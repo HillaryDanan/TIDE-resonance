@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TIDE-resonance Advanced Explorer</title>
     <style>
         :root {
@@ -19,7 +20,7 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background: var(--bg);
-            color: #2c3e50;
+            color: var(--primary);
             line-height: 1.6;
         }
 
@@ -53,12 +54,570 @@
             0% { transform: translate(0, 0); }
             100% { transform: translate(20px, 20px); }
         }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin: 2rem 0;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 1rem 2rem;
+            background: white;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .tab:hover {
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        .tab.active {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .advanced-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .advanced-module {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .advanced-module:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+
+        .module-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+
+        .module-title span {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        .dimension-slider {
+            margin: 1rem 0;
+        }
+
+        .dimension-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--secondary);
+            cursor: pointer;
+        }
+
+        .resonance-matrix {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .matrix-cell {
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .matrix-cell:hover {
+            background: var(--secondary);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .playlist-generator {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .generate-btn {
+            background: var(--success);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .generate-btn:hover {
+            background: #229954;
+        }
+
+        .visualization-canvas {
+            width: 100%;
+            height: 300px;
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            margin: 1rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pattern-visual {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            transition: all 0.5s ease;
+        }
+
+        .nt-visual {
+            background: linear-gradient(135deg, #3498db, #9b59b6);
+        }
+
+        .asd-visual {
+            background: linear-gradient(135deg, #27ae60, #16a085);
+        }
+
+        .adhd-visual {
+            background: linear-gradient(135deg, #e74c3c, #f39c12);
+        }
+
+        .hypothesis-card {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .hypothesis-card h4 {
+            color: #d97706;
+            margin-bottom: 0.5rem;
+        }
+
+        .data-export {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+
+        .data-export:hover {
+            background: #1a252f;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .advanced-grid { grid-template-columns: 1fr; }
+            .tabs { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
     <div class="hero">
         <h1>TIDE-resonance Advanced Explorer</h1>
-        <p>Mapping cognitive-sensory resonance patterns</p>
+        <p>Deep dive into cognitive-sensory resonance patterns</p>
     </div>
+
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" onclick="showTab('dimensional')">🎛️ Dimensional Analysis</div>
+            <div class="tab" onclick="showTab('music')">🎼 Music Deep Dive</div>
+            <div class="tab" onclick="showTab('sensory')">🌈 Sensory Mapping</div>
+            <div class="tab" onclick="showTab('research')">🔬 Research Tools</div>
+        </div>
+
+        <!-- Dimensional Analysis Tab -->
+        <div id="dimensional" class="tab-content active">
+            <div class="advanced-grid">
+                <div class="advanced-module">
+                    <h3 class="module-title">
+                        <span>📊</span>
+                        Multi-Dimensional Configuration
+                    </h3>
+                    <div class="dimension-slider">
+                        <div class="dimension-label">
+                            <span>Self-Representation</span>
+                            <span id="self-value">Internal</span>
+                        </div>
+                        <input type="range" class="slider" id="self-dim" min="-1" max="1" step="0.1" value="0">
+                    </div>
+                    <div class="dimension-slider">
+                        <div class="dimension-label">
+                            <span>Temporal Processing</span>
+                            <span id="temp-value">Balanced</span>
+                        </div>
+                        <input type="range" class="slider" id="temp-dim" min="-1" max="1" step="0.1" value="0">
+                    </div>
+                    <div class="dimension-slider">
+                        <div class="dimension-label">
+                            <span>Integration Strength</span>
+                            <span id="int-value">50%</span>
+                        </div>
+                        <input type="range" class="slider" id="int-dim" min="0" max="100" step="5" value="50">
+                    </div>
+                    <div class="dimension-slider">
+                        <div class="dimension-label">
+                            <span>Flexibility Index</span>
+                            <span id="flex-value">50%</span>
+                        </div>
+                        <input type="range" class="slider" id="flex-dim" min="0" max="100" step="5" value="50">
+                    </div>
+                </div>
+
+                <div class="advanced-module">
+                    <h3 class="module-title">
+                        <span>🎯</span>
+                        Pattern Visualization
+                    </h3>
+                    <div class="visualization-canvas" id="pattern-viz">
+                        <div class="pattern-visual nt-visual" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+                    </div>
+                    <p style="text-align: center; color: #666; margin-top: 1rem;">
+                        Interactive pattern position based on dimensional configuration
+                    </p>
+                </div>
+            </div>
+
+            <div class="advanced-module">
+                <h3 class="module-title">
+                    <span>🔄</span>
+                    Cross-Pattern Resonance Matrix
+                </h3>
+                <div class="resonance-matrix">
+                    <div class="matrix-cell">
+                        <strong>NT↔NT</strong><br>
+                        <span style="font-size: 2rem;">85%</span>
+                    </div>
+                    <div class="matrix-cell">
+                        <strong>NT↔ASD</strong><br>
+                        <span style="font-size: 2rem;">45%</span>
+                    </div>
+                    <div class="matrix-cell">
+                        <strong>NT↔ADHD</strong><br>
+                        <span style="font-size: 2rem;">60%</span>
+                    </div>
+                    <div class="matrix-cell">
+                        <strong>ASD↔NT</strong><br>
+                        <span style="font-size: 2rem;">45%</span>
+                    </div>
+                    <div class="matrix-cell">
+                        <strong>ASD↔ASD</strong><br>
+                        <span style="font-size: 2rem;">90%</span>
+                    </div>
+                    <div class="matrix-cell">
+                        <strong>ASD↔ADHD</strong><br>
+                        <span style="font-size: 2rem;">30%</span>
+                    </div>
+                    <div class="matrix-cell">
+                        <strong>ADHD↔NT</strong><br>
+                        <span style="font-size: 2rem;">60%</span>
+                    </div>
+                    <div class="matrix-cell">
+                        <strong>ADHD↔ASD</strong><br>
+                        <span style="font-size: 2rem;">30%</span>
+                    </div>
+                    <div class="matrix-cell">
+                        <strong>ADHD↔ADHD</strong><br>
+                        <span style="font-size: 2rem;">75%</span>
+                    </div>
+                </div>
+                <p style="text-align: center; color: #666; margin-top: 1rem;">
+                    Theoretical inter-pattern communication efficiency
+                </p>
+            </div>
+        </div>
+
+        <!-- Music Deep Dive Tab -->
+        <div id="music" class="tab-content">
+            <div class="advanced-grid">
+                <div class="advanced-module">
+                    <h3 class="module-title">
+                        <span>🎹</span>
+                        Advanced Music Analysis
+                    </h3>
+                    <textarea style="width: 100%; height: 150px; padding: 1rem; border: 2px solid #e5e7eb; border-radius: 8px;" 
+                              placeholder="Paste complete Spotify track analysis JSON here..."></textarea>
+                    <button class="generate-btn">Analyze Complete Audio Profile</button>
+                </div>
+
+                <div class="advanced-module">
+                    <h3 class="module-title">
+                        <span>🎵</span>
+                        Theoretical Playlist Generator
+                    </h3>
+                    <div class="playlist-generator">
+                        <h4>Focus Enhancement Playlist</h4>
+                        <select style="width: 100%; padding: 0.75rem; margin: 0.5rem 0; border: 2px solid #e5e7eb; border-radius: 8px;">
+                            <option>Select Pattern</option>
+                            <option>NT-TIDE</option>
+                            <option>ASD-TIDE</option>
+                            <option>ADHD-TIDE</option>
+                        </select>
+                        <select style="width: 100%; padding: 0.75rem; margin: 0.5rem 0; border: 2px solid #e5e7eb; border-radius: 8px;">
+                            <option>Select Context</option>
+                            <option>Deep Focus</option>
+                            <option>Creative Flow</option>
+                            <option>Energy Boost</option>
+                            <option>Calm Down</option>
+                        </select>
+                        <button class="generate-btn">Generate Playlist Structure</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="advanced-module">
+                <h3 class="module-title">
+                    <span>📈</span>
+                    Temporal Dynamics Analysis
+                </h3>
+                <div class="visualization-canvas" style="background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><path d="M20,250 Q100,200 150,150 T250,100 T350,50" stroke="%233498db" stroke-width="3" fill="none"/><circle cx="150" cy="150" r="5" fill="%23e74c3c"/><circle cx="250" cy="100" r="5" fill="%23e74c3c"/></svg>') center/contain no-repeat;">
+                </div>
+                <p style="text-align: center; color: #666; margin-top: 1rem;">
+                    Theoretical energy-tempo-engagement curves by pattern
+                </p>
+            </div>
+        </div>
+
+        <!-- Sensory Mapping Tab -->
+        <div id="sensory" class="tab-content">
+            <div class="advanced-module">
+                <h3 class="module-title">
+                    <span>🌈</span>
+                    Multi-Modal Sensory Profile Builder
+                </h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div>
+                        <h4>Visual Processing</h4>
+                        <label>Light Sensitivity: <input type="range" min="0" max="100" value="50"></label>
+                        <label>Color Preference: <input type="range" min="0" max="100" value="50"></label>
+                        <label>Motion Tolerance: <input type="range" min="0" max="100" value="50"></label>
+                    </div>
+                    <div>
+                        <h4>Auditory Processing</h4>
+                        <label>Volume Tolerance: <input type="range" min="0" max="100" value="50"></label>
+                        <label>Frequency Range: <input type="range" min="0" max="100" value="50"></label>
+                        <label>Background Noise: <input type="range" min="0" max="100" value="50"></label>
+                    </div>
+                    <div>
+                        <h4>Tactile Processing</h4>
+                        <label>Texture Sensitivity: <input type="range" min="0" max="100" value="50"></label>
+                        <label>Pressure Preference: <input type="range" min="0" max="100" value="50"></label>
+                        <label>Temperature Range: <input type="range" min="0" max="100" value="50"></label>
+                    </div>
+                    <div>
+                        <h4>Vestibular/Proprioceptive</h4>
+                        <label>Movement Need: <input type="range" min="0" max="100" value="50"></label>
+                        <label>Balance Sensitivity: <input type="range" min="0" max="100" value="50"></label>
+                        <label>Spatial Awareness: <input type="range" min="0" max="100" value="50"></label>
+                    </div>
+                </div>
+                <button class="generate-btn" style="margin-top: 2rem;">Generate Sensory Profile Report</button>
+            </div>
+        </div>
+
+        <!-- Research Tools Tab -->
+        <div id="research" class="tab-content">
+            <div class="advanced-grid">
+                <div class="advanced-module">
+                    <h3 class="module-title">
+                        <span>📝</span>
+                        Hypothesis Generator
+                    </h3>
+                    <div class="hypothesis-card">
+                        <h4>Generated Hypothesis #1</h4>
+                        <p>Individuals with ASD-TIDE patterns will show 40% higher engagement with music featuring tempo coefficient of variation < 0.1</p>
+                        <p><strong>Test Method:</strong> EEG coherence during listening tasks</p>
+                        <p><strong>Sample Size:</strong> n=64 (power = 0.8, α = 0.05)</p>
+                    </div>
+                    <button class="generate-btn">Generate New Hypothesis</button>
+                </div>
+
+                <div class="advanced-module">
+                    <h3 class="module-title">
+                        <span>💾</span>
+                        Data Export Tools
+                    </h3>
+                    <p>Export your exploration data for further analysis:</p>
+                    <div style="margin-top: 1rem;">
+                        <button class="data-export">Export as JSON</button>
+                        <button class="data-export">Export as CSV</button>
+                        <button class="data-export">Generate Report PDF</button>
+                        <button class="data-export">Create R Script</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="advanced-module">
+                <h3 class="module-title">
+                    <span>🔗</span>
+                    Framework Integration Links
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <a href="https://github.com/HillaryDanan/TIDE" style="text-decoration: none;">
+                        <div class="matrix-cell">
+                            <strong>TIDE Core</strong><br>
+                            <span style="color: #666;">Dimensional Framework</span>
+                        </div>
+                    </a>
+                    <a href="https://github.com/HillaryDanan/BIND" style="text-decoration: none;">
+                        <div class="matrix-cell">
+                            <strong>BIND</strong><br>
+                            <span style="color: #666;">Boundary Dynamics</span>
+                        </div>
+                    </a>
+                    <a href="https://github.com/HillaryDanan/information-atoms" style="text-decoration: none;">
+                        <div class="matrix-cell">
+                            <strong>Info-Atoms</strong><br>
+                            <span style="color: #666;">Processing Units</span>
+                        </div>
+                    </a>
+                    <a href="https://github.com/HillaryDanan/hexagonal-consciousness-suite" style="text-decoration: none;">
+                        <div class="matrix-cell">
+                            <strong>Hexagonal</strong><br>
+                            <span style="color: #666;">Structural Patterns</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Dimensional sliders
+        document.getElementById('self-dim').addEventListener('input', function(e) {
+            const val = parseFloat(e.target.value);
+            const label = val < -0.3 ? 'External' : val > 0.3 ? 'Internal' : 'Balanced';
+            document.getElementById('self-value').textContent = label;
+            updateVisualization();
+        });
+
+        document.getElementById('temp-dim').addEventListener('input', function(e) {
+            const val = parseFloat(e.target.value);
+            const label = val < -0.3 ? 'Extended' : val > 0.3 ? 'Immediate' : 'Balanced';
+            document.getElementById('temp-value').textContent = label;
+            updateVisualization();
+        });
+
+        document.getElementById('int-dim').addEventListener('input', function(e) {
+            document.getElementById('int-value').textContent = e.target.value + '%';
+        });
+
+        document.getElementById('flex-dim').addEventListener('input', function(e) {
+            document.getElementById('flex-value').textContent = e.target.value + '%';
+        });
+
+        function updateVisualization() {
+            const self = parseFloat(document.getElementById('self-dim').value);
+            const temp = parseFloat(document.getElementById('temp-dim').value);
+            
+            const visual = document.querySelector('.pattern-visual');
+            const x = 50 + (self * 40);
+            const y = 50 + (temp * 40);
+            
+            visual.style.left = x + '%';
+            visual.style.top = y + '%';
+            
+            // Change color based on position
+            if (self < -0.5 && temp < -0.5) {
+                visual.className = 'pattern-visual asd-visual';
+            } else if (temp > 0.5) {
+                visual.className = 'pattern-visual adhd-visual';
+            } else {
+                visual.className = 'pattern-visual nt-visual';
+            }
+        }
+    </script>
 </body>
 </html>
