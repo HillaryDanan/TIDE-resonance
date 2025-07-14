@@ -25,6 +25,6 @@ Levinson, H. J. (2021). *The Neural Representation of Abstract Concepts in Typic
 If you use TIDE-resonance in your research:
 
 ```
-Danan, H. (2024). TIDE-resonance: Empirical explorations of cognitive-sensory
+Danan, H. (2025). TIDE-resonance: Empirical explorations of cognitive-sensory
 resonance patterns [Computer software]. https://github.com/HillaryDanan/TIDE-resonance
 ```
