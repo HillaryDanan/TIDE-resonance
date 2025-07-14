@@ -27,22 +27,6 @@
             overflow: hidden;
         }
 
-        .hero::before {
-            content: "";
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background: url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.05"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            animation: drift 20s linear infinite;
-        }
-
-        @keyframes drift {
-            from { transform: translate(0, 0); }
-            to { transform: translate(30px, 30px); }
-        }
-
         h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
@@ -164,6 +148,8 @@
             font-size: 1rem;
             cursor: pointer;
             transition: background 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
         }
 
         .button:hover {
@@ -213,23 +199,17 @@
         <section>
             <h2 style="text-align: center; margin: 2rem 0;">Select Your TIDE Pattern</h2>
             <div class="pattern-selector">
-                <div class="pattern-card" onclick="selectPattern(
-'NT-TIDE'
-)">
+                <div class="pattern-card" onclick="selectPattern('NT-TIDE')">
                     <h3>NT-TIDE</h3>
                     <p>Neurotypical</p>
                     <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Flexible • Adaptive • Contextual</p>
                 </div>
-                <div class="pattern-card" onclick="selectPattern(
-'ASD-TIDE'
-)">
+                <div class="pattern-card" onclick="selectPattern('ASD-TIDE')">
                     <h3>ASD-TIDE</h3>
                     <p>Autism Spectrum</p>
                     <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Structured • Predictable • Consistent</p>
                 </div>
-                <div class="pattern-card" onclick="selectPattern(
-'ADHD-TIDE'
-)">
+                <div class="pattern-card" onclick="selectPattern('ADHD-TIDE')">
                     <h3>ADHD-TIDE</h3>
                     <p>ADHD</p>
                     <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Dynamic • Immediate • Intense</p>
@@ -244,7 +224,7 @@
                     <h2>Music Resonance Explorer</h2>
                 </div>
                 <p>Analyze how music features resonate with different TIDE patterns</p>
-                <input type="text" id="spotify-input" placeholder="Paste Spotify audio features JSON here">
+                <input type="text" id="spotify-input" placeholder='{"energy": 0.8, "valence": 0.6, "tempo": 120, "danceability": 0.7}'>
                 <button class="button" onclick="analyzeMusicResonance()">Analyze Resonance</button>
                 <div id="music-results" style="display: none;">
                     <div class="resonance-display">
@@ -313,16 +293,10 @@
             selectedPattern = pattern;
             
             // Update card styles
-            document.querySelectorAll(
-'.pattern-card'
-).forEach(card => {
-                card.classList.remove(
-'active'
-);
+            document.querySelectorAll('.pattern-card').forEach(card => {
+                card.classList.remove('active');
             });
-            event.currentTarget.classList.add(
-'active'
-);
+            event.currentTarget.classList.add('active');
             
             // Update displays
             updateRhythmDisplay(pattern);
@@ -330,9 +304,7 @@
         }
 
         function updateRhythmDisplay(pattern) {
-            const rhythmDisplay = document.getElementById(
-'rhythm-display'
-);
+            const rhythmDisplay = document.getElementById('rhythm-display');
             
             const profiles = {
                 "NT-TIDE": {
@@ -356,23 +328,17 @@
             };
             
             const profile = profiles[pattern];
-            rhythmDisplay.innerHTML = `
-                <div class="resonance-display">
-                    <h4>${pattern} Rhythm Profile</h4>
-                    <p><strong>Preferred Tempo:</strong> ${profile.tempo}</p>
-                    <p><strong>Variability Tolerance:</strong> ${profile.variability}</p>
-                    <p><strong>Entrainment Style:</strong> ${profile.entrainment}</p>
-                    <p style="margin-top: 1rem; font-style: italic; color: #666;">
-                        Hypothesis: ${profile.hypothesis}
-                    </p>
-                </div>
-            `;
+            rhythmDisplay.innerHTML = '<div class="resonance-display">' +
+                '<h4>' + pattern + ' Rhythm Profile</h4>' +
+                '<p><strong>Preferred Tempo:</strong> ' + profile.tempo + '</p>' +
+                '<p><strong>Variability Tolerance:</strong> ' + profile.variability + '</p>' +
+                '<p><strong>Entrainment Style:</strong> ' + profile.entrainment + '</p>' +
+                '<p style="margin-top: 1rem; font-style: italic; color: #666;">' +
+                'Hypothesis: ' + profile.hypothesis + '</p></div>';
         }
 
         function updateSensoryProfile(pattern) {
-            const sensoryProfile = document.getElementById(
-'sensory-profile'
-);
+            const sensoryProfile = document.getElementById('sensory-profile');
             
             const profiles = {
                 "NT-TIDE": {
@@ -396,25 +362,18 @@
             };
             
             const profile = profiles[pattern];
-            sensoryProfile.innerHTML = `
-                <div class="resonance-display">
-                    <h4>${pattern} Sensory Profile</h4>
-                    <p><strong>Auditory:</strong> ${profile.auditory}</p>
-                    <p><strong>Visual:</strong> ${profile.visual}</p>
-                    <p><strong>Tactile:</strong> ${profile.tactile}</p>
-                    <p><strong>Integration:</strong> ${profile.integration}</p>
-                </div>
-            `;
+            sensoryProfile.innerHTML = '<div class="resonance-display">' +
+                '<h4>' + pattern + ' Sensory Profile</h4>' +
+                '<p><strong>Auditory:</strong> ' + profile.auditory + '</p>' +
+                '<p><strong>Visual:</strong> ' + profile.visual + '</p>' +
+                '<p><strong>Tactile:</strong> ' + profile.tactile + '</p>' +
+                '<p><strong>Integration:</strong> ' + profile.integration + '</p></div>';
         }
 
         function analyzeMusicResonance() {
-            const input = document.getElementById(
-'spotify-input'
-).value;
+            const input = document.getElementById('spotify-input').value;
             if (!input) {
-                alert(
-'Please enter Spotify audio features'
-);
+                alert('Please enter Spotify audio features');
                 return;
             }
             
@@ -422,19 +381,13 @@
                 const features = JSON.parse(input);
                 displayMusicAnalysis(features);
             } catch (e) {
-                alert(
-'Please enter valid JSON format'
-);
+                alert('Please enter valid JSON format. Example: {"energy": 0.8, "valence": 0.6}');
             }
         }
 
         function displayMusicAnalysis(features) {
-            const resultsDiv = document.getElementById(
-'music-results'
-);
-            const scoresDiv = document.getElementById(
-'resonance-scores'
-);
+            const resultsDiv = document.getElementById('music-results');
+            const scoresDiv = document.getElementById('resonance-scores');
             
             // Calculate theoretical resonance
             const ntScore = Math.round(
@@ -455,30 +408,24 @@
                 Math.min((features.tempo || 120) / 4, 20)
             );
             
-            scoresDiv.innerHTML = `
-                <div style="margin: 1rem 0;">
-                    <p><strong>NT-TIDE Resonance</strong></p>
-                    <div class="resonance-bar">
-                        <div class="resonance-fill" style="width: ${ntScore}%">${ntScore}%</div>
-                    </div>
-                </div>
-                <div style="margin: 1rem 0;">
-                    <p><strong>ASD-TIDE Resonance</strong></p>
-                    <div class="resonance-bar">
-                        <div class="resonance-fill" style="width: ${asdScore}%">${asdScore}%</div>
-                    </div>
-                </div>
-                <div style="margin: 1rem 0;">
-                    <p><strong>ADHD-TIDE Resonance</strong></p>
-                    <div class="resonance-bar">
-                        <div class="resonance-fill" style="width: ${adhdScore}%">${adhdScore}%</div>
-                    </div>
-                </div>
-            `;
+            scoresDiv.innerHTML = 
+                '<div style="margin: 1rem 0;">' +
+                '<p><strong>NT-TIDE Resonance</strong></p>' +
+                '<div class="resonance-bar">' +
+                '<div class="resonance-fill" style="width: ' + ntScore + '%">' + ntScore + '%</div>' +
+                '</div></div>' +
+                '<div style="margin: 1rem 0;">' +
+                '<p><strong>ASD-TIDE Resonance</strong></p>' +
+                '<div class="resonance-bar">' +
+                '<div class="resonance-fill" style="width: ' + asdScore + '%">' + asdScore + '%</div>' +
+                '</div></div>' +
+                '<div style="margin: 1rem 0;">' +
+                '<p><strong>ADHD-TIDE Resonance</strong></p>' +
+                '<div class="resonance-bar">' +
+                '<div class="resonance-fill" style="width: ' + adhdScore + '%">' + adhdScore + '%</div>' +
+                '</div></div>';
             
-            resultsDiv.style.display = 
-'block'
-;
+            resultsDiv.style.display = 'block';
         }
     </script>
 </body>
