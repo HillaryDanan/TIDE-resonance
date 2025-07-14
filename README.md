@@ -22,7 +22,7 @@ Different TIDE configurations (NT-TIDE, ASD-TIDE, ADHD-TIDE) may exhibit charact
 ### 🎵 [Launch Simple Explorer](https://hillarydanan.github.io/TIDE-resonance/)
 Perfect for getting started - explore how different cognitive patterns might resonate with music and sensory experiences.
 
-### 🔬 [Launch Advanced Research Explorer](https://hillarydanan.github.io/TIDE-resonance/docs/advanced_explorer.html)
+### 🔬 [Launch Advanced Research Explorer](https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html)
 For researchers and deep divers - includes dimensional analysis, cross-pattern resonance matrices, and hypothesis generation tools.
 
 ## Research Framework
