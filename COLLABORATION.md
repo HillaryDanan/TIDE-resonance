@@ -1,14 +1,5 @@
 # Collaboration Guidelines
 
-
-TIDE-resonance welcomes collaboration from:
-- Neuroscience researchers
-- Music therapy professionals
-- Sensory integration specialists
-- Neurodiversity advocates
-- Data scientists
-- Anyone interested in cognitive diversity
-
 ## How to Contribute
 
 ### 1. Theoretical Extensions
@@ -33,6 +24,3 @@ All contributions must:
 - Include appropriate scientific disclaimers
 - Prioritize participant wellbeing
 - Maintain open science principles
-
-## Contact
-
