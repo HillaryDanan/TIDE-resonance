@@ -37,3 +37,58 @@ Different TIDE configurations (NT-TIDE, ASD-TIDE, ADHD-TIDE) may exhibit charact
 ## Interactive Explorer
 
 [Launch Explorer](https://hillarydanan.github.io/TIDE-resonance/)
+
+## Key Features
+
+### 🔬 Research Tools
+- Theoretical resonance calculators
+- Music pattern analyzers
+- Sensory profile builders
+- Empirical prediction generators
+
+### 📊 Analysis Framework
+- Multi-dimensional resonance matrices
+- Pattern-specific playlist generation
+- Cross-modal integration mapping
+- Temporal entrainment analysis
+
+### 🔗 Integration
+- Connects to TIDE core framework
+- Bridges to BIND dynamics
+- Links to Information-Atoms
+- Incorporates Hexagonal structure
+
+### 🛡️ Scientific Standards
+- All tools include theoretical disclaimers
+- Hypotheses clearly marked as testable
+- Validation framework included
+- Ethical guidelines enforced
+
+## Getting Started
+
+```bash
+# Clone the repository
+git clone https://github.com/HillaryDanan/TIDE-resonance.git
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run example analysis
+python experiments/example_analysis.py
+```
+
+## Interactive Explorer
+
+[Launch the Interactive Explorer](https://hillarydanan.github.io/TIDE-resonance/)
+
+## Contributing
+
+See [COLLABORATION.md](COLLABORATION.md) for guidelines
+
+## Ethics
+
+See [ETHICS.md](ETHICS.md) for our ethical framework
+
+## Citation
+
+See [REFERENCES.md](REFERENCES.md) for citation guidelines
