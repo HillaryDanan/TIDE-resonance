@@ -228,7 +228,7 @@
                 <button class="button" onclick="analyzeMusicResonance()">Analyze Resonance</button>
                 <div id="music-results" style="display: none;">
                     <div class="resonance-display">
-                        <h4>Pattern Resonance Analysis</h4>
+                        <h4>Pattern Resonance Analysis (SIMULATED)</h4>
                         <div id="resonance-scores"></div>
                     </div>
                 </div>
@@ -389,7 +389,7 @@
             const resultsDiv = document.getElementById('music-results');
             const scoresDiv = document.getElementById('resonance-scores');
             
-            // Calculate theoretical resonance
+            // Calculate SIMULATED theoretical resonance
             const ntScore = Math.round(
                 (features.valence || 0.5) * 40 +
                 (features.energy || 0.5) * 30 +
