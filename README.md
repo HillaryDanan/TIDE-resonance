@@ -21,3 +21,19 @@ Different TIDE configurations (NT-TIDE, ASD-TIDE, ADHD-TIDE) may exhibit charact
 ---
 
 *Different minds resonate with different rhythms - let's map the spectrum*
+
+## Research Framework
+
+### 1. Music-Cognition Resonance
+- Crystalline resonance (ASD-TIDE): Structured, repetitive, predictable
+- Fluid resonance (NT-TIDE): Balanced, adaptive, contextual
+- Quantum resonance (ADHD-TIDE): Immediate, intense, dynamic
+
+### 2. Temporal Entrainment
+- Beat perception and production
+- Temporal prediction accuracy
+- Rhythm-based regulation strategies
+
+## Interactive Explorer
+
+[Launch Explorer](https://hillarydanan.github.io/TIDE-resonance/)
