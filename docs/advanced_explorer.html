@@ -75,6 +75,33 @@
             padding: 2rem;
         }
 
+        .simulation-warning {
+            background: #fff3cd;
+            border: 3px solid #ffc107;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .simulation-warning strong {
+            color: #856404;
+            font-size: 1.2rem;
+        }
+
+        .simulation-badge {
+            display: inline-block;
+            background: #ffc107;
+            color: #856404;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
         .tabs {
             display: flex;
             justify-content: center;
@@ -130,6 +157,7 @@
             padding: 2rem;
             box-shadow: 0 8px 16px rgba(0,0,0,0.1);
             transition: transform 0.3s ease;
+            position: relative;
         }
 
         .advanced-module:hover {
@@ -193,12 +221,25 @@
             border-radius: 8px;
             text-align: center;
             transition: all 0.3s ease;
+            position: relative;
         }
 
         .matrix-cell:hover {
             background: var(--secondary);
             color: white;
             transform: scale(1.05);
+        }
+
+        .matrix-cell .simulation-indicator {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #ffc107;
+            color: #856404;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: 600;
         }
 
         .playlist-generator {
@@ -297,10 +338,17 @@
     </div>
 
     <div class="container">
+        <div class="simulation-warning">
+            <strong>⚠️ IMPORTANT: ALL NUMBERS ARE SIMULATIONS</strong><br>
+            Every percentage, score, and metric shown in this explorer is a <strong>THEORETICAL SIMULATION</strong> 
+            designed to test relational dynamics across dimensions. These are NOT empirical data or validated measurements.
+            They are placeholder values for hypothesis generation and framework development only.
+        </div>
+
         <div class="tabs">
-            <div class="tab active" onclick="showTab('dimensional')">🎛️ Dimensional Analysis</div>
-            <div class="tab" onclick="showTab('music')">🎼 Music Deep Dive</div>
-            <div class="tab" onclick="showTab('sensory')">🌈 Sensory Mapping</div>
+            <div class="tab active" onclick="showTab('dimensional')">🎛️ Dimensional Analysis <span class="simulation-badge">SIMULATED</span></div>
+            <div class="tab" onclick="showTab('music')">🎼 Music Deep Dive <span class="simulation-badge">SIMULATED</span></div>
+            <div class="tab" onclick="showTab('sensory')">🌈 Sensory Mapping <span class="simulation-badge">SIMULATED</span></div>
             <div class="tab" onclick="showTab('research')">🔬 Research Tools</div>
         </div>
 
@@ -311,6 +359,7 @@
                     <h3 class="module-title">
                         <span>📊</span>
                         Multi-Dimensional Configuration
+                        <span class="simulation-badge">SIMULATION</span>
                     </h3>
                     <div class="dimension-slider">
                         <div class="dimension-label">
@@ -340,6 +389,9 @@
                         </div>
                         <input type="range" class="slider" id="flex-dim" min="0" max="100" step="5" value="50">
                     </div>
+                    <p style="color: #856404; font-size: 0.9rem; margin-top: 1rem; text-align: center;">
+                        ⚠️ All values are theoretical simulations for research purposes
+                    </p>
                 </div>
 
                 <div class="advanced-module">
@@ -351,7 +403,8 @@
                         <div class="pattern-visual nt-visual" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
                     </div>
                     <p style="text-align: center; color: #666; margin-top: 1rem;">
-                        Interactive pattern position based on dimensional configuration
+                        Interactive pattern position based on dimensional configuration<br>
+                        <strong style="color: #856404;">SIMULATED VISUALIZATION</strong>
                     </p>
                 </div>
             </div>
@@ -360,47 +413,71 @@
                 <h3 class="module-title">
                     <span>🔄</span>
                     Cross-Pattern Resonance Matrix
+                    <span class="simulation-badge">100% SIMULATED</span>
                 </h3>
+                <p style="color: #856404; margin-bottom: 1rem; text-align: center;">
+                    <strong>⚠️ ALL PERCENTAGES BELOW ARE SIMULATED VALUES</strong><br>
+                    These numbers are theoretical placeholders to explore potential relational dynamics
+                </p>
                 <div class="resonance-matrix">
                     <div class="matrix-cell">
+                        <span class="simulation-indicator">SIM</span>
                         <strong>NT↔NT</strong><br>
-                        <span style="font-size: 2rem;">85%</span>
+                        <span style="font-size: 2rem;">85%</span><br>
+                        <small style="color: #666;">Simulated</small>
                     </div>
                     <div class="matrix-cell">
+                        <span class="simulation-indicator">SIM</span>
                         <strong>NT↔ASD</strong><br>
-                        <span style="font-size: 2rem;">45%</span>
+                        <span style="font-size: 2rem;">45%</span><br>
+                        <small style="color: #666;">Simulated</small>
                     </div>
                     <div class="matrix-cell">
+                        <span class="simulation-indicator">SIM</span>
                         <strong>NT↔ADHD</strong><br>
-                        <span style="font-size: 2rem;">60%</span>
+                        <span style="font-size: 2rem;">60%</span><br>
+                        <small style="color: #666;">Simulated</small>
                     </div>
                     <div class="matrix-cell">
+                        <span class="simulation-indicator">SIM</span>
                         <strong>ASD↔NT</strong><br>
-                        <span style="font-size: 2rem;">45%</span>
+                        <span style="font-size: 2rem;">45%</span><br>
+                        <small style="color: #666;">Simulated</small>
                     </div>
                     <div class="matrix-cell">
+                        <span class="simulation-indicator">SIM</span>
                         <strong>ASD↔ASD</strong><br>
-                        <span style="font-size: 2rem;">90%</span>
+                        <span style="font-size: 2rem;">90%</span><br>
+                        <small style="color: #666;">Simulated</small>
                     </div>
                     <div class="matrix-cell">
+                        <span class="simulation-indicator">SIM</span>
                         <strong>ASD↔ADHD</strong><br>
-                        <span style="font-size: 2rem;">30%</span>
+                        <span style="font-size: 2rem;">30%</span><br>
+                        <small style="color: #666;">Simulated</small>
                     </div>
                     <div class="matrix-cell">
+                        <span class="simulation-indicator">SIM</span>
                         <strong>ADHD↔NT</strong><br>
-                        <span style="font-size: 2rem;">60%</span>
+                        <span style="font-size: 2rem;">60%</span><br>
+                        <small style="color: #666;">Simulated</small>
                     </div>
                     <div class="matrix-cell">
+                        <span class="simulation-indicator">SIM</span>
                         <strong>ADHD↔ASD</strong><br>
-                        <span style="font-size: 2rem;">30%</span>
+                        <span style="font-size: 2rem;">30%</span><br>
+                        <small style="color: #666;">Simulated</small>
                     </div>
                     <div class="matrix-cell">
+                        <span class="simulation-indicator">SIM</span>
                         <strong>ADHD↔ADHD</strong><br>
-                        <span style="font-size: 2rem;">75%</span>
+                        <span style="font-size: 2rem;">75%</span><br>
+                        <small style="color: #666;">Simulated</small>
                     </div>
                 </div>
-                <p style="text-align: center; color: #666; margin-top: 1rem;">
-                    Theoretical inter-pattern communication efficiency
+                <p style="text-align: center; color: #856404; margin-top: 1rem; font-weight: 600;">
+                    These simulated values are placeholders for testing theoretical frameworks only.<br>
+                    Empirical validation required for any real-world application.
                 </p>
             </div>
         </div>
@@ -412,10 +489,14 @@
                     <h3 class="module-title">
                         <span>🎹</span>
                         Advanced Music Analysis
+                        <span class="simulation-badge">SIMULATED</span>
                     </h3>
                     <textarea style="width: 100%; height: 150px; padding: 1rem; border: 2px solid #e5e7eb; border-radius: 8px;" 
                               placeholder="Paste complete Spotify track analysis JSON here..."></textarea>
-                    <button class="generate-btn">Analyze Complete Audio Profile</button>
+                    <button class="generate-btn">Analyze Complete Audio Profile (Simulated)</button>
+                    <p style="color: #856404; font-size: 0.9rem; margin-top: 1rem; text-align: center;">
+                        Analysis will generate simulated resonance scores for research purposes
+                    </p>
                 </div>
 
                 <div class="advanced-module">
@@ -424,7 +505,7 @@
                         Theoretical Playlist Generator
                     </h3>
                     <div class="playlist-generator">
-                        <h4>Focus Enhancement Playlist</h4>
+                        <h4>Focus Enhancement Playlist <span class="simulation-badge">THEORETICAL</span></h4>
                         <select style="width: 100%; padding: 0.75rem; margin: 0.5rem 0; border: 2px solid #e5e7eb; border-radius: 8px;">
                             <option>Select Pattern</option>
                             <option>NT-TIDE</option>
@@ -447,11 +528,12 @@
                 <h3 class="module-title">
                     <span>📈</span>
                     Temporal Dynamics Analysis
+                    <span class="simulation-badge">SIMULATED</span>
                 </h3>
-                <div class="visualization-canvas" style="background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><path d="M20,250 Q100,200 150,150 T250,100 T350,50" stroke="%233498db" stroke-width="3" fill="none"/><circle cx="150" cy="150" r="5" fill="%23e74c3c"/><circle cx="250" cy="100" r="5" fill="%23e74c3c"/></svg>') center/contain no-repeat;">
+                <div class="visualization-canvas" style="background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><text x="200" y="20" text-anchor="middle" fill="%23856404" font-weight="bold">SIMULATED DATA</text><path d="M20,250 Q100,200 150,150 T250,100 T350,50" stroke="%233498db" stroke-width="3" fill="none"/><circle cx="150" cy="150" r="5" fill="%23e74c3c"/><circle cx="250" cy="100" r="5" fill="%23e74c3c"/></svg>') center/contain no-repeat;">
                 </div>
-                <p style="text-align: center; color: #666; margin-top: 1rem;">
-                    Theoretical energy-tempo-engagement curves by pattern
+                <p style="text-align: center; color: #856404; margin-top: 1rem; font-weight: 600;">
+                    Simulated energy-tempo-engagement curves for theoretical exploration
                 </p>
             </div>
         </div>
@@ -462,34 +544,38 @@
                 <h3 class="module-title">
                     <span>🌈</span>
                     Multi-Modal Sensory Profile Builder
+                    <span class="simulation-badge">SIMULATED</span>
                 </h3>
+                <p style="color: #856404; margin-bottom: 1rem; text-align: center;">
+                    <strong>All sensory values are simulated for framework testing</strong>
+                </p>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                     <div>
-                        <h4>Visual Processing</h4>
+                        <h4>Visual Processing <small style="color: #856404;">(Simulated)</small></h4>
                         <label>Light Sensitivity: <input type="range" min="0" max="100" value="50"></label>
                         <label>Color Preference: <input type="range" min="0" max="100" value="50"></label>
                         <label>Motion Tolerance: <input type="range" min="0" max="100" value="50"></label>
                     </div>
                     <div>
-                        <h4>Auditory Processing</h4>
+                        <h4>Auditory Processing <small style="color: #856404;">(Simulated)</small></h4>
                         <label>Volume Tolerance: <input type="range" min="0" max="100" value="50"></label>
                         <label>Frequency Range: <input type="range" min="0" max="100" value="50"></label>
                         <label>Background Noise: <input type="range" min="0" max="100" value="50"></label>
                     </div>
                     <div>
-                        <h4>Tactile Processing</h4>
+                        <h4>Tactile Processing <small style="color: #856404;">(Simulated)</small></h4>
                         <label>Texture Sensitivity: <input type="range" min="0" max="100" value="50"></label>
                         <label>Pressure Preference: <input type="range" min="0" max="100" value="50"></label>
                         <label>Temperature Range: <input type="range" min="0" max="100" value="50"></label>
                     </div>
                     <div>
-                        <h4>Vestibular/Proprioceptive</h4>
+                        <h4>Vestibular/Proprioceptive <small style="color: #856404;">(Simulated)</small></h4>
                         <label>Movement Need: <input type="range" min="0" max="100" value="50"></label>
                         <label>Balance Sensitivity: <input type="range" min="0" max="100" value="50"></label>
                         <label>Spatial Awareness: <input type="range" min="0" max="100" value="50"></label>
                     </div>
                 </div>
-                <button class="generate-btn" style="margin-top: 2rem;">Generate Sensory Profile Report</button>
+                <button class="generate-btn" style="margin-top: 2rem;">Generate Sensory Profile Report (Simulated)</button>
             </div>
         </div>
 
@@ -503,9 +589,12 @@
                     </h3>
                     <div class="hypothesis-card">
                         <h4>Generated Hypothesis #1</h4>
-                        <p>Individuals with ASD-TIDE patterns will show 40% higher engagement with music featuring tempo coefficient of variation < 0.1</p>
+                        <p>Individuals with ASD-TIDE patterns will show <strong style="color: #d97706;">[SIMULATED: 40%]</strong> higher engagement with music featuring tempo coefficient of variation < 0.1</p>
                         <p><strong>Test Method:</strong> EEG coherence during listening tasks</p>
                         <p><strong>Sample Size:</strong> n=64 (power = 0.8, α = 0.05)</p>
+                        <p style="color: #856404; font-size: 0.9rem; margin-top: 0.5rem;">
+                            Note: The 40% value is a simulated placeholder for hypothesis development
+                        </p>
                     </div>
                     <button class="generate-btn">Generate New Hypothesis</button>
                 </div>
@@ -516,9 +605,12 @@
                         Data Export Tools
                     </h3>
                     <p>Export your exploration data for further analysis:</p>
+                    <p style="color: #856404; font-size: 0.9rem;">
+                        <strong>Remember:</strong> All exported data contains simulated values for theoretical exploration
+                    </p>
                     <div style="margin-top: 1rem;">
-                        <button class="data-export">Export as JSON</button>
-                        <button class="data-export">Export as CSV</button>
+                        <button class="data-export">Export as JSON (with simulation flags)</button>
+                        <button class="data-export">Export as CSV (with simulation headers)</button>
                         <button class="data-export">Generate Report PDF</button>
                         <button class="data-export">Create R Script</button>
                     </div>
@@ -579,23 +671,23 @@
         document.getElementById('self-dim').addEventListener('input', function(e) {
             const val = parseFloat(e.target.value);
             const label = val < -0.3 ? 'External' : val > 0.3 ? 'Internal' : 'Balanced';
-            document.getElementById('self-value').textContent = label;
+            document.getElementById('self-value').textContent = label + ' (Simulated)';
             updateVisualization();
         });
 
         document.getElementById('temp-dim').addEventListener('input', function(e) {
             const val = parseFloat(e.target.value);
             const label = val < -0.3 ? 'Extended' : val > 0.3 ? 'Immediate' : 'Balanced';
-            document.getElementById('temp-value').textContent = label;
+            document.getElementById('temp-value').textContent = label + ' (Simulated)';
             updateVisualization();
         });
 
         document.getElementById('int-dim').addEventListener('input', function(e) {
-            document.getElementById('int-value').textContent = e.target.value + '%';
+            document.getElementById('int-value').textContent = e.target.value + '% (Sim)';
         });
 
         document.getElementById('flex-dim').addEventListener('input', function(e) {
-            document.getElementById('flex-value').textContent = e.target.value + '%';
+            document.getElementById('flex-value').textContent = e.target.value + '% (Sim)';
         });
 
         function updateVisualization() {
