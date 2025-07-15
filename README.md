@@ -30,7 +30,7 @@ Beautiful real-time visualization of how different cognitive architectures build
 ### 🧪 [Interactive Resonance Lab](https://hillarydanan.github.io/TIDE-resonance/interactive_resonance.html)
 Focused exploration environment for studying trust dynamics and resonance patterns between cognitive architectures.
 
-### 🔬 [Advanced Research Explorer](https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html)
+### 🔬 [Advanced Research Explorer](https://hillarydanan.github.io/TIDE-resonance/)
 For researchers and deep divers - includes dimensional analysis, cross-pattern resonance matrices, hypothesis generation tools, and **trust dynamics modeling**.
 
 ## Research Framework
