@@ -4,16 +4,11 @@ Empirical explorations of cognitive-sensory resonance patterns within the TIDE f
 ## Overview
 TIDE-resonance extends the [TIDE (Temporal-Internal Dimensional Encoding)](https://github.com/HillaryDanan/TIDE) framework to explore how different cognitive architectures resonate with sensory experiences, particularly music and rhythm.
 
-**NEW**: Now integrating [game-theoretic trust dynamics](https://github.com/HillaryDanan/game-theory-trust-suite) to model how different cognitive architectures build trust and cooperation through shared sensory experiences.
-
 ## Theoretical Foundation
 Building on findings that different cognitive architectures achieve identical outcomes through distinct dimensional organizations (Levinson, 2021), TIDE-resonance investigates whether these architectural differences create predictable patterns of sensory preference and processing.
 
 ### Core Hypothesis
 Different TIDE configurations (NT-TIDE, ASD-TIDE, ADHD-TIDE) may exhibit characteristic resonance patterns with external stimuli due to their unique dimensional organizations of self and time.
-
-### Trust Dynamics Integration
-Drawing from game theory and cooperation research, we explore how trust evolves differently between cognitive architecture pairings, affecting the depth and sustainability of resonance achieved.
 
 ## Status
 🔬 **Research Phase**: Generating hypotheses and building exploration tools
@@ -28,7 +23,7 @@ Drawing from game theory and cooperation research, we explore how trust evolves 
 Perfect for getting started - explore how different cognitive patterns might resonate with music and sensory experiences.
 
 ### 🔬 [Launch Advanced Research Explorer](https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html)
-For researchers and deep divers - includes dimensional analysis, cross-pattern resonance matrices, hypothesis generation tools, and **trust dynamics modeling**.
+For researchers and deep divers - includes dimensional analysis, cross-pattern resonance matrices, and hypothesis generation tools.
 
 ## Research Framework
 
@@ -42,12 +37,6 @@ For researchers and deep divers - includes dimensional analysis, cross-pattern r
 - Temporal prediction accuracy
 - Rhythm-based regulation strategies
 
-### 3. Trust Dynamics (NEW)
-- Architecture-specific trust evolution rates
-- Trust-modulated resonance strength
-- Cooperative stability in heterogeneous pairings
-- Based on [game-theory-trust-suite](https://github.com/HillaryDanan/game-theory-trust-suite) framework
-
 ## Key Features
 
 ### 🔬 Research Tools
@@ -55,30 +44,27 @@ For researchers and deep divers - includes dimensional analysis, cross-pattern r
 - Music pattern analyzers
 - Sensory profile builders
 - Empirical prediction generators
-- **Trust evolution simulators** (NEW)
 
 ### 📊 Analysis Framework
 - Multi-dimensional resonance matrices
 - Pattern-specific playlist generation
 - Cross-modal integration mapping
 - Temporal entrainment analysis
-- **Trust-resonance correlation analysis** (NEW)
 
 ### 🔗 Integration
-- Connects to [TIDE](https://github.com/HillaryDanan/TIDE) core framework
-- Bridges to [BIND](https://github.com/HillaryDanan/BIND) dynamics
-- Links to [Information-Atoms](https://github.com/HillaryDanan/information-atoms)
-- Incorporates [Hexagonal](https://github.com/HillaryDanan/hexagonal-consciousness-suite) structure
-- **Integrates [Game-Theory-Trust](https://github.com/HillaryDanan/game-theory-trust-suite) dynamics** (NEW)
+- Connects to TIDE core framework
+- Bridges to BIND dynamics
+- Links to Information-Atoms
+- Incorporates Hexagonal structure
 
 ### 🛡️ Scientific Standards
 - All tools include theoretical disclaimers
 - Hypotheses clearly marked as testable
 - Validation framework included
 - Ethical guidelines enforced
-- Trust parameters documented as theoretical
 
 ## Getting Started
+
 ```bash
 # Clone the repository
 git clone https://github.com/HillaryDanan/TIDE-resonance.git
@@ -88,15 +74,7 @@ pip install -r requirements.txt
 
 # Run example analysis
 python experiments/example_analysis.py
-
-# Run trust dynamics simulation
-python experiments/trust_dynamics_example.py
 ```
-
-## Related Work
-- [Game-Theory-Trust-Suite](https://github.com/HillaryDanan/game-theory-trust-suite): Foundation for trust dynamics modeling
-- [TIDE Framework](https://github.com/HillaryDanan/TIDE): Core cognitive architecture theory
-- [BIND Systems](https://github.com/HillaryDanan/BIND): Boundary dynamics framework
 
 ## Contributing
 See [COLLABORATION.md](COLLABORATION.md) for guidelines
