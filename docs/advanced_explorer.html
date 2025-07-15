@@ -1277,18 +1277,28 @@
                 ctx.lineWidth = 1;
                 ctx.strokeRect(x + 0.5, y + 0.5, cellWidth - 1, cellHeight - 1);
                 
-                // Add text with shadow for readability
+                // Add crisp white text with dark outline for readability
                 ctx.save();
-                ctx.shadowColor = 'black';
-                ctx.shadowBlur = 3;
-                ctx.fillStyle = intensity > 0.6 ? '#000' : '#fff';
-                ctx.font = 'bold 10px Arial';
+                
+                // Draw dark outline for contrast
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 3;
+                ctx.font = 'bold 11px Arial';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
+                ctx.strokeText(agent.type, x + cellWidth/2, y + cellHeight/2 - 6);
+                
+                ctx.font = '10px Arial';
+                ctx.strokeText(agent.resonance.toFixed(3), x + cellWidth/2, y + cellHeight/2 + 6);
+                
+                // Draw white text on top
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 11px Arial';
                 ctx.fillText(agent.type, x + cellWidth/2, y + cellHeight/2 - 6);
                 
-                ctx.font = '9px Arial';
+                ctx.font = '10px Arial';
                 ctx.fillText(agent.resonance.toFixed(3), x + cellWidth/2, y + cellHeight/2 + 6);
+                
                 ctx.restore();
             });
             
