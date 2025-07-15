@@ -22,12 +22,15 @@ Drawing from game theory and cooperation research, we explore how trust evolves 
 
 *Different minds resonate with different rhythms - let's map the spectrum*
 
-## Interactive Explorers
+## Interactive Experiences
 
-### 🎵 [Launch Simple Explorer](https://hillarydanan.github.io/TIDE-resonance/)
-Perfect for getting started - explore how different cognitive patterns might resonate with music and sensory experiences.
+### 🎵 [Main Interactive Experience](https://hillarydanan.github.io/TIDE-resonance/)
+Beautiful real-time visualization of how different cognitive architectures build trust through shared sensory experiences. Features particle effects, live metrics, and intuitive controls.
 
-### 🔬 [Launch Advanced Research Explorer](https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html)
+### 🧪 [Interactive Resonance Lab](https://hillarydanan.github.io/TIDE-resonance/interactive_resonance.html)
+Focused exploration environment for studying trust dynamics and resonance patterns between cognitive architectures.
+
+### 🔬 [Advanced Research Explorer](https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html)
 For researchers and deep divers - includes dimensional analysis, cross-pattern resonance matrices, hypothesis generation tools, and **trust dynamics modeling**.
 
 ## Research Framework
@@ -93,10 +96,19 @@ python experiments/example_analysis.py
 python experiments/trust_dynamics_example.py
 ```
 
+## Interactive Demos
+- [TIDE Interactive](https://hillarydanan.github.io/TIDE/tide_interactive.html) - Core framework visualization
+- [BIND Systems Interactive](https://hillarydanan.github.io/BIND/bind_systems_interactive.html) - Boundary dynamics
+- [BIND Research Tool](https://hillarydanan.github.io/BIND/bind_research_tool.html) - Research interface
+
 ## Related Work
 - [Game-Theory-Trust-Suite](https://github.com/HillaryDanan/game-theory-trust-suite): Foundation for trust dynamics modeling
 - [TIDE Framework](https://github.com/HillaryDanan/TIDE): Core cognitive architecture theory
 - [BIND Systems](https://github.com/HillaryDanan/BIND): Boundary dynamics framework
+- [Hexagonal Consciousness Suite](https://github.com/HillaryDanan/hexagonal-consciousness-suite): Structural organization model
+- [Information Atoms](https://github.com/HillaryDanan/information-atoms): Discrete information processing
+- [Concrete Overflow Detector](https://github.com/HillaryDanan/concrete-overflow-detector): Alternative processing patterns
+- [Hexagonal Vision Research](https://github.com/HillaryDanan/hexagonal-vision-research): Visual processing studies
 
 ## Contributing
 See [COLLABORATION.md](COLLABORATION.md) for guidelines
@@ -106,15 +118,3 @@ See [ETHICS.md](ETHICS.md) for our ethical framework
 
 ## Citation
 See [REFERENCES.md](REFERENCES.md) for citation guidelines
-
-## Integration with TIDE-Resonance
-
-The game-theory-trust-suite now powers trust dynamics in [TIDE-resonance](https://github.com/HillaryDanan/TIDE-resonance),
-modeling how different cognitive architectures build trust through shared sensory experiences.
-
-This integration demonstrates:
-- How trust evolution differs between architecture pairings
-- Trust-modulated resonance in multi-agent systems
-- Cooperative stability in heterogeneous cognitive teams
-
-See the [TIDE-resonance Advanced Explorer](https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html) for interactive demonstrations.
