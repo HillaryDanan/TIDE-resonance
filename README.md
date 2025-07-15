@@ -106,3 +106,15 @@ See [ETHICS.md](ETHICS.md) for our ethical framework
 
 ## Citation
 See [REFERENCES.md](REFERENCES.md) for citation guidelines
+
+## Integration with TIDE-Resonance
+
+The game-theory-trust-suite now powers trust dynamics in [TIDE-resonance](https://github.com/HillaryDanan/TIDE-resonance),
+modeling how different cognitive architectures build trust through shared sensory experiences.
+
+This integration demonstrates:
+- How trust evolution differs between architecture pairings
+- Trust-modulated resonance in multi-agent systems
+- Cooperative stability in heterogeneous cognitive teams
+
+See the [TIDE-resonance Advanced Explorer](https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html) for interactive demonstrations.
