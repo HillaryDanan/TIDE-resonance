@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIDE-resonance Explorer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f0f2f5;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .disclaimer {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .pattern-selector {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .pattern-card {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .pattern-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+
+        .pattern-card.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .explorer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .explorer-module {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+
+        .module-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .module-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        .resonance-display {
+            background: #f3f4f6;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .resonance-bar {
+            height: 30px;
+            background: #e5e7eb;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 0.5rem 0;
+        }
+
+        .resonance-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .button:hover {
+            background: #764ba2;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        .footer {
+            background: #1f2937;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .explorer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>TIDE-resonance</h1>
+        <p class="subtitle">Exploring Cognitive-Sensory Resonance Patterns</p>
+    </div>
+
+    <div class="container">
+        <div class="disclaimer">
+            <strong>🔬 Research Tool:</strong> This explorer generates theoretical resonance patterns for research hypothesis generation.
+            <br>All values are simulated and require empirical validation.
+        </div>
+
+        <section>
+            <h2 style="text-align: center; margin: 2rem 0;">Select Your TIDE Pattern</h2>
+            <div class="pattern-selector">
+                <div class="pattern-card" onclick="selectPattern('NT-TIDE')">
+                    <h3>NT-TIDE</h3>
+                    <p>Neurotypical</p>
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Flexible • Adaptive • Contextual</p>
+                </div>
+                <div class="pattern-card" onclick="selectPattern('ASD-TIDE')">
+                    <h3>ASD-TIDE</h3>
+                    <p>Autism Spectrum</p>
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Structured • Predictable • Consistent</p>
+                </div>
+                <div class="pattern-card" onclick="selectPattern('ADHD-TIDE')">
+                    <h3>ADHD-TIDE</h3>
+                    <p>ADHD</p>
+                    <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Dynamic • Immediate • Intense</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="explorer-grid">
+            <div class="explorer-module">
+                <div class="module-header">
+                    <span class="module-icon">🎵</span>
+                    <h2>Music Resonance Explorer</h2>
+                </div>
+                <p>Analyze how music features resonate with different TIDE patterns</p>
+                <input type="text" id="spotify-input" placeholder='{"energy": 0.8, "valence": 0.6, "tempo": 120, "danceability": 0.7}'>
+                <button class="button" onclick="analyzeMusicResonance()">Analyze Resonance</button>
+                <div id="music-results" style="display: none;">
+                    <div class="resonance-display">
+                        <h4>Pattern Resonance Analysis (SIMULATED)</h4>
+                        <div id="resonance-scores"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="explorer-module">
+                <div class="module-header">
+                    <span class="module-icon">🌊</span>
+                    <h2>Rhythm Pattern Explorer</h2>
+                </div>
+                <p>Discover theoretical rhythm preferences for your pattern</p>
+                <div id="rhythm-display">
+                    <p style="color: #666;">Select a TIDE pattern above to explore rhythm preferences</p>
+                </div>
+            </div>
+
+            <div class="explorer-module">
+                <div class="module-header">
+                    <span class="module-icon">🎨</span>
+                    <h2>Sensory Profile Builder</h2>
+                </div>
+                <p>Map theoretical sensory preferences across modalities</p>
+                <div id="sensory-profile">
+                    <div class="resonance-display">
+                        <p style="color: #666;">Select a pattern to view sensory profile</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="explorer-module">
+                <div class="module-header">
+                    <span class="module-icon">🔬</span>
+                    <h2>Research Hypotheses</h2>
+                </div>
+                <p>Generated hypotheses for empirical testing</p>
+                <div class="resonance-display">
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin: 0.5rem 0;">📊 Musical tempo preferences correlate with temporal processing patterns</li>
+                        <li style="margin: 0.5rem 0;">🎯 Rhythmic entrainment varies by dimensional organization</li>
+                        <li style="margin: 0.5rem 0;">🧩 Sensory integration profiles predict regulation strategies</li>
+                        <li style="margin: 0.5rem 0;">🔄 Pattern transitions follow predictable pathways</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>Part of the <a href="https://github.com/HillaryDanan/TIDE">TIDE Framework</a></p>
+        <p>Exploring cognitive diversity through dimensional organization</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+            <a href="https://github.com/HillaryDanan/TIDE-resonance">GitHub</a> • 
+            <a href="https://github.com/HillaryDanan/TIDE-resonance/blob/main/ETHICS.md">Ethics</a> • 
+            <a href="https://github.com/HillaryDanan/TIDE-resonance/blob/main/COLLABORATION.md">Collaborate</a>
+        </p>
+    </footer>
+
+    <script>
+        let selectedPattern = null;
+
+        function selectPattern(pattern) {
+            selectedPattern = pattern;
+            
+            // Update card styles
+            document.querySelectorAll('.pattern-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+            
+            // Update displays
+            updateRhythmDisplay(pattern);
+            updateSensoryProfile(pattern);
+        }
+
+        function updateRhythmDisplay(pattern) {
+            const rhythmDisplay = document.getElementById('rhythm-display');
+            
+            const profiles = {
+                "NT-TIDE": {
+                    tempo: "90-120 BPM",
+                    variability: "Moderate",
+                    entrainment: "Flexible",
+                    hypothesis: "Adapts rhythm preferences to context"
+                },
+                "ASD-TIDE": {
+                    tempo: "60-90 BPM",
+                    variability: "Low",
+                    entrainment: "Strong when matched",
+                    hypothesis: "Prefers predictable, stable rhythms"
+                },
+                "ADHD-TIDE": {
+                    tempo: "120-160 BPM",
+                    variability: "High",
+                    entrainment: "Immediate but variable",
+                    hypothesis: "Seeks novel, energetic rhythms"
+                }
+            };
+            
+            const profile = profiles[pattern];
+            rhythmDisplay.innerHTML = '<div class="resonance-display">' +
+                '<h4>' + pattern + ' Rhythm Profile</h4>' +
+                '<p><strong>Preferred Tempo:</strong> ' + profile.tempo + '</p>' +
+                '<p><strong>Variability Tolerance:</strong> ' + profile.variability + '</p>' +
+                '<p><strong>Entrainment Style:</strong> ' + profile.entrainment + '</p>' +
+                '<p style="margin-top: 1rem; font-style: italic; color: #666;">' +
+                'Hypothesis: ' + profile.hypothesis + '</p></div>';
+        }
+
+        function updateSensoryProfile(pattern) {
+            const sensoryProfile = document.getElementById('sensory-profile');
+            
+            const profiles = {
+                "NT-TIDE": {
+                    auditory: "Moderate, context-dependent",
+                    visual: "Flexible brightness/contrast",
+                    tactile: "Variable texture preferences",
+                    integration: "Dynamic multi-modal"
+                },
+                "ASD-TIDE": {
+                    auditory: "Specific frequency preferences",
+                    visual: "Consistent lighting needs",
+                    tactile: "Predictable textures",
+                    integration: "Sequential processing"
+                },
+                "ADHD-TIDE": {
+                    auditory: "High stimulation tolerance",
+                    visual: "Bright, dynamic preferred",
+                    tactile: "Seeks varied input",
+                    integration: "Simultaneous multi-modal"
+                }
+            };
+            
+            const profile = profiles[pattern];
+            sensoryProfile.innerHTML = '<div class="resonance-display">' +
+                '<h4>' + pattern + ' Sensory Profile</h4>' +
+                '<p><strong>Auditory:</strong> ' + profile.auditory + '</p>' +
+                '<p><strong>Visual:</strong> ' + profile.visual + '</p>' +
+                '<p><strong>Tactile:</strong> ' + profile.tactile + '</p>' +
+                '<p><strong>Integration:</strong> ' + profile.integration + '</p></div>';
+        }
+
+        function analyzeMusicResonance() {
+            const input = document.getElementById('spotify-input').value;
+            if (!input) {
+                alert('Please enter Spotify audio features');
+                return;
+            }
+            
+            try {
+                const features = JSON.parse(input);
+                displayMusicAnalysis(features);
+            } catch (e) {
+                alert('Please enter valid JSON format. Example: {"energy": 0.8, "valence": 0.6}');
+            }
+        }
+
+        function displayMusicAnalysis(features) {
+            const resultsDiv = document.getElementById('music-results');
+            const scoresDiv = document.getElementById('resonance-scores');
+            
+            // Calculate SIMULATED theoretical resonance
+            const ntScore = Math.round(
+                (features.valence || 0.5) * 40 +
+                (features.energy || 0.5) * 30 +
+                (features.danceability || 0.5) * 30
+            );
+            
+            const asdScore = Math.round(
+                (1 - (features.speechiness || 0)) * 30 +
+                (features.instrumentalness || 0) * 40 +
+                (features.acousticness || 0) * 30
+            );
+            
+            const adhdScore = Math.round(
+                (features.energy || 0) * 50 +
+                (features.danceability || 0) * 30 +
+                Math.min((features.tempo || 120) / 4, 20)
+            );
+            
+            scoresDiv.innerHTML = 
+                '<div style="margin: 1rem 0;">' +
+                '<p><strong>NT-TIDE Resonance</strong></p>' +
+                '<div class="resonance-bar">' +
+                '<div class="resonance-fill" style="width: ' + ntScore + '%">' + ntScore + '%</div>' +
+                '</div></div>' +
+                '<div style="margin: 1rem 0;">' +
+                '<p><strong>ASD-TIDE Resonance</strong></p>' +
+                '<div class="resonance-bar">' +
+                '<div class="resonance-fill" style="width: ' + asdScore + '%">' + asdScore + '%</div>' +
+                '</div></div>' +
+                '<div style="margin: 1rem 0;">' +
+                '<p><strong>ADHD-TIDE Resonance</strong></p>' +
+                '<div class="resonance-bar">' +
+                '<div class="resonance-fill" style="width: ' + adhdScore + '%">' + adhdScore + '%</div>' +
+                '</div></div>';
+            
+            resultsDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
