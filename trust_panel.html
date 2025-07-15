@@ -1,28 +1,28 @@
-
-<!-- Add this to the controls section of advanced_explorer.html -->
-<div class="trust-panel" style="margin-top: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
-    <h3>Trust Dynamics (Research Simulation)</h3>
-    <p style="font-size: 0.9em; color: #666;">
-        Theoretical model for research exploration - not empirically validated
-    </p>
-    <div id="trust-metrics" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-        <div>
-            <label>Agent 1 → Agent 2 Trust:</label>
-            <span id="trust-1-2">0.50</span>
-        </div>
-        <div>
-            <label>Agent 2 → Agent 1 Trust:</label>
-            <span id="trust-2-1">0.50</span>
-        </div>
-        <div>
-            <label>Trust Symmetry:</label>
-            <span id="trust-symmetry">100%</span>
-        </div>
-        <div>
-            <label>Resonance Modifier:</label>
-            <span id="resonance-modifier">1.00x</span>
-        </div>
-    </div>
-    <canvas id="trust-evolution-chart" width="400" height="200" style="margin-top: 10px;"></canvas>
 </div>
-
+        
+        <!-- Trust Dynamics Panel -->
+        <div style="margin-top: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 5px; background: rgba(255,255,255,0.9);">
+            <h3>Trust Dynamics <span style="font-size: 0.8em; color: #666;">(Research Simulation - <a href="https://github.com/HillaryDanan/game-theory-trust-suite" target="_blank">Learn More</a>)</span></h3>
+            <p style="font-size: 0.9em; color: #666; margin: 5px 0;">
+                Theoretical model showing how trust evolves between cognitive architectures
+            </p>
+            <div id="trust-display" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px;">
+                <div>
+                    <strong>Agent 1 → Agent 2:</strong> <span id="trust-1-2">0.50</span>
+                </div>
+                <div>
+                    <strong>Agent 2 → Agent 1:</strong> <span id="trust-2-1">0.50</span>
+                </div>
+                <div>
+                    <strong>Resonance Modifier:</strong> <span id="resonance-mod">1.00x</span>
+                </div>
+                <div>
+                    <strong>Interaction Count:</strong> <span id="interaction-count">0</span>
+                </div>
+            </div>
+            <canvas id="trust-graph" width="400" height="150" style="margin-top: 10px; border: 1px solid #ddd;"></canvas>
+            <div style="margin-top: 10px;">
+                <button onclick="resetTrust()" style="padding: 5px 10px;">Reset Trust</button>
+                <button onclick="exportTrustData()" style="padding: 5px 10px; margin-left: 10px;">Export Data</button>
+            </div>
+        </div>

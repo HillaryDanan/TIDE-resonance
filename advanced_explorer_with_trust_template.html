@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TIDE-Resonance Advanced Explorer</title>
+    <style>
+        /* Existing styles remain the same */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TIDE-Resonance Advanced Explorer</h1>
+        <p style="font-size: 0.9em; color: #666;">
+            Explore resonance patterns between cognitive architectures • 
+            Now featuring <a href="https://github.com/HillaryDanan/game-theory-trust-suite" target="_blank">trust dynamics</a>
+        </p>
+        
+        <!-- Canvas and controls remain the same -->
+        
+        <script>
+        // TRUST DYNAMICS INTEGRATION
+        const TRUST_PARAMS = {
+            NT: {
+                initialTrust: 0.5,    // Theoretical parameter
+                learningRate: 0.1,    // Theoretical parameter
+                decayRate: 0.05,      // Theoretical parameter
+                resonanceThreshold: 0.6
+            },
+            ASD: {
+                initialTrust: 0.3,    // Theoretical parameter
+                learningRate: 0.15,   // Theoretical parameter
+                decayRate: 0.02,      // Theoretical parameter
+                resonanceThreshold: 0.8
+            },
+            ADHD: {
+                initialTrust: 0.7,    // Theoretical parameter
+                learningRate: 0.2,    // Theoretical parameter
+                decayRate: 0.1,       // Theoretical parameter
+                resonanceThreshold: 0.4
+            }
+        };
+
+        let agentTrustMatrix = {};
+        let trustHistory = [];
+        let interactionCount = 0;
+
+        // Initialize trust when agents are created
+        function initializeTrustMatrix() {
+            agentTrustMatrix = {};
+            agents.forEach(agent1 => {
+                agentTrustMatrix[agent1.id] = {};
+                agents.forEach(agent2 => {
+                    if (agent1.id !== agent2.id) {
+                        const initial = TRUST_PARAMS[agent1.architecture].initialTrust;
+                        agentTrustMatrix[agent1.id][agent2.id] = initial;
+                    }
+                });
+            });
+            trustHistory = [];
+            interactionCount = 0;
+        }
+
+        // Update trust based on interaction quality
+        function updateTrust(agent1, agent2, resonanceQuality) {
+            const params = TRUST_PARAMS[agent1.architecture];
+            const currentTrust = agentTrustMatrix[agent1.id][agent2.id] || params.initialTrust;
+            
+            const success = resonanceQuality > params.resonanceThreshold ? 1 : 0;
+            const trustDelta = params.learningRate * (success - currentTrust);
+            const decay = -params.decayRate * (currentTrust - params.initialTrust);
+            
+            const newTrust = Math.max(0, Math.min(1, currentTrust + trustDelta + decay));
+            agentTrustMatrix[agent1.id][agent2.id] = newTrust;
+            
+            trustHistory.push({
+                time: interactionCount++,
+                agent1: agent1.id,
+                agent2: agent2.id,
+                trust: newTrust,
+                resonance: resonanceQuality
+            });
+            
+            updateTrustDisplay();
+            return newTrust;
+        }
+
+        // Get trust modifier for resonance
+        function getTrustModifier(agent1, agent2) {
+            if (!agentTrustMatrix[agent1.id]) return 1.0;
+            const trust = agentTrustMatrix[agent1.id][agent2.id] || 0.5;
+            return 0.5 + 0.5 * trust; // Range: 0.5x to 1.0x
+        }
+
+        // Update trust display
+        function updateTrustDisplay() {
+            if (agents.length >= 2) {
+                document.getElementById("trust-1-2").textContent = 
+                    (agentTrustMatrix[0]?.[1] || 0.5).toFixed(2);
+                document.getElementById("trust-2-1").textContent = 
+                    (agentTrustMatrix[1]?.[0] || 0.5).toFixed(2);
+                document.getElementById("resonance-mod").textContent = 
+                    getTrustModifier(agents[0], agents[1]).toFixed(2) + "x";
+                document.getElementById("interaction-count").textContent = interactionCount;
+                
+                drawTrustGraph();
+            }
+        }
+
+        // Draw trust evolution graph
+        function drawTrustGraph() {
+            const canvas = document.getElementById("trust-graph");
+            const ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw axes
+            ctx.strokeStyle = "#ccc";
+            ctx.beginPath();
+            ctx.moveTo(30, 10);
+            ctx.lineTo(30, 130);
+            ctx.lineTo(390, 130);
+            ctx.stroke();
+            
+            // Draw trust history
+            if (trustHistory.length > 1) {
+                ctx.strokeStyle = "#4CAF50";
+                ctx.beginPath();
+                const recentHistory = trustHistory.slice(-50); // Last 50 interactions
+                recentHistory.forEach((entry, i) => {
+                    const x = 30 + (i / recentHistory.length) * 360;
+                    const y = 130 - entry.trust * 100;
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                });
+                ctx.stroke();
+            }
+        }
+
+        // Reset trust
+        function resetTrust() {
+            initializeTrustMatrix();
+            updateTrustDisplay();
+        }
+
+        // Export trust data
+        function exportTrustData() {
+            const data = {
+                metadata: {
+                    timestamp: new Date().toISOString(),
+                    parameters: TRUST_PARAMS,
+                    description: "Trust dynamics simulation data - theoretical research model"
+                },
+                trustMatrix: agentTrustMatrix,
+                history: trustHistory
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], {type: "application/json"});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `trust_dynamics_${Date.now()}.json`;
+            a.click();
+        }
+
+        // Modify the existing updateAgents function to include trust
+        const originalUpdateAgents = updateAgents;
+        updateAgents = function(musicData) {
+            originalUpdateAgents(musicData);
+            
+            // Apply trust dynamics in resonance mode
+            if (displayMode === "resonance") {
+                agents.forEach((agent, i) => {
+                    agents.forEach((other, j) => {
+                        if (i !== j) {
+                            const baseResonance = Math.abs(agent.resonance - other.resonance);
+                            const trustMod = getTrustModifier(agent, other);
+                            const quality = (1 - baseResonance) * trustMod;
+                            
+                            updateTrust(agent, other, quality);
+                        }
+                    });
+                });
+            }
+        };
+
+        // Initialize trust when page loads
+        window.addEventListener("load", function() {
+            initializeTrustMatrix();
+            updateTrustDisplay();
+        });
+        </script>
+    </div>
+</body>
+</html>
