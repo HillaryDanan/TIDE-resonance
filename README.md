@@ -4,6 +4,8 @@ Empirical explorations of cognitive-sensory resonance patterns within the TIDE f
 ## Overview
 TIDE-resonance extends the [TIDE (Temporal-Internal Dimensional Encoding)](https://github.com/HillaryDanan/TIDE) framework to explore how different cognitive architectures resonate with sensory experiences, particularly music and rhythm.
 
+**Important**: We use labels like "NT", "ASD", and "ADHD" as communication tools, not rigid categories. [Read our full perspective on labels and cognitive diversity](https://github.com/HillaryDanan/TIDE/blob/main/DISCLAIMER.md).
+
 **NEW**: Now integrating [game-theoretic trust dynamics](https://github.com/HillaryDanan/game-theory-trust-suite) to model how different cognitive architectures build trust and cooperation through shared sensory experiences.
 
 ## Theoretical Foundation
@@ -11,6 +13,8 @@ Building on findings that different cognitive architectures achieve identical ou
 
 ### Core Hypothesis
 Different TIDE configurations (NT-TIDE, ASD-TIDE, ADHD-TIDE) may exhibit characteristic resonance patterns with external stimuli due to their unique dimensional organizations of self and time.
+
+*Note: These labels represent cognitive patterns, not fixed categories. [Learn more about our approach to cognitive diversity](https://github.com/HillaryDanan/TIDE/blob/main/DISCLAIMER.md).*
 
 ### Trust Dynamics Integration
 Drawing from game theory and cooperation research, we explore how trust evolves differently between cognitive architecture pairings, affecting the depth and sustainability of resonance achieved.
@@ -30,7 +34,7 @@ Beautiful real-time visualization of how different cognitive architectures build
 ### 🧪 [Interactive Resonance Lab](https://hillarydanan.github.io/TIDE-resonance/interactive_resonance.html)
 Focused exploration environment for studying trust dynamics and resonance patterns between cognitive architectures.
 
-### 🔬 [Advanced Research Explorer](https://hillarydanan.github.io/TIDE-resonance/)
+### 🔬 [Advanced Research Explorer](https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html)
 For researchers and deep divers - includes dimensional analysis, cross-pattern resonance matrices, hypothesis generation tools, and **trust dynamics modeling**.
 
 ## Research Framework
@@ -80,6 +84,7 @@ For researchers and deep divers - includes dimensional analysis, cross-pattern r
 - Validation framework included
 - Ethical guidelines enforced
 - Trust parameters documented as theoretical
+- [Cognitive diversity perspective](https://github.com/HillaryDanan/TIDE/blob/main/DISCLAIMER.md)
 
 ## Getting Started
 ```bash
@@ -118,3 +123,6 @@ See [ETHICS.md](ETHICS.md) for our ethical framework
 
 ## Citation
 See [REFERENCES.md](REFERENCES.md) for citation guidelines
+
+## On Labels and Cognitive Diversity
+Please read our [perspective on labels and cognitive diversity](https://github.com/HillaryDanan/TIDE/blob/main/DISCLAIMER.md). We use terms like "NT," "ASD," and "ADHD" as communication tools to describe patterns, not as rigid diagnostic categories. Human cognition is beautifully diverse and exists on continuous spectrums.
