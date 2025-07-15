@@ -3,16 +3,521 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TIDE-Resonance Interactive Simulation</title>
+    <title>TIDE-Resonance Interactive Explorer</title>
     <style>
-        body { margin: 0; padding: 0; overflow: hidden; background: #000; }
-        canvas { display: block; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #0a0f1b;
+            color: #e0e0e0;
+            overflow: hidden;
+        }
+        
+        #canvas {
+            display: block;
+            background: radial-gradient(ellipse at center, #0f1922 0%, #000000 100%);
+        }
+        
+        .controls {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(20, 30, 40, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(100, 200, 255, 0.3);
+            max-width: 350px;
+        }
+        
+        h1 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #4CAF50;
+        }
+        
+        .subtitle {
+            font-size: 0.9em;
+            color: #888;
+            margin-bottom: 20px;
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            color: #aaa;
+        }
+        
+        select, input[type="range"], button {
+            width: 100%;
+            padding: 8px;
+            background: rgba(40, 50, 60, 0.8);
+            border: 1px solid rgba(100, 200, 255, 0.5);
+            border-radius: 5px;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+        
+        button {
+            cursor: pointer;
+            background: #4CAF50;
+            border: none;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background: #5CBF60;
+            transform: translateY(-2px);
+        }
+        
+        .value {
+            display: inline-block;
+            width: 50px;
+            text-align: right;
+            color: #4CAF50;
+        }
+        
+        .metrics {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(20, 30, 40, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(100, 200, 255, 0.3);
+            min-width: 250px;
+        }
+        
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding: 8px;
+            background: rgba(30, 40, 50, 0.5);
+            border-radius: 5px;
+        }
+        
+        .legend {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(20, 30, 40, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(100, 200, 255, 0.3);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .info {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            max-width: 300px;
+            background: rgba(20, 30, 40, 0.9);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(100, 200, 255, 0.3);
+            font-size: 0.8em;
+            color: #888;
+        }
+        
+        .info a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
+    <canvas id="canvas"></canvas>
+    
+    <div class="controls">
+        <h1>TIDE-Resonance Explorer</h1>
+        <p class="subtitle">Real-time trust dynamics & sensory resonance</p>
+        
+        <div class="control-group">
+            <label>Number of Agents</label>
+            <input type="range" id="agentCount" min="2" max="10" value="6">
+            <span class="value" id="agentCountValue">6</span>
+        </div>
+        
+        <div class="control-group">
+            <label>Music Stimulus</label>
+            <select id="musicType">
+                <option value="structured">Structured (Bach-like)</option>
+                <option value="flowing">Flowing (Debussy-like)</option>
+                <option value="dynamic">Dynamic (EDM-like)</option>
+                <option value="ambient">Ambient (Drone-like)</option>
+            </select>
+        </div>
+        
+        <div class="control-group">
+            <label>Trust Evolution Speed</label>
+            <input type="range" id="trustSpeed" min="0.01" max="0.5" step="0.01" value="0.1">
+            <span class="value" id="trustSpeedValue">0.10</span>
+        </div>
+        
+        <button onclick="resetSimulation()">Reset Simulation</button>
+        <button onclick="pauseSimulation()">Pause/Resume</button>
+        <button onclick="exportData()">Export Data</button>
+    </div>
+    
+    <div class="metrics">
+        <h3>Live Metrics</h3>
+        <div class="metric">
+            <span>Average Trust:</span>
+            <span id="avgTrust">0.50</span>
+        </div>
+        <div class="metric">
+            <span>System Resonance:</span>
+            <span id="systemResonance">0.00</span>
+        </div>
+        <div class="metric">
+            <span>Cooperation Index:</span>
+            <span id="cooperationIndex">0.00</span>
+        </div>
+    </div>
+    
+    <div class="legend">
+        <h4>Architecture Types</h4>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #3b82f6;"></div>
+            <span>NT-TIDE (Neurotypical)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #f59e0b;"></div>
+            <span>ASD-TIDE (Systematic)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ef4444;"></div>
+            <span>ADHD-TIDE (Dynamic)</span>
+        </div>
+    </div>
+    
+    <div class="info">
+        <p>Based on <a href="https://github.com/HillaryDanan/game-theory-trust-suite" target="_blank">game-theory-trust-suite</a></p>
+        <p>Theoretical model for research exploration. Parameters are simulated for hypothesis generation.</p>
+    </div>
+    
     <script>
-        // Redirect to the main advanced explorer
-        window.location.href = "advanced_explorer.html";
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        
+        // Resize canvas
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
+        
+        // Architecture parameters
+        const ARCHITECTURES = {
+            NT: {
+                color: "#3b82f6",
+                initialTrust: 0.5,
+                learningRate: 0.1,
+                decayRate: 0.05,
+                resonanceThreshold: 0.6,
+                movementStyle: "balanced",
+                responseToMusic: {
+                    structured: 0.7,
+                    flowing: 0.8,
+                    dynamic: 0.6,
+                    ambient: 0.5
+                }
+            },
+            ASD: {
+                color: "#f59e0b",
+                initialTrust: 0.3,
+                learningRate: 0.15,
+                decayRate: 0.02,
+                resonanceThreshold: 0.8,
+                movementStyle: "systematic",
+                responseToMusic: {
+                    structured: 0.9,
+                    flowing: 0.4,
+                    dynamic: 0.3,
+                    ambient: 0.6
+                }
+            },
+            ADHD: {
+                color: "#ef4444",
+                initialTrust: 0.7,
+                learningRate: 0.2,
+                decayRate: 0.1,
+                resonanceThreshold: 0.4,
+                movementStyle: "dynamic",
+                responseToMusic: {
+                    structured: 0.3,
+                    flowing: 0.6,
+                    dynamic: 0.9,
+                    ambient: 0.4
+                }
+            }
+        };
+        
+        // Agent class
+        class Agent {
+            constructor(id, architecture) {
+                this.id = id;
+                this.architecture = architecture;
+                this.params = ARCHITECTURES[architecture];
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 2;
+                this.vy = (Math.random() - 0.5) * 2;
+                this.radius = 25;
+                this.resonance = 0;
+                this.pulsePhase = Math.random() * Math.PI * 2;
+                this.trustMatrix = {};
+            }
+            
+            update(musicStimulus, agents, trustSpeed) {
+                // Movement based on architecture
+                if (this.params.movementStyle === "systematic") {
+                    // Grid-like movement for ASD
+                    this.vx += (Math.round(this.vx * 10) / 10 - this.vx) * 0.1;
+                    this.vy += (Math.round(this.vy * 10) / 10 - this.vy) * 0.1;
+                } else if (this.params.movementStyle === "dynamic") {
+                    // Erratic movement for ADHD
+                    this.vx += (Math.random() - 0.5) * 0.5;
+                    this.vy += (Math.random() - 0.5) * 0.5;
+                } else {
+                    // Smooth movement for NT
+                    this.vx += (Math.random() - 0.5) * 0.2;
+                    this.vy += (Math.random() - 0.5) * 0.2;
+                }
+                
+                // Apply velocity with damping
+                this.vx *= 0.98;
+                this.vy *= 0.98;
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                // Bounce off walls
+                if (this.x < this.radius || this.x > canvas.width - this.radius) {
+                    this.vx *= -1;
+                    this.x = Math.max(this.radius, Math.min(canvas.width - this.radius, this.x));
+                }
+                if (this.y < this.radius || this.y > canvas.height - this.radius) {
+                    this.vy *= -1;
+                    this.y = Math.max(this.radius, Math.min(canvas.height - this.radius, this.y));
+                }
+                
+                // Update resonance based on music
+                const musicResponse = this.params.responseToMusic[musicStimulus];
+                this.resonance = musicResponse;
+                
+                // Update trust with other agents
+                agents.forEach(other => {
+                    if (other.id !== this.id) {
+                        this.updateTrust(other, musicStimulus, trustSpeed);
+                    }
+                });
+                
+                // Pulse based on resonance
+                this.pulsePhase += this.resonance * 0.1;
+            }
+            
+            updateTrust(other, musicStimulus, trustSpeed) {
+                if (!this.trustMatrix[other.id]) {
+                    this.trustMatrix[other.id] = this.params.initialTrust;
+                }
+                
+                const distance = Math.sqrt(
+                    Math.pow(this.x - other.x, 2) + 
+                    Math.pow(this.y - other.y, 2)
+                );
+                
+                // Interaction quality based on distance and resonance compatibility
+                const resonanceCompatibility = 1 - Math.abs(this.resonance - other.resonance);
+                const proximityFactor = Math.max(0, 1 - distance / 500);
+                const interactionQuality = resonanceCompatibility * proximityFactor;
+                
+                // Trust evolution
+                const currentTrust = this.trustMatrix[other.id];
+                const success = interactionQuality > this.params.resonanceThreshold ? 1 : 0;
+                const trustDelta = this.params.learningRate * (success - currentTrust) * trustSpeed;
+                const decay = -this.params.decayRate * (currentTrust - this.params.initialTrust) * 0.1;
+                
+                this.trustMatrix[other.id] = Math.max(0, Math.min(1, 
+                    currentTrust + trustDelta + decay
+                ));
+            }
+            
+            draw(ctx, agents) {
+                // Draw connections based on trust
+                agents.forEach(other => {
+                    if (other.id !== this.id && this.trustMatrix[other.id]) {
+                        const trust = this.trustMatrix[other.id];
+                        if (trust > 0.3) {
+                            ctx.strokeStyle = `rgba(100, 200, 255, ${trust * 0.5})`;
+                            ctx.lineWidth = trust * 3;
+                            ctx.beginPath();
+                            ctx.moveTo(this.x, this.y);
+                            ctx.lineTo(other.x, other.y);
+                            ctx.stroke();
+                        }
+                    }
+                });
+                
+                // Draw agent
+                const pulseSize = Math.sin(this.pulsePhase) * 5 * this.resonance;
+                ctx.fillStyle = this.params.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius + pulseSize, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Draw resonance aura
+                if (this.resonance > 0.5) {
+                    ctx.strokeStyle = this.params.color + "40";
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius + 20 + pulseSize * 2, 0, Math.PI * 2);
+                    ctx.stroke();
+                }
+                
+                // Draw architecture label
+                ctx.fillStyle = "#fff";
+                ctx.font = "12px Arial";
+                ctx.textAlign = "center";
+                ctx.fillText(this.architecture, this.x, this.y + 4);
+            }
+        }
+        
+        // Simulation variables
+        let agents = [];
+        let paused = false;
+        let musicStimulus = "structured";
+        let trustSpeed = 0.1;
+        
+        // Initialize agents
+        function initAgents() {
+            const count = parseInt(document.getElementById("agentCount").value);
+            agents = [];
+            const architectures = ["NT", "ASD", "ADHD"];
+            
+            for (let i = 0; i < count; i++) {
+                const arch = architectures[i % architectures.length];
+                agents.push(new Agent(i, arch));
+            }
+        }
+        
+        // Animation loop
+        function animate() {
+            if (!paused) {
+                ctx.fillStyle = "rgba(10, 15, 27, 0.1)";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Update and draw agents
+                agents.forEach(agent => {
+                    agent.update(musicStimulus, agents, trustSpeed);
+                });
+                
+                // Draw agents (separate loop for proper layering)
+                agents.forEach(agent => {
+                    agent.draw(ctx, agents);
+                });
+                
+                // Update metrics
+                updateMetrics();
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        // Update metrics display
+        function updateMetrics() {
+            // Calculate average trust
+            let totalTrust = 0;
+            let trustCount = 0;
+            agents.forEach(agent => {
+                Object.values(agent.trustMatrix).forEach(trust => {
+                    totalTrust += trust;
+                    trustCount++;
+                });
+            });
+            const avgTrust = trustCount > 0 ? totalTrust / trustCount : 0;
+            document.getElementById("avgTrust").textContent = avgTrust.toFixed(3);
+            
+            // Calculate system resonance
+            const systemResonance = agents.reduce((sum, agent) => sum + agent.resonance, 0) / agents.length;
+            document.getElementById("systemResonance").textContent = systemResonance.toFixed(3);
+            
+            // Calculate cooperation index
+            const cooperationIndex = avgTrust * systemResonance;
+            document.getElementById("cooperationIndex").textContent = cooperationIndex.toFixed(3);
+        }
+        
+        // Control functions
+        function resetSimulation() {
+            initAgents();
+        }
+        
+        function pauseSimulation() {
+            paused = !paused;
+        }
+        
+        function exportData() {
+            const data = {
+                timestamp: new Date().toISOString(),
+                parameters: {
+                    agentCount: agents.length,
+                    musicStimulus: musicStimulus,
+                    trustSpeed: trustSpeed
+                },
+                agents: agents.map(agent => ({
+                    id: agent.id,
+                    architecture: agent.architecture,
+                    position: { x: agent.x, y: agent.y },
+                    resonance: agent.resonance,
+                    trustMatrix: agent.trustMatrix
+                }))
+            };
+            
+            const blob = new Blob([JSON.stringify(data, null, 2)], {type: "application/json"});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `tide_resonance_${Date.now()}.json`;
+            a.click();
+        }
+        
+        // Event listeners
+        document.getElementById("agentCount").addEventListener("input", function(e) {
+            document.getElementById("agentCountValue").textContent = e.target.value;
+            initAgents();
+        });
+        
+        document.getElementById("musicType").addEventListener("change", function(e) {
+            musicStimulus = e.target.value;
+        });
+        
+        document.getElementById("trustSpeed").addEventListener("input", function(e) {
+            trustSpeed = parseFloat(e.target.value);
+            document.getElementById("trustSpeedValue").textContent = e.target.value;
+        });
+        
+        // Initialize and start
+        initAgents();
+        animate();
     </script>
 </body>
 </html>
