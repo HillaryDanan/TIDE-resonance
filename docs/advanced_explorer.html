@@ -410,6 +410,21 @@
                     <label>Environmental Noise <span class="value-display" id="noise-value">0.1</span></label>
                     <input type="range" id="env-noise" min="0" max="1" step="0.01" value="0.1">
                 </div>
+                
+                <div class="control-group">
+                    <label>Lyrics Abstractness <span class="value-display" id="lyrics-value">0.5</span></label>
+                    <input type="range" id="lyrics-abstractness" min="0" max="1" step="0.01" value="0.5">
+                    <div style="font-size: 0.8rem; color: #666; margin-top: 0.3rem;">
+                        <span style="float: left;">Concrete</span>
+                        <span style="float: right;">Abstract</span>
+                        <div style="clear: both;"></div>
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button onclick="setLyricsPreset('concrete')">Concrete Sample</button>
+                    <button onclick="setLyricsPreset('abstract')">Abstract Sample</button>
+                </div>
             </div>
             
             <div class="control-section">
@@ -572,6 +587,13 @@
                     <li><strong>System Trust</strong>: Average trust across all relationships</li>
                     <li><strong>Collective Resonance</strong>: How well the system synchronizes</li>
                     <li><strong>Diversity Index</strong>: Variety in the population</li>
+                </ul>
+                
+                <h3>Lyrics Response</h3>
+                <ul>
+                    <li><strong>NT</strong>: Prefers balanced lyrics (mid-range abstractness)</li>
+                    <li><strong>ASD</strong>: Prefers concrete, literal lyrics</li>
+                    <li><strong>ADHD</strong>: Prefers abstract, novel lyrics</li>
                 </ul>
                 
                 <p style="margin-top: 1rem; color: #888;">
@@ -768,6 +790,30 @@
                 const dimensionalModifier = this.calculateDimensionalModifier(params);
                 
                 this.resonance = baseResonance * tempoFactor * params.sensoryIntensity * dimensionalModifier;
+                
+                // Apply lyrics modifier based on architecture preference
+                if (params.lyricsAbstractness !== undefined) {
+                    let lyricsModifier = 1;
+                    
+                    // NT: Balanced - prefers mid-range abstractness
+                    if (this.type === "NT") {
+                        // Peak at 0.5, falls off towards extremes
+                        lyricsModifier = 0.7 + 0.6 * (1 - Math.abs(0.5 - params.lyricsAbstractness) * 2);
+                    }
+                    // ASD: Systematic - prefers concrete lyrics (low abstractness)
+                    else if (this.type === "ASD") {
+                        // Higher resonance with lower abstractness
+                        lyricsModifier = 0.6 + 0.8 * (1 - params.lyricsAbstractness);
+                    }
+                    // ADHD: Dynamic - prefers abstract/novel lyrics (high abstractness)
+                    else if (this.type === "ADHD") {
+                        // Higher resonance with higher abstractness
+                        lyricsModifier = 0.6 + 0.8 * params.lyricsAbstractness;
+                    }
+                    
+                    this.resonance *= lyricsModifier;
+                }
+                
                 this.pulsePhase += this.resonance * 0.1;
             }
             
@@ -966,7 +1012,8 @@
             interactionRadius: 150,
             selfDimension: 0,
             timeDimension: 0,
-            integrationFunction: 'multiplicative'
+            integrationFunction: 'multiplicative',
+            lyricsAbstractness: 0.5
         };
         
         // Parameter change tracking for visual feedback
@@ -1474,6 +1521,8 @@
             // Update all controls to match params
             document.getElementById('population-size').value = params.populationSize;
             document.getElementById('distribution-model').value = params.distributionModel;
+            document.getElementById('lyrics-abstractness').value = params.lyricsAbstractness;
+            document.getElementById('lyrics-value').textContent = params.lyricsAbstractness.toFixed(2);
             // ... etc for all controls
         }
         
@@ -1590,6 +1639,48 @@
         params.ntRatio = 33;
         params.asdRatio = 33;
         params.adhdRatio = 34;
+        
+        // Lyrics controls
+        document.getElementById('lyrics-abstractness').addEventListener('input', (e) => {
+            params.lyricsAbstractness = parseFloat(e.target.value);
+            document.getElementById('lyrics-value').textContent = e.target.value;
+            trackParameterChange('lyricsAbstractness', params.lyricsAbstractness);
+        });
+        
+        // Lyrics presets with visual feedback
+        function setLyricsPreset(type) {
+            const value = type === 'concrete' ? 0.1 : 0.9;
+            document.getElementById('lyrics-abstractness').value = value;
+            document.getElementById('lyrics-value').textContent = value.toFixed(2);
+            params.lyricsAbstractness = value;
+            trackParameterChange('lyricsAbstractness', value);
+            
+            // Visual feedback showing which agents prefer this
+            agents.forEach(agent => {
+                const flash = document.createElement('div');
+                flash.style.position = 'absolute';
+                flash.style.left = agent.x + 'px';
+                flash.style.top = agent.y + 'px';
+                flash.style.color = agent.config.color;
+                flash.style.pointerEvents = 'none';
+                flash.style.fontSize = '18px';
+                flash.style.fontWeight = 'bold';
+                flash.style.zIndex = '1000';
+                
+                let response = '';
+                if (agent.type === 'NT') {
+                    response = type === 'concrete' || type === 'abstract' ? '~' : '✓';
+                } else if (agent.type === 'ASD') {
+                    response = type === 'concrete' ? '✓' : '✗';
+                } else if (agent.type === 'ADHD') {
+                    response = type === 'abstract' ? '✓' : '✗';
+                }
+                
+                flash.textContent = response;
+                canvas.parentElement.appendChild(flash);
+                setTimeout(() => flash.remove(), 1500);
+            });
+        }
         
         // Initialize
         initSimulation();
