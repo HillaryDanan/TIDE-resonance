@@ -27,5 +27,4 @@ All parameters are theoretical values for research exploration:
 ### Citations
 - Axelrod, R. (1984). The Evolution of Cooperation
 - Nowak, M. A. (2006). Five rules for the evolution of cooperation
-- [Your relevant papers on cognitive architectures]
-
+- TO BE CONTINUED & UPDATED
