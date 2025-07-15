@@ -259,7 +259,7 @@
         
         .trust-matrix-mini {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fill, minmax(30px, 1fr));
             gap: 2px;
             margin-top: 0.5rem;
         }
@@ -1082,6 +1082,10 @@
             
             // Update distribution chart
             updateDistributionChart(typeCounts);
+            
+            // Update trust matrix and resonance heatmap
+            updateTrustMatrixDisplay();
+            updateResonanceHeatmap();
         }
         
         function drawMiniChart(ctx, data, color) {
@@ -1155,7 +1159,69 @@
             });
         }
         
-        // Animation loop
+        
+        // Update trust matrix display
+        function updateTrustMatrixDisplay() {
+            const matrixDiv = document.getElementById('trust-matrix-display');
+            matrixDiv.innerHTML = '';
+            
+            // Only show for reasonable number of agents
+            if (agents.length <= 12) {
+                agents.forEach((agent, i) => {
+                    agents.forEach((other, j) => {
+                        if (i !== j) {
+                            const trust = agent.trustMatrix[other.id] || 0;
+                            const cell = document.createElement('div');
+                            cell.className = 'trust-cell-mini';
+                            cell.style.background = `rgba(0, 255, 136, ${trust})`;
+                            cell.style.color = trust > 0.5 ? '#000' : '#fff';
+                            cell.style.fontSize = '10px';
+                            cell.textContent = trust.toFixed(1);
+                            cell.title = `${agent.type}→${other.type}: ${trust.toFixed(2)}`;
+                            matrixDiv.appendChild(cell);
+                        }
+                    });
+                });
+            } else {
+                matrixDiv.innerHTML = '<div style="color: #666; text-align: center; padding: 20px;">Too many agents</div>';
+            }
+        }
+
+        // Update resonance heatmap
+        function updateResonanceHeatmap() {
+            const ctx = document.getElementById('resonance-heatmap').getContext('2d');
+            const width = ctx.canvas.width;
+            const height = ctx.canvas.height;
+            
+            ctx.clearRect(0, 0, width, height);
+            
+            // Create a grid showing resonance levels
+            const gridSize = Math.ceil(Math.sqrt(agents.length));
+            const cellWidth = width / gridSize;
+            const cellHeight = height / gridSize;
+            
+            agents.forEach((agent, i) => {
+                const row = Math.floor(i / gridSize);
+                const col = i % gridSize;
+                const x = col * cellWidth;
+                const y = row * cellHeight;
+                
+                // Color based on resonance level
+                const resonance = agent.resonance;
+                const hue = 120 - (120 * resonance); // Green to red
+                ctx.fillStyle = `hsl(${hue}, 100%, 50%)`;
+                ctx.fillRect(x, y, cellWidth - 1, cellHeight - 1);
+                
+                // Add type label
+                ctx.fillStyle = resonance > 0.5 ? '#000' : '#fff';
+                ctx.font = 'bold 10px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(agent.type, x + cellWidth/2, y + cellHeight/2);
+            });
+        }
+        
+// Animation loop
         function animate() {
             if (!paused) {
                 // Clear canvas
