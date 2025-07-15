@@ -1300,7 +1300,8 @@
             ctx.textAlign = 'center';
             ctx.fillText(`Range: ${(maxRes - minRes).toFixed(3)}`, width/2, height - 5);
             ctx.textAlign = 'right';
-            ctx.fillText(`Max: ${maxRes.toFixed(3)}
+            ctx.fillText(`Max: ${maxRes.toFixed(3)}`, width - 5, height - 5);
+        }
         
         // Add parameter impact display
         function showParameterImpact() {
