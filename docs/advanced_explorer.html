@@ -3,820 +3,1271 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TIDE-resonance Advanced Explorer</title>
+    <title>TIDE-Resonance Advanced Research Laboratory</title>
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --success: #27ae60;
-            --warning: #f39c12;
-            --bg: #ecf0f1;
-            --card-bg: #ffffff;
+            --primary: #00ff88;
+            --secondary: #ff006e;
+            --accent: #3b82f6;
+            --warning: #f59e0b;
+            --bg-dark: #050505;
+            --panel-bg: rgba(10, 10, 10, 0.95);
+            --border: rgba(255, 255, 255, 0.1);
         }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: var(--bg);
-            color: var(--primary);
-            line-height: 1.6;
-        }
-
-        .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-            position: relative;
+            background: var(--bg-dark);
+            color: #fff;
             overflow: hidden;
         }
-
-        .hero::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 10px,
-                rgba(255, 255, 255, 0.05) 10px,
-                rgba(255, 255, 255, 0.05) 20px
-            );
-            animation: slide 20s linear infinite;
-        }
-
-        @keyframes slide {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(20px, 20px); }
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero p {
-            font-size: 1.4rem;
-            opacity: 0.9;
-            position: relative;
-            z-index: 1;
-        }
-
+        
+        /* Main Layout */
         .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .simulation-warning {
-            background: #fff3cd;
-            border: 3px solid #ffc107;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .simulation-warning strong {
-            color: #856404;
-            font-size: 1.2rem;
-        }
-
-        .simulation-badge {
-            display: inline-block;
-            background: #ffc107;
-            color: #856404;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-left: 0.5rem;
-        }
-
-        .tabs {
-            display: flex;
-            justify-content: center;
-            margin: 2rem 0;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .tab {
-            padding: 1rem 2rem;
-            background: white;
-            border: 2px solid transparent;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .tab:hover {
-            border-color: var(--secondary);
-            transform: translateY(-2px);
-        }
-
-        .tab.active {
-            background: var(--secondary);
-            color: white;
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .advanced-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
+            grid-template-columns: 350px 1fr 300px;
+            grid-template-rows: 60px 1fr 200px;
+            height: 100vh;
+            gap: 1px;
+            background: var(--border);
         }
-
-        .advanced-module {
-            background: white;
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            position: relative;
-        }
-
-        .advanced-module:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
-        }
-
-        .module-title {
+        
+        /* Header */
+        .header {
+            grid-column: 1 / -1;
+            background: var(--panel-bg);
             display: flex;
             align-items: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-            color: var(--primary);
-        }
-
-        .module-title span {
-            font-size: 2rem;
-            margin-right: 1rem;
-        }
-
-        .dimension-slider {
-            margin: 1rem 0;
-        }
-
-        .dimension-label {
-            display: flex;
             justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
+            padding: 0 2rem;
+            border-bottom: 2px solid var(--primary);
         }
-
-        .slider {
-            width: 100%;
-            height: 8px;
-            border-radius: 4px;
-            background: #ddd;
-            outline: none;
-            -webkit-appearance: none;
+        
+        .header h1 {
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-
-        .slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--secondary);
-            cursor: pointer;
-        }
-
-        .resonance-matrix {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+        
+        .status {
+            display: flex;
+            align-items: center;
             gap: 1rem;
-            margin: 2rem 0;
+            font-size: 0.9rem;
+            color: #888;
         }
-
-        .matrix-cell {
-            padding: 1rem;
-            background: #f8f9fa;
-            border-radius: 8px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
+        
+        .status .live {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-
-        .matrix-cell:hover {
-            background: var(--secondary);
-            color: white;
-            transform: scale(1.05);
+        
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: pulse 2s ease infinite;
         }
-
-        .matrix-cell .simulation-indicator {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: #ffc107;
-            color: #856404;
-            font-size: 0.7rem;
-            padding: 2px 6px;
-            border-radius: 10px;
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.5); }
+        }
+        
+        /* Control Panel */
+        .control-panel {
+            background: var(--panel-bg);
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+        
+        .control-section {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .control-section:last-child {
+            border-bottom: none;
+        }
+        
+        .control-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .control-group {
+            margin-bottom: 1rem;
+        }
+        
+        .control-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .control-group input[type="range"],
+        .control-group select {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 0.5rem;
+            border-radius: 6px;
+        }
+        
+        .control-group input[type="range"] {
+            -webkit-appearance: none;
+            height: 6px;
+            padding: 0;
+        }
+        
+        .control-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+        
+        .value-display {
+            float: right;
+            color: var(--primary);
             font-weight: 600;
         }
-
-        .playlist-generator {
-            background: #f8f9fa;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1rem 0;
-        }
-
-        .generate-btn {
-            background: var(--success);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            width: 100%;
+        
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
             margin-top: 1rem;
         }
-
-        .generate-btn:hover {
-            background: #229954;
+        
+        button {
+            padding: 0.7rem;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s;
         }
-
-        .visualization-canvas {
-            width: 100%;
-            height: 300px;
-            background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            margin: 1rem 0;
+        
+        button:hover {
+            background: rgba(0, 255, 136, 0.2);
+            transform: translateY(-1px);
+        }
+        
+        button.danger {
+            background: rgba(255, 0, 110, 0.1);
+            border-color: var(--secondary);
+            color: var(--secondary);
+        }
+        
+        /* Main Canvas */
+        .main-view {
+            background: #000;
             position: relative;
-            overflow: hidden;
         }
-
-        .pattern-visual {
-            position: absolute;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            transition: all 0.5s ease;
+        
+        #mainCanvas {
+            width: 100%;
+            height: 100%;
         }
-
-        .nt-visual {
-            background: linear-gradient(135deg, #3498db, #9b59b6);
-        }
-
-        .asd-visual {
-            background: linear-gradient(135deg, #27ae60, #16a085);
-        }
-
-        .adhd-visual {
-            background: linear-gradient(135deg, #e74c3c, #f39c12);
-        }
-
-        .hypothesis-card {
-            background: #fef3c7;
-            border: 2px solid #f59e0b;
-            border-radius: 12px;
+        
+        /* Metrics Panel */
+        .metrics-panel {
+            background: var(--panel-bg);
             padding: 1.5rem;
-            margin: 1rem 0;
+            overflow-y: auto;
         }
-
-        .hypothesis-card h4 {
-            color: #d97706;
+        
+        .metric-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .metric-card h4 {
+            font-size: 0.9rem;
+            color: #888;
             margin-bottom: 0.5rem;
         }
-
-        .data-export {
-            background: var(--primary);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border: none;
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary);
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .metric-subtitle {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.2rem;
+        }
+        
+        .mini-chart {
+            width: 100%;
+            height: 60px;
+            margin-top: 0.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 4px;
+        }
+        
+        /* Data Panel */
+        .data-panel {
+            grid-column: 1 / -1;
+            background: var(--panel-bg);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            padding: 1.5rem;
+            overflow-x: auto;
+        }
+        
+        .data-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
             border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .data-card h5 {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+        
+        .trust-matrix-mini {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            margin-top: 0.5rem;
+        }
+        
+        .trust-cell-mini {
+            aspect-ratio: 1;
+            background: rgba(0, 255, 136, 0.1);
+            border-radius: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: var(--panel-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 1.5rem;
             cursor: pointer;
-            margin: 0.5rem;
         }
-
-        .data-export:hover {
-            background: #1a252f;
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .advanced-grid { grid-template-columns: 1fr; }
-            .tabs { flex-direction: column; }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 1fr;
+                grid-template-rows: 60px auto 1fr auto auto;
+            }
+            
+            .control-panel,
+            .metrics-panel {
+                grid-column: 1;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="hero">
-        <h1>TIDE-resonance Advanced Explorer</h1>
-        <p style="margin-bottom: 20px;"><a href="interactive_resonance.html" style="color: #4CAF50;">→ Launch Real-time Interactive Simulation</a> | <a href="https://github.com/HillaryDanan/game-theory-trust-suite" target="_blank" style="color: #4CAF50;">Trust Dynamics Framework</a></p>        <p>Deep dive into cognitive-sensory resonance patterns</p>
-    </div>
-
     <div class="container">
-        <div class="simulation-warning">
-            <strong>⚠️ IMPORTANT: ALL NUMBERS ARE SIMULATIONS</strong><br>
-            Every percentage, score, and metric shown in this explorer is a <strong>THEORETICAL SIMULATION</strong> 
-            designed to test relational dynamics across dimensions. These are NOT empirical data or validated measurements.
-            They are placeholder values for hypothesis generation and framework development only.
-        </div>
-
-        <div class="tabs">
-            <div class="tab active" onclick="showTab('dimensional')">🎛️ Dimensional Analysis <span class="simulation-badge">SIMULATED</span></div>
-            <div class="tab" onclick="showTab('music')">🎼 Music Deep Dive <span class="simulation-badge">SIMULATED</span></div>
-            <div class="tab" onclick="showTab('sensory')">🌈 Sensory Mapping <span class="simulation-badge">SIMULATED</span></div>
-            <div class="tab" onclick="showTab('research')">🔬 Research Tools</div>
-            <div class="tab" onclick="showTab('trust')">🤝 Trust Dynamics <span class="simulation-badge">SIMULATED</span></div>        </div>
-
-        <!-- Dimensional Analysis Tab -->
-        <div id="dimensional" class="tab-content active">
-            <div class="advanced-grid">
-                <div class="advanced-module">
-                    <h3 class="module-title">
-                        <span>📊</span>
-                        Multi-Dimensional Configuration
-                        <span class="simulation-badge">SIMULATION</span>
-                    </h3>
-                    <div class="dimension-slider">
-                        <div class="dimension-label">
-                            <span>Self-Representation</span>
-                            <span id="self-value">Internal</span>
-                        </div>
-                        <input type="range" class="slider" id="self-dim" min="-1" max="1" step="0.1" value="0">
-                    </div>
-                    <div class="dimension-slider">
-                        <div class="dimension-label">
-                            <span>Temporal Processing</span>
-                            <span id="temp-value">Balanced</span>
-                        </div>
-                        <input type="range" class="slider" id="temp-dim" min="-1" max="1" step="0.1" value="0">
-                    </div>
-                    <div class="dimension-slider">
-                        <div class="dimension-label">
-                            <span>Integration Strength</span>
-                            <span id="int-value">50%</span>
-                        </div>
-                        <input type="range" class="slider" id="int-dim" min="0" max="100" step="5" value="50">
-                    </div>
-                    <div class="dimension-slider">
-                        <div class="dimension-label">
-                            <span>Flexibility Index</span>
-                            <span id="flex-value">50%</span>
-                        </div>
-                        <input type="range" class="slider" id="flex-dim" min="0" max="100" step="5" value="50">
-                    </div>
-                    <p style="color: #856404; font-size: 0.9rem; margin-top: 1rem; text-align: center;">
-                        ⚠️ All values are theoretical simulations for research purposes
-                    </p>
+        <!-- Header -->
+        <div class="header">
+            <h1>TIDE-Resonance Advanced Research Laboratory</h1>
+            <div class="status">
+                <div class="live">
+                    <div class="live-dot"></div>
+                    <span>LIVE SIMULATION</span>
                 </div>
-
-                <div class="advanced-module">
-                    <h3 class="module-title">
-                        <span>🎯</span>
-                        Pattern Visualization
-                    </h3>
-                    <div class="visualization-canvas" id="pattern-viz">
-                        <div class="pattern-visual nt-visual" style="top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
-                    </div>
-                    <p style="text-align: center; color: #666; margin-top: 1rem;">
-                        Interactive pattern position based on dimensional configuration<br>
-                        <strong style="color: #856404;">SIMULATED VISUALIZATION</strong>
-                    </p>
-                </div>
-            </div>
-
-            <div class="advanced-module">
-                <h3 class="module-title">
-                    <span>🔄</span>
-                    Cross-Pattern Resonance Matrix
-                    <span class="simulation-badge">100% SIMULATED</span>
-                </h3>
-                <p style="color: #856404; margin-bottom: 1rem; text-align: center;">
-                    <strong>⚠️ ALL PERCENTAGES BELOW ARE SIMULATED VALUES</strong><br>
-                    These numbers are theoretical placeholders to explore potential relational dynamics
-                </p>
-                <div class="resonance-matrix">
-                    <div class="matrix-cell">
-                        <span class="simulation-indicator">SIM</span>
-                        <strong>NT↔NT</strong><br>
-                        <span style="font-size: 2rem;">85%</span><br>
-                        <small style="color: #666;">Simulated</small>
-                    </div>
-                    <div class="matrix-cell">
-                        <span class="simulation-indicator">SIM</span>
-                        <strong>NT↔ASD</strong><br>
-                        <span style="font-size: 2rem;">45%</span><br>
-                        <small style="color: #666;">Simulated</small>
-                    </div>
-                    <div class="matrix-cell">
-                        <span class="simulation-indicator">SIM</span>
-                        <strong>NT↔ADHD</strong><br>
-                        <span style="font-size: 2rem;">60%</span><br>
-                        <small style="color: #666;">Simulated</small>
-                    </div>
-                    <div class="matrix-cell">
-                        <span class="simulation-indicator">SIM</span>
-                        <strong>ASD↔NT</strong><br>
-                        <span style="font-size: 2rem;">45%</span><br>
-                        <small style="color: #666;">Simulated</small>
-                    </div>
-                    <div class="matrix-cell">
-                        <span class="simulation-indicator">SIM</span>
-                        <strong>ASD↔ASD</strong><br>
-                        <span style="font-size: 2rem;">90%</span><br>
-                        <small style="color: #666;">Simulated</small>
-                    </div>
-                    <div class="matrix-cell">
-                        <span class="simulation-indicator">SIM</span>
-                        <strong>ASD↔ADHD</strong><br>
-                        <span style="font-size: 2rem;">30%</span><br>
-                        <small style="color: #666;">Simulated</small>
-                    </div>
-                    <div class="matrix-cell">
-                        <span class="simulation-indicator">SIM</span>
-                        <strong>ADHD↔NT</strong><br>
-                        <span style="font-size: 2rem;">60%</span><br>
-                        <small style="color: #666;">Simulated</small>
-                    </div>
-                    <div class="matrix-cell">
-                        <span class="simulation-indicator">SIM</span>
-                        <strong>ADHD↔ASD</strong><br>
-                        <span style="font-size: 2rem;">30%</span><br>
-                        <small style="color: #666;">Simulated</small>
-                    </div>
-                    <div class="matrix-cell">
-                        <span class="simulation-indicator">SIM</span>
-                        <strong>ADHD↔ADHD</strong><br>
-                        <span style="font-size: 2rem;">75%</span><br>
-                        <small style="color: #666;">Simulated</small>
-                    </div>
-                </div>
-                <p style="text-align: center; color: #856404; margin-top: 1rem; font-weight: 600;">
-                    These simulated values are placeholders for testing theoretical frameworks only.<br>
-                    Empirical validation required for any real-world application.
-                </p>
+                <span id="fps">60 FPS</span>
+                <span id="agent-count-status">0 Agents</span>
+                <span id="sim-time">00:00</span>
             </div>
         </div>
-
-        <!-- Music Deep Dive Tab -->
-        <div id="music" class="tab-content">
-            <div class="advanced-grid">
-                <div class="advanced-module">
-                    <h3 class="module-title">
-                        <span>🎹</span>
-                        Advanced Music Analysis
-                        <span class="simulation-badge">SIMULATED</span>
-                    </h3>
-                    <textarea style="width: 100%; height: 150px; padding: 1rem; border: 2px solid #e5e7eb; border-radius: 8px;" 
-                              placeholder="Paste complete Spotify track analysis JSON here..."></textarea>
-                    <button class="generate-btn">Analyze Complete Audio Profile (Simulated)</button>
-                    <p style="color: #856404; font-size: 0.9rem; margin-top: 1rem; text-align: center;">
-                        Analysis will generate simulated resonance scores for research purposes
-                    </p>
+        
+        <!-- Control Panel -->
+        <div class="control-panel">
+            <div class="control-section">
+                <h3>🧬 Architecture Configuration</h3>
+                
+                <div class="control-group">
+                    <label>Population Size <span class="value-display" id="pop-size-value">12</span></label>
+                    <input type="range" id="population-size" min="3" max="50" value="12">
                 </div>
-
-                <div class="advanced-module">
-                    <h3 class="module-title">
-                        <span>🎵</span>
-                        Theoretical Playlist Generator
-                    </h3>
-                    <div class="playlist-generator">
-                        <h4>Focus Enhancement Playlist <span class="simulation-badge">THEORETICAL</span></h4>
-                        <select style="width: 100%; padding: 0.75rem; margin: 0.5rem 0; border: 2px solid #e5e7eb; border-radius: 8px;">
-                            <option>Select Pattern</option>
-                            <option>NT-TIDE</option>
-                            <option>ASD-TIDE</option>
-                            <option>ADHD-TIDE</option>
-                        </select>
-                        <select style="width: 100%; padding: 0.75rem; margin: 0.5rem 0; border: 2px solid #e5e7eb; border-radius: 8px;">
-                            <option>Select Context</option>
-                            <option>Deep Focus</option>
-                            <option>Creative Flow</option>
-                            <option>Energy Boost</option>
-                            <option>Calm Down</option>
-                        </select>
-                        <button class="generate-btn">Generate Playlist Structure</button>
+                
+                <div class="control-group">
+                    <label>Distribution Model</label>
+                    <select id="distribution-model">
+                        <option value="balanced">Balanced (Equal Distribution)</option>
+                        <option value="nt-dominant">NT Dominant (60/20/20)</option>
+                        <option value="asd-dominant">ASD Dominant (20/60/20)</option>
+                        <option value="adhd-dominant">ADHD Dominant (20/20/60)</option>
+                        <option value="complementary">Complementary Pairs</option>
+                        <option value="custom">Custom Distribution</option>
+                    </select>
+                </div>
+                
+                <div id="custom-dist" style="display: none;">
+                    <div class="control-group">
+                        <label>NT % <span class="value-display" id="nt-percent">33%</span></label>
+                        <input type="range" id="nt-ratio" min="0" max="100" value="33">
+                    </div>
+                    <div class="control-group">
+                        <label>ASD % <span class="value-display" id="asd-percent">33%</span></label>
+                        <input type="range" id="asd-ratio" min="0" max="100" value="33">
+                    </div>
+                    <div class="control-group">
+                        <label>ADHD % <span class="value-display" id="adhd-percent">34%</span></label>
+                        <input type="range" id="adhd-ratio" min="0" max="100" value="34">
                     </div>
                 </div>
             </div>
-
-            <div class="advanced-module">
-                <h3 class="module-title">
-                    <span>📈</span>
-                    Temporal Dynamics Analysis
-                    <span class="simulation-badge">SIMULATED</span>
-                </h3>
-                <div class="visualization-canvas" style="background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><text x="200" y="20" text-anchor="middle" fill="%23856404" font-weight="bold">SIMULATED DATA</text><path d="M20,250 Q100,200 150,150 T250,100 T350,50" stroke="%233498db" stroke-width="3" fill="none"/><circle cx="150" cy="150" r="5" fill="%23e74c3c"/><circle cx="250" cy="100" r="5" fill="%23e74c3c"/></svg>') center/contain no-repeat;">
+            
+            <div class="control-section">
+                <h3>🎵 Environmental Parameters</h3>
+                
+                <div class="control-group">
+                    <label>Music Complexity</label>
+                    <select id="music-complexity">
+                        <option value="simple">Simple (Single frequency)</option>
+                        <option value="structured">Structured (Bach-like)</option>
+                        <option value="flowing">Flowing (Debussy-like)</option>
+                        <option value="dynamic">Dynamic (EDM-like)</option>
+                        <option value="ambient">Ambient (Drone-like)</option>
+                        <option value="chaotic">Chaotic (Free jazz)</option>
+                    </select>
                 </div>
-                <p style="text-align: center; color: #856404; margin-top: 1rem; font-weight: 600;">
-                    Simulated energy-tempo-engagement curves for theoretical exploration
-                </p>
+                
+                <div class="control-group">
+                    <label>Tempo (BPM) <span class="value-display" id="tempo-value">120</span></label>
+                    <input type="range" id="tempo" min="40" max="200" value="120">
+                </div>
+                
+                <div class="control-group">
+                    <label>Sensory Intensity <span class="value-display" id="intensity-value">0.5</span></label>
+                    <input type="range" id="sensory-intensity" min="0" max="1" step="0.01" value="0.5">
+                </div>
+                
+                <div class="control-group">
+                    <label>Environmental Noise <span class="value-display" id="noise-value">0.1</span></label>
+                    <input type="range" id="env-noise" min="0" max="1" step="0.01" value="0.1">
+                </div>
+            </div>
+            
+            <div class="control-section">
+                <h3>🤝 Trust Dynamics</h3>
+                
+                <div class="control-group">
+                    <label>Trust Evolution Model</label>
+                    <select id="trust-model">
+                        <option value="standard">Standard Game Theory</option>
+                        <option value="adaptive">Adaptive Learning</option>
+                        <option value="memory">Memory-Based</option>
+                        <option value="reputation">Reputation Network</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label>Learning Rate <span class="value-display" id="learning-rate-value">0.1</span></label>
+                    <input type="range" id="learning-rate" min="0.01" max="1" step="0.01" value="0.1">
+                </div>
+                
+                <div class="control-group">
+                    <label>Memory Decay <span class="value-display" id="memory-decay-value">0.05</span></label>
+                    <input type="range" id="memory-decay" min="0" max="0.5" step="0.01" value="0.05">
+                </div>
+                
+                <div class="control-group">
+                    <label>Interaction Radius <span class="value-display" id="radius-value">150px</span></label>
+                    <input type="range" id="interaction-radius" min="50" max="500" value="150">
+                </div>
+            </div>
+            
+            <div class="control-section">
+                <h3>🔬 Dimensional Analysis</h3>
+                
+                <div class="control-group">
+                    <label>Self-Dimension Weight <span class="value-display" id="self-dim-value">0.0</span></label>
+                    <input type="range" id="self-dimension" min="-1" max="1" step="0.01" value="0">
+                </div>
+                
+                <div class="control-group">
+                    <label>Time-Dimension Weight <span class="value-display" id="time-dim-value">0.0</span></label>
+                    <input type="range" id="time-dimension" min="-1" max="1" step="0.01" value="0">
+                </div>
+                
+                <div class="control-group">
+                    <label>Integration Function</label>
+                    <select id="integration-function">
+                        <option value="multiplicative">Multiplicative</option>
+                        <option value="additive">Additive</option>
+                        <option value="hierarchical">Hierarchical</option>
+                        <option value="quantum">Quantum Superposition</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button onclick="resetSimulation()">Reset</button>
+                <button onclick="pauseSimulation()">Pause</button>
+                <button onclick="saveState()">Save State</button>
+                <button onclick="loadState()">Load State</button>
+                <button onclick="exportData()">Export Data</button>
+                <button onclick="showHelp()">Help</button>
             </div>
         </div>
-
-        <!-- Sensory Mapping Tab -->
-        <div id="sensory" class="tab-content">
-            <div class="advanced-module">
-                <h3 class="module-title">
-                    <span>🌈</span>
-                    Multi-Modal Sensory Profile Builder
-                    <span class="simulation-badge">SIMULATED</span>
-                </h3>
-                <p style="color: #856404; margin-bottom: 1rem; text-align: center;">
-                    <strong>All sensory values are simulated for framework testing</strong>
-                </p>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                    <div>
-                        <h4>Visual Processing <small style="color: #856404;">(Simulated)</small></h4>
-                        <label>Light Sensitivity: <input type="range" min="0" max="100" value="50"></label>
-                        <label>Color Preference: <input type="range" min="0" max="100" value="50"></label>
-                        <label>Motion Tolerance: <input type="range" min="0" max="100" value="50"></label>
-                    </div>
-                    <div>
-                        <h4>Auditory Processing <small style="color: #856404;">(Simulated)</small></h4>
-                        <label>Volume Tolerance: <input type="range" min="0" max="100" value="50"></label>
-                        <label>Frequency Range: <input type="range" min="0" max="100" value="50"></label>
-                        <label>Background Noise: <input type="range" min="0" max="100" value="50"></label>
-                    </div>
-                    <div>
-                        <h4>Tactile Processing <small style="color: #856404;">(Simulated)</small></h4>
-                        <label>Texture Sensitivity: <input type="range" min="0" max="100" value="50"></label>
-                        <label>Pressure Preference: <input type="range" min="0" max="100" value="50"></label>
-                        <label>Temperature Range: <input type="range" min="0" max="100" value="50"></label>
-                    </div>
-                    <div>
-                        <h4>Vestibular/Proprioceptive <small style="color: #856404;">(Simulated)</small></h4>
-                        <label>Movement Need: <input type="range" min="0" max="100" value="50"></label>
-                        <label>Balance Sensitivity: <input type="range" min="0" max="100" value="50"></label>
-                        <label>Spatial Awareness: <input type="range" min="0" max="100" value="50"></label>
-                    </div>
-                </div>
-                <button class="generate-btn" style="margin-top: 2rem;">Generate Sensory Profile Report (Simulated)</button>
+        
+        <!-- Main Canvas -->
+        <div class="main-view">
+            <canvas id="mainCanvas"></canvas>
+        </div>
+        
+        <!-- Metrics Panel -->
+        <div class="metrics-panel">
+            <h3 style="margin-bottom: 1rem; color: var(--primary);">📊 Live Metrics</h3>
+            
+            <div class="metric-card">
+                <h4>System Trust</h4>
+                <div class="metric-value" id="system-trust">0.000</div>
+                <div class="metric-subtitle">Cross-architecture average</div>
+                <canvas class="mini-chart" id="trust-chart"></canvas>
+            </div>
+            
+            <div class="metric-card">
+                <h4>Collective Resonance</h4>
+                <div class="metric-value" id="collective-resonance">0.000</div>
+                <div class="metric-subtitle">System-wide coherence</div>
+                <canvas class="mini-chart" id="resonance-chart"></canvas>
+            </div>
+            
+            <div class="metric-card">
+                <h4>Diversity Index</h4>
+                <div class="metric-value" id="diversity-index">0.000</div>
+                <div class="metric-subtitle">Shannon entropy</div>
+            </div>
+            
+            <div class="metric-card">
+                <h4>Stability Score</h4>
+                <div class="metric-value" id="stability-score">0.000</div>
+                <div class="metric-subtitle">System equilibrium</div>
+            </div>
+            
+            <div class="metric-card">
+                <h4>Information Flow</h4>
+                <div class="metric-value" id="info-flow">0.000</div>
+                <div class="metric-subtitle">bits/second</div>
             </div>
         </div>
-
-        <!-- Research Tools Tab -->
-        <div id="research" class="tab-content">
-            <div class="advanced-grid">
-                <div class="advanced-module">
-                    <h3 class="module-title">
-                        <span>📝</span>
-                        Hypothesis Generator
-                    </h3>
-                    <div class="hypothesis-card">
-                        <h4>Generated Hypothesis #1</h4>
-                        <p>Individuals with ASD-TIDE patterns will show <strong style="color: #d97706;">[SIMULATED: 40%]</strong> higher engagement with music featuring tempo coefficient of variation < 0.1</p>
-                        <p><strong>Test Method:</strong> EEG coherence during listening tasks</p>
-                        <p><strong>Sample Size:</strong> n=64 (power = 0.8, α = 0.05)</p>
-                        <p style="color: #856404; font-size: 0.9rem; margin-top: 0.5rem;">
-                            Note: The 40% value is a simulated placeholder for hypothesis development
-                        </p>
-                    </div>
-                    <button class="generate-btn">Generate New Hypothesis</button>
-                </div>
-
-                <div class="advanced-module">
-                    <h3 class="module-title">
-                        <span>💾</span>
-                        Data Export Tools
-                    </h3>
-                    <p>Export your exploration data for further analysis:</p>
-                    <p style="color: #856404; font-size: 0.9rem;">
-                        <strong>Remember:</strong> All exported data contains simulated values for theoretical exploration
-                    </p>
-                    <div style="margin-top: 1rem;">
-                        <button class="data-export">Export as JSON (with simulation flags)</button>
-                        <button class="data-export">Export as CSV (with simulation headers)</button>
-                        <button class="data-export">Generate Report PDF</button>
-                        <button class="data-export">Create R Script</button>
-                    </div>
-                </div>
+        
+        <!-- Data Panel -->
+        <div class="data-panel">
+            <div class="data-card">
+                <h5>Trust Matrix</h5>
+                <div class="trust-matrix-mini" id="trust-matrix-display"></div>
             </div>
-
-            <div class="advanced-module">
-                <h3 class="module-title">
-                    <span>🔗</span>
-                    Framework Integration Links
-                </h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
-                    <a href="https://github.com/HillaryDanan/TIDE" style="text-decoration: none;">
-                        <div class="matrix-cell">
-                            <strong>TIDE Core</strong><br>
-                            <span style="color: #666;">Dimensional Framework</span>
-                        </div>
-                    </a>
-                    <a href="https://github.com/HillaryDanan/BIND" style="text-decoration: none;">
-                        <div class="matrix-cell">
-                            <strong>BIND</strong><br>
-                            <span style="color: #666;">Boundary Dynamics</span>
-                        </div>
-                    </a>
-                    <a href="https://github.com/HillaryDanan/information-atoms" style="text-decoration: none;">
-                        <div class="matrix-cell">
-                            <strong>Info-Atoms</strong><br>
-                            <span style="color: #666;">Processing Units</span>
-                        </div>
-                    </a>
-                    <a href="https://github.com/HillaryDanan/hexagonal-consciousness-suite" style="text-decoration: none;">
-                        <div class="matrix-cell">
-                            <strong>Hexagonal</strong><br>
-                            <span style="color: #666;">Structural Patterns</span>
-                        </div>
-                    </a>
+            
+            <div class="data-card">
+                <h5>Architecture Distribution</h5>
+                <canvas id="distribution-chart" width="200" height="100"></canvas>
+            </div>
+            
+            <div class="data-card">
+                <h5>Resonance Heatmap</h5>
+                <canvas id="resonance-heatmap" width="200" height="100"></canvas>
+            </div>
+            
+            <div class="data-card">
+                <h5>Network Topology</h5>
+                <div id="network-stats">
+                    <div>Clusters: <span id="cluster-count">0</span></div>
+                    <div>Bridges: <span id="bridge-count">0</span></div>
+                    <div>Isolates: <span id="isolate-count">0</span></div>
                 </div>
             </div>
         </div>
     </div>
-
+    
+    <!-- Help Modal -->
+    <div class="modal" id="help-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Research Laboratory Guide</h2>
+                <button class="close-modal" onclick="closeHelp()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h3>Architecture Types</h3>
+                <ul>
+                    <li><strong>NT (Blue)</strong>: Balanced processing, moderate trust formation</li>
+                    <li><strong>ASD (Orange)</strong>: Systematic processing, careful trust building</li>
+                    <li><strong>ADHD (Red)</strong>: Dynamic processing, rapid trust changes</li>
+                </ul>
+                
+                <h3>Visual Indicators</h3>
+                <ul>
+                    <li><strong>Connection Lines</strong>: Trust strength between agents</li>
+                    <li><strong>Pulse Size</strong>: Current resonance with environment</li>
+                    <li><strong>Movement Pattern</strong>: Architecture-specific behavior</li>
+                </ul>
+                
+                <h3>Key Metrics</h3>
+                <ul>
+                    <li><strong>System Trust</strong>: Average trust across all relationships</li>
+                    <li><strong>Collective Resonance</strong>: How well the system synchronizes</li>
+                    <li><strong>Diversity Index</strong>: Variety in the population</li>
+                </ul>
+                
+                <p style="margin-top: 1rem; color: #888;">
+                    This is a theoretical research simulation. All parameters are hypothetical
+                    and designed for scientific exploration.
+                </p>
+            </div>
+        </div>
+    </div>
+    
     <script>
-        function showTab(tabName) {
-            // Hide all tabs
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
+        // Get canvas and context
+        const canvas = document.getElementById('mainCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Mini chart contexts
+        const trustChartCanvas = document.getElementById('trust-chart');
+        const trustChartCtx = trustChartCanvas.getContext('2d');
+        const resonanceChartCanvas = document.getElementById('resonance-chart');
+        const resonanceChartCtx = resonanceChartCanvas.getContext('2d');
+        
+        // Resize canvas
+        function resizeCanvas() {
+            const rect = canvas.parentElement.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
             
-            // Show selected tab
-            document.getElementById(tabName).classList.add('active');
-            event.currentTarget.classList.add('active');
+            // Resize mini charts
+            trustChartCanvas.width = trustChartCanvas.offsetWidth;
+            trustChartCanvas.height = 60;
+            resonanceChartCanvas.width = resonanceChartCanvas.offsetWidth;
+            resonanceChartCanvas.height = 60;
         }
-
-        // Dimensional sliders
-        document.getElementById('self-dim').addEventListener('input', function(e) {
-            const val = parseFloat(e.target.value);
-            const label = val < -0.3 ? 'External' : val > 0.3 ? 'Internal' : 'Balanced';
-            document.getElementById('self-value').textContent = label + ' (Simulated)';
-            updateVisualization();
-        });
-
-        document.getElementById('temp-dim').addEventListener('input', function(e) {
-            const val = parseFloat(e.target.value);
-            const label = val < -0.3 ? 'Extended' : val > 0.3 ? 'Immediate' : 'Balanced';
-            document.getElementById('temp-value').textContent = label + ' (Simulated)';
-            updateVisualization();
-        });
-
-        document.getElementById('int-dim').addEventListener('input', function(e) {
-            document.getElementById('int-value').textContent = e.target.value + '% (Sim)';
-        });
-
-        document.getElementById('flex-dim').addEventListener('input', function(e) {
-            document.getElementById('flex-value').textContent = e.target.value + '% (Sim)';
-        });
-
-        function updateVisualization() {
-            const self = parseFloat(document.getElementById('self-dim').value);
-            const temp = parseFloat(document.getElementById('temp-dim').value);
-            
-            const visual = document.querySelector('.pattern-visual');
-            const x = 50 + (self * 40);
-            const y = 50 + (temp * 40);
-            
-            visual.style.left = x + '%';
-            visual.style.top = y + '%';
-            
-            // Change color based on position
-            if (self < -0.5 && temp < -0.5) {
-                visual.className = 'pattern-visual asd-visual';
-            } else if (temp > 0.5) {
-                visual.className = 'pattern-visual adhd-visual';
-            } else {
-                visual.className = 'pattern-visual nt-visual';
-            }
-        }
-
-        // TRUST DYNAMICS INTEGRATION
-        const TRUST_PARAMS = {
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        // Architecture configurations
+        const ARCHITECTURES = {
             NT: {
-                initialTrust: 0.5,    // Theoretical parameter
-                learningRate: 0.1,    // Theoretical parameter
-                decayRate: 0.05,      // Theoretical parameter
-                resonanceThreshold: 0.6
+                color: '#3b82f6',
+                glow: 'rgba(59, 130, 246, 0.4)',
+                params: {
+                    initialTrust: 0.5,
+                    learningRate: 0.1,
+                    decayRate: 0.05,
+                    resonanceThreshold: 0.6,
+                    movementStyle: 'smooth',
+                    socialDistance: 80,
+                    musicResponse: {
+                        simple: 0.6,
+                        structured: 0.7,
+                        flowing: 0.8,
+                        dynamic: 0.6,
+                        ambient: 0.5,
+                        chaotic: 0.3
+                    }
+                }
             },
             ASD: {
-                initialTrust: 0.3,    // Theoretical parameter
-                learningRate: 0.15,   // Theoretical parameter
-                decayRate: 0.02,      // Theoretical parameter
-                resonanceThreshold: 0.8
+                color: '#f59e0b',
+                glow: 'rgba(245, 158, 11, 0.4)',
+                params: {
+                    initialTrust: 0.3,
+                    learningRate: 0.15,
+                    decayRate: 0.02,
+                    resonanceThreshold: 0.8,
+                    movementStyle: 'systematic',
+                    socialDistance: 120,
+                    musicResponse: {
+                        simple: 0.8,
+                        structured: 0.9,
+                        flowing: 0.4,
+                        dynamic: 0.3,
+                        ambient: 0.7,
+                        chaotic: 0.1
+                    }
+                }
             },
             ADHD: {
-                initialTrust: 0.7,    // Theoretical parameter
-                learningRate: 0.2,    // Theoretical parameter
-                decayRate: 0.1,       // Theoretical parameter
-                resonanceThreshold: 0.4
+                color: '#ef4444',
+                glow: 'rgba(239, 68, 68, 0.4)',
+                params: {
+                    initialTrust: 0.7,
+                    learningRate: 0.2,
+                    decayRate: 0.1,
+                    resonanceThreshold: 0.4,
+                    movementStyle: 'dynamic',
+                    socialDistance: 60,
+                    musicResponse: {
+                        simple: 0.4,
+                        structured: 0.3,
+                        flowing: 0.6,
+                        dynamic: 0.9,
+                        ambient: 0.4,
+                        chaotic: 0.8
+                    }
+                }
             }
         };
-
-        let trustHistory = [];
-        let currentTrust = 0.5;
-
-        function updateTrustParamsDisplay() {
-            const arch1 = document.getElementById('agent1-arch').value;
-            const arch2 = document.getElementById('agent2-arch').value;
-            const params1 = TRUST_PARAMS[arch1];
-            const params2 = TRUST_PARAMS[arch2];
-            
-            document.getElementById('trust-params-display').innerHTML = ;
-        }
-
-        function runTrustSimulation() {
-            const arch1 = document.getElementById('agent1-arch').value;
-            const arch2 = document.getElementById('agent2-arch').value;
-            const params1 = TRUST_PARAMS[arch1];
-            
-            trustHistory = [];
-            currentTrust = params1.initialTrust;
-            
-            // Simulate 50 interactions
-            for (let i = 0; i < 50; i++) {
-                const resonanceQuality = Math.random();
-                const success = resonanceQuality > params1.resonanceThreshold ? 1 : 0;
-                const trustDelta = params1.learningRate * (success - currentTrust);
-                const decay = -params1.decayRate * (currentTrust - params1.initialTrust);
-                
-                currentTrust = Math.max(0, Math.min(1, currentTrust + trustDelta + decay));
-                trustHistory.push(currentTrust);
+        
+        // Agent class
+        class Agent {
+            constructor(id, type, x, y) {
+                this.id = id;
+                this.type = type;
+                this.config = ARCHITECTURES[type];
+                this.x = x;
+                this.y = y;
+                this.vx = 0;
+                this.vy = 0;
+                this.angle = Math.random() * Math.PI * 2;
+                this.radius = 20;
+                this.energy = 1;
+                this.resonance = 0;
+                this.pulsePhase = Math.random() * Math.PI * 2;
+                this.trustMatrix = {};
+                this.interactionHistory = [];
+                this.memory = [];
             }
             
-            drawTrustGraph();
-            updateTrustMetrics();
+            update(agents, params) {
+                this.updateMovement(agents, params);
+                this.updateResonance(params);
+                this.updateTrust(agents, params);
+                this.updateEnergy();
+            }
+            
+            updateMovement(agents, params) {
+                const style = this.config.params.movementStyle;
+                
+                if (style === 'smooth') {
+                    this.angle += (Math.random() - 0.5) * 0.1;
+                    const speed = 1.5 * (1 + params.sensoryIntensity * 0.5);
+                    this.vx = Math.cos(this.angle) * speed;
+                    this.vy = Math.sin(this.angle) * speed;
+                } else if (style === 'systematic') {
+                    if (Math.random() < 0.02) {
+                        this.angle = Math.round(this.angle / (Math.PI/2)) * (Math.PI/2);
+                    }
+                    const speed = 1.2;
+                    this.vx = Math.cos(this.angle) * speed;
+                    this.vy = Math.sin(this.angle) * speed;
+                } else if (style === 'dynamic') {
+                    this.angle += (Math.random() - 0.5) * 0.3 * (1 + params.sensoryIntensity);
+                    const speed = 2.5 * (1 + params.sensoryIntensity * 0.3);
+                    this.vx = Math.cos(this.angle) * speed;
+                    this.vy = Math.sin(this.angle) * speed;
+                }
+                
+                // Social forces
+                agents.forEach(other => {
+                    if (other.id !== this.id) {
+                        const dx = other.x - this.x;
+                        const dy = other.y - this.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (dist < this.config.params.socialDistance && dist > 0) {
+                            const force = (this.config.params.socialDistance - dist) / this.config.params.socialDistance;
+                            this.vx -= (dx / dist) * force * 0.5;
+                            this.vy -= (dy / dist) * force * 0.5;
+                        }
+                        
+                        // Attraction to trusted agents
+                        if (this.trustMatrix[other.id] > 0.6 && dist > 100) {
+                            this.vx += (dx / dist) * this.trustMatrix[other.id] * 0.2;
+                            this.vy += (dy / dist) * this.trustMatrix[other.id] * 0.2;
+                        }
+                    }
+                });
+                
+                // Apply noise
+                if (params.envNoise > 0) {
+                    this.vx += (Math.random() - 0.5) * params.envNoise * 2;
+                    this.vy += (Math.random() - 0.5) * params.envNoise * 2;
+                }
+                
+                // Update position
+                this.vx *= 0.95;
+                this.vy *= 0.95;
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                // Boundaries
+                const margin = this.radius + 10;
+                if (this.x < margin) this.x = margin, this.vx = Math.abs(this.vx);
+                if (this.x > canvas.width - margin) this.x = canvas.width - margin, this.vx = -Math.abs(this.vx);
+                if (this.y < margin) this.y = margin, this.vy = Math.abs(this.vy);
+                if (this.y > canvas.height - margin) this.y = canvas.height - margin, this.vy = -Math.abs(this.vy);
+            }
+            
+            updateResonance(params) {
+                const baseResonance = this.config.params.musicResponse[params.musicComplexity];
+                const tempoFactor = 1 - Math.abs(params.tempo - 100) / 100 * 0.5;
+                const dimensionalModifier = this.calculateDimensionalModifier(params);
+                
+                this.resonance = baseResonance * tempoFactor * params.sensoryIntensity * dimensionalModifier;
+                this.pulsePhase += this.resonance * 0.1;
+            }
+            
+            calculateDimensionalModifier(params) {
+                const selfMod = {
+                    NT: 0.5 + params.selfDimension * 0.3,
+                    ASD: 0.3 + params.selfDimension * 0.5,
+                    ADHD: 0.7 + params.selfDimension * 0.2
+                };
+                
+                const timeMod = {
+                    NT: 0.5 + params.timeDimension * 0.3,
+                    ASD: 0.7 + params.timeDimension * 0.2,
+                    ADHD: 0.3 + params.timeDimension * 0.5
+                };
+                
+                if (params.integrationFunction === 'multiplicative') {
+                    return selfMod[this.type] * timeMod[this.type];
+                } else if (params.integrationFunction === 'additive') {
+                    return (selfMod[this.type] + timeMod[this.type]) / 2;
+                } else if (params.integrationFunction === 'hierarchical') {
+                    return Math.max(selfMod[this.type], timeMod[this.type]);
+                } else { // quantum
+                    return Math.sqrt(selfMod[this.type] * selfMod[this.type] + timeMod[this.type] * timeMod[this.type]) / Math.sqrt(2);
+                }
+            }
+            
+            updateTrust(agents, params) {
+                agents.forEach(other => {
+                    if (other.id !== this.id) {
+                        const dist = Math.sqrt(
+                            Math.pow(this.x - other.x, 2) + 
+                            Math.pow(this.y - other.y, 2)
+                        );
+                        
+                        if (dist < params.interactionRadius) {
+                            if (!this.trustMatrix[other.id]) {
+                                this.trustMatrix[other.id] = this.config.params.initialTrust;
+                            }
+                            
+                            const proximity = 1 - dist / params.interactionRadius;
+                            const resonanceMatch = 1 - Math.abs(this.resonance - other.resonance);
+                            const architectureBonus = this.getArchitectureCompatibility(other.type);
+                            
+                            const quality = proximity * resonanceMatch * architectureBonus;
+                            const currentTrust = this.trustMatrix[other.id];
+                            
+                            let newTrust = currentTrust;
+                            
+                            if (params.trustModel === 'standard') {
+                                const success = quality > this.config.params.resonanceThreshold ? 1 : 0;
+                                const delta = params.learningRate * (success - currentTrust);
+                                const decay = -params.memoryDecay * (currentTrust - this.config.params.initialTrust);
+                                newTrust = currentTrust + delta + decay;
+                            } else if (params.trustModel === 'adaptive') {
+                                const adaptiveRate = params.learningRate * (1 - currentTrust);
+                                newTrust = currentTrust + quality * adaptiveRate;
+                            } else if (params.trustModel === 'memory') {
+                                this.memory.push({ agent: other.id, quality, time: Date.now() });
+                                if (this.memory.length > 10) this.memory.shift();
+                                const avgQuality = this.memory
+                                    .filter(m => m.agent === other.id)
+                                    .reduce((sum, m) => sum + m.quality, 0) / this.memory.filter(m => m.agent === other.id).length;
+                                newTrust = currentTrust * (1 - params.learningRate) + avgQuality * params.learningRate;
+                            } else if (params.trustModel === 'reputation') {
+                                const reputation = this.calculateReputation(other, agents);
+                                newTrust = currentTrust * 0.7 + reputation * 0.3;
+                            }
+                            
+                            this.trustMatrix[other.id] = Math.max(0, Math.min(1, newTrust));
+                            
+                            this.interactionHistory.push({
+                                time: Date.now(),
+                                agent: other.id,
+                                trust: this.trustMatrix[other.id],
+                                quality
+                            });
+                            
+                            if (this.interactionHistory.length > 100) {
+                                this.interactionHistory.shift();
+                            }
+                        }
+                    }
+                });
+            }
+            
+            getArchitectureCompatibility(otherType) {
+                const compatibility = {
+                    NT: { NT: 0.8, ASD: 0.6, ADHD: 0.7 },
+                    ASD: { NT: 0.6, ASD: 0.9, ADHD: 0.4 },
+                    ADHD: { NT: 0.7, ASD: 0.4, ADHD: 0.8 }
+                };
+                return compatibility[this.type][otherType];
+            }
+            
+            calculateReputation(agent, allAgents) {
+                let totalTrust = 0;
+                let count = 0;
+                
+                allAgents.forEach(other => {
+                    if (other.id !== this.id && other.id !== agent.id && other.trustMatrix[agent.id]) {
+                        totalTrust += other.trustMatrix[agent.id];
+                        count++;
+                    }
+                });
+                
+                return count > 0 ? totalTrust / count : 0.5;
+            }
+            
+            updateEnergy() {
+                this.energy = 0.9 * this.energy + 0.1 * this.resonance;
+            }
+            
+            draw(ctx, agents) {
+                // Draw trust connections
+                agents.forEach(other => {
+                    if (other.id > this.id && this.trustMatrix[other.id] && other.trustMatrix[this.id]) {
+                        const trust = (this.trustMatrix[other.id] + other.trustMatrix[this.id]) / 2;
+                        
+                        if (trust > 0.2) {
+                            const gradient = ctx.createLinearGradient(this.x, this.y, other.x, other.y);
+                            gradient.addColorStop(0, this.config.color + Math.floor(trust * 127).toString(16).padStart(2, '0'));
+                            gradient.addColorStop(1, other.config.color + Math.floor(trust * 127).toString(16).padStart(2, '0'));
+                            
+                            ctx.strokeStyle = gradient;
+                            ctx.lineWidth = trust * 4;
+                            ctx.beginPath();
+                            ctx.moveTo(this.x, this.y);
+                            ctx.lineTo(other.x, other.y);
+                            ctx.stroke();
+                        }
+                    }
+                });
+                
+                // Draw resonance field
+                const pulse = Math.sin(this.pulsePhase) * 15 * this.resonance;
+                const fieldRadius = this.radius + 30 + pulse;
+                
+                const gradient = ctx.createRadialGradient(
+                    this.x, this.y, this.radius,
+                    this.x, this.y, fieldRadius
+                );
+                gradient.addColorStop(0, this.config.glow);
+                gradient.addColorStop(0.5, this.config.glow.replace('0.4', '0.2'));
+                gradient.addColorStop(1, 'transparent');
+                
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, fieldRadius, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Draw agent body
+                ctx.shadowBlur = 20;
+                ctx.shadowColor = this.config.color;
+                ctx.fillStyle = this.config.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+                
+                // Energy ring
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 2;
+                ctx.globalAlpha = 0.5;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius + 5, 0, Math.PI * 2 * this.energy);
+                ctx.stroke();
+                ctx.globalAlpha = 1;
+                
+                // Type label
+                ctx.fillStyle = '#000';
+                ctx.font = 'bold 12px -apple-system, BlinkMacSystemFont, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(this.type, this.x, this.y);
+            }
         }
-
-        function drawTrustGraph() {
-            const canvas = document.getElementById('trust-evolution-graph');
-            const ctx = canvas.getContext('2d');
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Simulation state
+        let agents = [];
+        let paused = false;
+        let simulationTime = 0;
+        let frameCount = 0;
+        let lastFpsUpdate = Date.now();
+        let fps = 60;
+        let params = {
+            populationSize: 12,
+            distributionModel: 'balanced',
+            musicComplexity: 'structured',
+            tempo: 120,
+            sensoryIntensity: 0.5,
+            envNoise: 0.1,
+            trustModel: 'standard',
+            learningRate: 0.1,
+            memoryDecay: 0.05,
+            interactionRadius: 150,
+            selfDimension: 0,
+            timeDimension: 0,
+            integrationFunction: 'multiplicative'
+        };
+        
+        // History for charts
+        let trustHistory = [];
+        let resonanceHistory = [];
+        
+        // Initialize simulation
+        function initSimulation() {
+            agents = [];
+            const distribution = getDistribution();
             
-            // Draw axes
-            ctx.strokeStyle = '#ccc';
-            ctx.beginPath();
-            ctx.moveTo(40, 20);
-            ctx.lineTo(40, 280);
-            ctx.lineTo(580, 280);
-            ctx.stroke();
+            for (let i = 0; i < params.populationSize; i++) {
+                const type = distribution[i % distribution.length];
+                const angle = (i / params.populationSize) * Math.PI * 2;
+                const radius = Math.min(canvas.width, canvas.height) * 0.3;
+                const x = canvas.width / 2 + Math.cos(angle) * radius * (0.8 + Math.random() * 0.4);
+                const y = canvas.height / 2 + Math.sin(angle) * radius * (0.8 + Math.random() * 0.4);
+                agents.push(new Agent(i, type, x, y));
+            }
             
-            // Draw trust evolution
-            ctx.strokeStyle = '#3b82f6';
+            trustHistory = [];
+            resonanceHistory = [];
+            simulationTime = 0;
+        }
+        
+        function getDistribution() {
+            switch(params.distributionModel) {
+                case 'balanced': return ['NT', 'ASD', 'ADHD'];
+                case 'nt-dominant': return ['NT', 'NT', 'NT', 'ASD', 'ADHD'];
+                case 'asd-dominant': return ['ASD', 'ASD', 'ASD', 'NT', 'ADHD'];
+                case 'adhd-dominant': return ['ADHD', 'ADHD', 'ADHD', 'NT', 'ASD'];
+                case 'complementary': return ['NT', 'ASD', 'NT', 'ASD'];
+                case 'custom': {
+                    const dist = [];
+                    const ntCount = Math.round(params.populationSize * params.ntRatio / 100);
+                    const asdCount = Math.round(params.populationSize * params.asdRatio / 100);
+                    const adhdCount = params.populationSize - ntCount - asdCount;
+                    
+                    for (let i = 0; i < ntCount; i++) dist.push('NT');
+                    for (let i = 0; i < asdCount; i++) dist.push('ASD');
+                    for (let i = 0; i < adhdCount; i++) dist.push('ADHD');
+                    
+                    return dist.sort(() => Math.random() - 0.5);
+                }
+                default: return ['NT', 'ASD', 'ADHD'];
+            }
+        }
+        
+        // Update metrics
+        function updateMetrics() {
+            // Calculate metrics
+            let totalTrust = 0;
+            let trustCount = 0;
+            let totalResonance = 0;
+            const typeCounts = { NT: 0, ASD: 0, ADHD: 0 };
+            
+            agents.forEach(agent => {
+                typeCounts[agent.type]++;
+                totalResonance += agent.resonance;
+                
+                Object.values(agent.trustMatrix).forEach(trust => {
+                    totalTrust += trust;
+                    trustCount++;
+                });
+            });
+            
+            const systemTrust = trustCount > 0 ? totalTrust / trustCount : 0;
+            const collectiveResonance = totalResonance / agents.length;
+            
+            // Diversity index (Shannon entropy)
+            let diversityIndex = 0;
+            Object.values(typeCounts).forEach(count => {
+                if (count > 0) {
+                    const p = count / agents.length;
+                    diversityIndex -= p * Math.log(p);
+                }
+            });
+            diversityIndex = Math.exp(diversityIndex) / 3;
+            
+            // Stability score
+            const trustVariance = agents.reduce((sum, agent) => {
+                const agentAvg = Object.values(agent.trustMatrix).reduce((s, t) => s + t, 0) / 
+                                Math.max(1, Object.values(agent.trustMatrix).length);
+                return sum + Math.pow(agentAvg - systemTrust, 2);
+            }, 0) / agents.length;
+            const stabilityScore = 1 - Math.min(1, Math.sqrt(trustVariance));
+            
+            // Information flow (interactions per second)
+            const recentInteractions = agents.reduce((sum, agent) => {
+                return sum + agent.interactionHistory.filter(i => Date.now() - i.time < 1000).length;
+            }, 0);
+            const infoFlow = recentInteractions / agents.length;
+            
+            // Update displays
+            document.getElementById('system-trust').textContent = systemTrust.toFixed(3);
+            document.getElementById('collective-resonance').textContent = collectiveResonance.toFixed(3);
+            document.getElementById('diversity-index').textContent = diversityIndex.toFixed(3);
+            document.getElementById('stability-score').textContent = stabilityScore.toFixed(3);
+            document.getElementById('info-flow').textContent = infoFlow.toFixed(3);
+            
+            // Update history
+            trustHistory.push(systemTrust);
+            resonanceHistory.push(collectiveResonance);
+            if (trustHistory.length > 100) trustHistory.shift();
+            if (resonanceHistory.length > 100) resonanceHistory.shift();
+            
+            // Update mini charts
+            drawMiniChart(trustChartCtx, trustHistory, '#00ff88');
+            drawMiniChart(resonanceChartCtx, resonanceHistory, '#3b82f6');
+            
+            // Update network stats
+            updateNetworkStats();
+            
+            // Update distribution chart
+            updateDistributionChart(typeCounts);
+        }
+        
+        function drawMiniChart(ctx, data, color) {
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            
+            if (data.length < 2) return;
+            
+            ctx.strokeStyle = color;
             ctx.lineWidth = 2;
             ctx.beginPath();
-            trustHistory.forEach((trust, i) => {
-                const x = 40 + (i / trustHistory.length) * 540;
-                const y = 280 - trust * 260;
+            
+            data.forEach((value, i) => {
+                const x = (i / (data.length - 1)) * ctx.canvas.width;
+                const y = ctx.canvas.height - value * ctx.canvas.height * 0.9 - 5;
+                
                 if (i === 0) ctx.moveTo(x, y);
                 else ctx.lineTo(x, y);
             });
+            
             ctx.stroke();
         }
-
-        function updateTrustMetrics() {
-            document.getElementById('current-trust').textContent = currentTrust.toFixed(3);
-            document.getElementById('resonance-modifier').textContent = (0.5 + 0.5 * currentTrust).toFixed(2) + 'x';
+        
+        function updateNetworkStats() {
+            let clusters = 0;
+            let bridges = 0;
+            let isolates = 0;
             
-            let stability = 'Low';
-            if (currentTrust > 0.7) stability = 'High';
-            else if (currentTrust > 0.4) stability = 'Moderate';
-            document.getElementById('cooperation-stability').textContent = stability;
+            // Simple network analysis
+            const visited = new Set();
+            
+            agents.forEach(agent => {
+                const strongConnections = Object.entries(agent.trustMatrix)
+                    .filter(([id, trust]) => trust > 0.5).length;
+                
+                if (strongConnections === 0) isolates++;
+                else if (strongConnections === 1) bridges++;
+                else if (strongConnections > 3 && !visited.has(agent.id)) {
+                    clusters++;
+                    visited.add(agent.id);
+                }
+            });
+            
+            document.getElementById('cluster-count').textContent = clusters;
+            document.getElementById('bridge-count').textContent = bridges;
+            document.getElementById('isolate-count').textContent = isolates;
         }
-
-        function exportTrustData() {
+        
+        function updateDistributionChart(typeCounts) {
+            const ctx = document.getElementById('distribution-chart').getContext('2d');
+            const width = ctx.canvas.width;
+            const height = ctx.canvas.height;
+            
+            ctx.clearRect(0, 0, width, height);
+            
+            const total = agents.length;
+            let x = 0;
+            
+            ['NT', 'ASD', 'ADHD'].forEach(type => {
+                const count = typeCounts[type];
+                const barWidth = (count / total) * width;
+                
+                ctx.fillStyle = ARCHITECTURES[type].color;
+                ctx.fillRect(x, 0, barWidth, height);
+                
+                ctx.fillStyle = '#fff';
+                ctx.font = '12px -apple-system, BlinkMacSystemFont, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(count, x + barWidth / 2, height / 2 + 4);
+                
+                x += barWidth;
+            });
+        }
+        
+        // Animation loop
+        function animate() {
+            if (!paused) {
+                // Clear canvas
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Update agents
+                agents.forEach(agent => {
+                    agent.update(agents, params);
+                });
+                
+                // Draw agents
+                agents.forEach(agent => {
+                    agent.draw(ctx, agents);
+                });
+                
+                // Update metrics every 10 frames
+                if (frameCount % 10 === 0) {
+                    updateMetrics();
+                }
+                
+                // Update FPS
+                frameCount++;
+                const now = Date.now();
+                if (now - lastFpsUpdate > 1000) {
+                    fps = frameCount;
+                    frameCount = 0;
+                    lastFpsUpdate = now;
+                    document.getElementById('fps').textContent = fps + ' FPS';
+                }
+                
+                // Update simulation time
+                simulationTime++;
+                const minutes = Math.floor(simulationTime / 3600);
+                const seconds = Math.floor((simulationTime % 3600) / 60);
+                document.getElementById('sim-time').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                document.getElementById('agent-count-status').textContent = agents.length + ' Agents';
+            }
+            
+            requestAnimationFrame(animate);
+        }
+        
+        // Control functions
+        function resetSimulation() {
+            initSimulation();
+        }
+        
+        function pauseSimulation() {
+            paused = !paused;
+        }
+        
+        function saveState() {
+            const state = {
+                params: params,
+                agents: agents.map(a => ({
+                    id: a.id,
+                    type: a.type,
+                    position: { x: a.x, y: a.y },
+                    trustMatrix: a.trustMatrix
+                })),
+                timestamp: new Date().toISOString()
+            };
+            
+            localStorage.setItem('tide-resonance-state', JSON.stringify(state));
+            alert('State saved!');
+        }
+        
+        function loadState() {
+            const saved = localStorage.getItem('tide-resonance-state');
+            if (saved) {
+                const state = JSON.parse(saved);
+                params = state.params;
+                // Restore controls
+                updateControlsFromParams();
+                initSimulation();
+                alert('State loaded!');
+            } else {
+                alert('No saved state found');
+            }
+        }
+        
+        function exportData() {
             const data = {
                 metadata: {
                     timestamp: new Date().toISOString(),
-                    framework: 'TIDE-resonance Trust Dynamics',
-                    description: 'Theoretical simulation data for research purposes'
+                    simulationTime: simulationTime,
+                    fps: fps,
+                    version: '2.0'
                 },
-                parameters: TRUST_PARAMS,
-                simulation: {
-                    agent1: document.getElementById('agent1-arch').value,
-                    agent2: document.getElementById('agent2-arch').value,
-                    trustHistory: trustHistory,
-                    finalTrust: currentTrust
+                parameters: params,
+                agents: agents.map(agent => ({
+                    id: agent.id,
+                    type: agent.type,
+                    position: { x: agent.x, y: agent.y },
+                    velocity: { x: agent.vx, y: agent.vy },
+                    resonance: agent.resonance,
+                    energy: agent.energy,
+                    trustMatrix: agent.trustMatrix,
+                    interactionHistory: agent.interactionHistory
+                })),
+                metrics: {
+                    systemTrust: parseFloat(document.getElementById('system-trust').textContent),
+                    collectiveResonance: parseFloat(document.getElementById('collective-resonance').textContent),
+                    diversityIndex: parseFloat(document.getElementById('diversity-index').textContent),
+                    stabilityScore: parseFloat(document.getElementById('stability-score').textContent),
+                    infoFlow: parseFloat(document.getElementById('info-flow').textContent)
+                },
+                history: {
+                    trust: trustHistory,
+                    resonance: resonanceHistory
                 }
             };
             
@@ -824,79 +1275,121 @@
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = ;
+            a.download = `tide_resonance_advanced_${Date.now()}.json`;
             a.click();
         }
-
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            if (document.getElementById('agent1-arch')) {
-                document.getElementById('agent1-arch').addEventListener('change', updateTrustParamsDisplay);
-                document.getElementById('agent2-arch').addEventListener('change', updateTrustParamsDisplay);
-                updateTrustParamsDisplay();
-            }
+        
+        function showHelp() {
+            document.getElementById('help-modal').style.display = 'flex';
+        }
+        
+        function closeHelp() {
+            document.getElementById('help-modal').style.display = 'none';
+        }
+        
+        function updateControlsFromParams() {
+            // Update all controls to match params
+            document.getElementById('population-size').value = params.populationSize;
+            document.getElementById('distribution-model').value = params.distributionModel;
+            // ... etc for all controls
+        }
+        
+        // Event listeners
+        document.getElementById('population-size').addEventListener('input', (e) => {
+            params.populationSize = parseInt(e.target.value);
+            document.getElementById('pop-size-value').textContent = params.populationSize;
+            initSimulation();
         });
+        
+        document.getElementById('distribution-model').addEventListener('change', (e) => {
+            params.distributionModel = e.target.value;
+            document.getElementById('custom-dist').style.display = 
+                e.target.value === 'custom' ? 'block' : 'none';
+            initSimulation();
+        });
+        
+        document.getElementById('music-complexity').addEventListener('change', (e) => {
+            params.musicComplexity = e.target.value;
+        });
+        
+        document.getElementById('tempo').addEventListener('input', (e) => {
+            params.tempo = parseInt(e.target.value);
+            document.getElementById('tempo-value').textContent = params.tempo;
+        });
+        
+        document.getElementById('sensory-intensity').addEventListener('input', (e) => {
+            params.sensoryIntensity = parseFloat(e.target.value);
+            document.getElementById('intensity-value').textContent = params.sensoryIntensity.toFixed(2);
+        });
+        
+        document.getElementById('env-noise').addEventListener('input', (e) => {
+            params.envNoise = parseFloat(e.target.value);
+            document.getElementById('noise-value').textContent = params.envNoise.toFixed(2);
+        });
+        
+        document.getElementById('trust-model').addEventListener('change', (e) => {
+            params.trustModel = e.target.value;
+        });
+        
+        document.getElementById('learning-rate').addEventListener('input', (e) => {
+            params.learningRate = parseFloat(e.target.value);
+            document.getElementById('learning-rate-value').textContent = params.learningRate.toFixed(2);
+        });
+        
+        document.getElementById('memory-decay').addEventListener('input', (e) => {
+            params.memoryDecay = parseFloat(e.target.value);
+            document.getElementById('memory-decay-value').textContent = params.memoryDecay.toFixed(2);
+        });
+        
+        document.getElementById('interaction-radius').addEventListener('input', (e) => {
+            params.interactionRadius = parseInt(e.target.value);
+            document.getElementById('radius-value').textContent = params.interactionRadius + 'px';
+        });
+        
+        document.getElementById('self-dimension').addEventListener('input', (e) => {
+            params.selfDimension = parseFloat(e.target.value);
+            document.getElementById('self-dim-value').textContent = params.selfDimension.toFixed(2);
+        });
+        
+        document.getElementById('time-dimension').addEventListener('input', (e) => {
+            params.timeDimension = parseFloat(e.target.value);
+            document.getElementById('time-dim-value').textContent = params.timeDimension.toFixed(2);
+        });
+        
+        document.getElementById('integration-function').addEventListener('change', (e) => {
+            params.integrationFunction = e.target.value;
+        });
+        
+        // Custom distribution controls
+        document.getElementById('nt-ratio').addEventListener('input', (e) => {
+            params.ntRatio = parseInt(e.target.value);
+            document.getElementById('nt-percent').textContent = params.ntRatio + '%';
+            
+            // Adjust ADHD to keep total at 100%
+            const remaining = 100 - params.ntRatio - params.asdRatio;
+            params.adhdRatio = Math.max(0, remaining);
+            document.getElementById('adhd-ratio').value = params.adhdRatio;
+            document.getElementById('adhd-percent').textContent = params.adhdRatio + '%';
+            
+            if (params.distributionModel === 'custom') initSimulation();
+        });
+        
+        document.getElementById('asd-ratio').addEventListener('input', (e) => {
+            params.asdRatio = parseInt(e.target.value);
+            document.getElementById('asd-percent').textContent = params.asdRatio + '%';
+            
+            // Adjust ADHD to keep total at 100%
+            const remaining = 100 - params.ntRatio - params.asdRatio;
+            params.adhdRatio = Math.max(0, remaining);
+            document.getElementById('adhd-ratio').value = params.adhdRatio;
+            document.getElementById('adhd-percent').textContent = params.adhdRatio + '%';
+            
+            if (params.distributionModel === 'custom') initSimulation();
+        });
+        
+        // Initialize
+        initSimulation();
+        animate();
     </script>
 </body>
 </html>
-        <!-- Trust Dynamics Tab -->
-        <div id="trust" class="tab-content">
-            <div class="advanced-grid">
-                <div class="advanced-module full-width">
-                    <h3 class="module-title">
-                        <span>🤝</span>
-                        Trust Evolution Between Cognitive Architectures
-                        <div class="sim-badge">THEORETICAL MODEL</div>
-                    </h3>
-                    <p style="color: #666; margin-bottom: 20px;">
-                        Based on <a href="https://github.com/HillaryDanan/game-theory-trust-suite" target="_blank">game-theory-trust-suite</a>
-                        - Exploring how different cognitive architectures build trust through shared experiences
-                    </p>
-                    
-                    <div class="trust-simulation">
-                        <div class="architecture-selector">
-                            <label>Agent 1 Architecture:</label>
-                            <select id="agent1-arch">
-                                <option value="NT">NT-TIDE (Neurotypical)</option>
-                                <option value="ASD">ASD-TIDE (Systematic)</option>
-                                <option value="ADHD">ADHD-TIDE (Dynamic)</option>
-                            </select>
-                            
-                            <label>Agent 2 Architecture:</label>
-                            <select id="agent2-arch">
-                                <option value="NT">NT-TIDE (Neurotypical)</option>
-                                <option value="ASD">ASD-TIDE (Systematic)</option>
-                                <option value="ADHD">ADHD-TIDE (Dynamic)</option>
-                            </select>
-                        </div>
-                        
-                        <div class="trust-parameters">
-                            <h4>Trust Parameters (Theoretical)</h4>
-                            <div id="trust-params-display"></div>
-                        </div>
-                        
-                        <div class="trust-visualization">
-                            <canvas id="trust-evolution-graph" width="600" height="300"></canvas>
-                        </div>
-                        
-                        <div class="trust-metrics">
-                            <div class="metric">
-                                <label>Current Trust Level:</label>
-                                <span id="current-trust">0.50</span>
-                            </div>
-                            <div class="metric">
-                                <label>Resonance Modifier:</label>
-                                <span id="resonance-modifier">1.00x</span>
-                            </div>
-                            <div class="metric">
-                                <label>Cooperation Stability:</label>
-                                <span id="cooperation-stability">Moderate</span>
-                            </div>
-                        </div>
-                        
-                        <button onclick="runTrustSimulation()" class="generate-btn">Run Trust Evolution Simulation</button>
-                        <button onclick="exportTrustData()" class="export-btn">Export Research Data</button>
-                    </div>
-                </div>
-            </div>
-        </div>
