@@ -1,0 +1,28 @@
+
+<!-- Add this to the controls section of advanced_explorer.html -->
+<div class="trust-panel" style="margin-top: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
+    <h3>Trust Dynamics (Research Simulation)</h3>
+    <p style="font-size: 0.9em; color: #666;">
+        Theoretical model for research exploration - not empirically validated
+    </p>
+    <div id="trust-metrics" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div>
+            <label>Agent 1 → Agent 2 Trust:</label>
+            <span id="trust-1-2">0.50</span>
+        </div>
+        <div>
+            <label>Agent 2 → Agent 1 Trust:</label>
+            <span id="trust-2-1">0.50</span>
+        </div>
+        <div>
+            <label>Trust Symmetry:</label>
+            <span id="trust-symmetry">100%</span>
+        </div>
+        <div>
+            <label>Resonance Modifier:</label>
+            <span id="resonance-modifier">1.00x</span>
+        </div>
+    </div>
+    <canvas id="trust-evolution-chart" width="400" height="200" style="margin-top: 10px;"></canvas>
+</div>
+
