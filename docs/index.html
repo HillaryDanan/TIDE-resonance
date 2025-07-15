@@ -3,436 +3,855 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TIDE-resonance Explorer</title>
+    <title>TIDE-Resonance: Where Minds Meet Music</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --primary: #00ff88;
+            --secondary: #ff006e;
+            --accent: #3b82f6;
+            --bg-dark: #0a0a0a;
+            --bg-darker: #000000;
+            --text: #ffffff;
+            --text-dim: #888888;
         }
-
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: #f0f2f5;
-            color: #1a1a1a;
+            background: var(--bg-darker);
+            color: var(--text);
+            overflow-x: hidden;
             line-height: 1.6;
         }
-
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            position: relative;
+        
+        /* Canvas Background */
+        #bgCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             z-index: 1;
         }
-
-        .subtitle {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            position: relative;
-            z-index: 1;
-        }
-
+        
+        /* Main Container */
         .container {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 8s ease infinite;
+            background-size: 200% 200%;
+        }
+        
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .hero .subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--text-dim);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.5s forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Interactive Demo Section */
+        .demo-section {
+            position: relative;
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .demo-container {
+            position: relative;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        #demoCanvas {
+            display: block;
+            width: 100%;
+            height: 600px;
+            background: radial-gradient(ellipse at center, #0a1015 0%, #000000 100%);
+        }
+        
+        /* Control Panel */
+        .controls {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(10, 10, 10, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(20px);
+            max-width: 300px;
+        }
+        
+        .control-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .control-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .control-header .live-indicator {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: pulse 2s ease infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        
+        .control-group {
+            margin-bottom: 1.2rem;
+        }
+        
+        .control-group label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .control-group select,
+        .control-group input[type="range"] {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            padding: 0.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .control-group input[type="range"] {
+            -webkit-appearance: none;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+        }
+        
+        .control-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .control-group input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 10px var(--primary);
+        }
+        
+        .value-display {
+            display: inline-block;
+            float: right;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* Metrics Panel */
+        .metrics {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(10, 10, 10, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(20px);
+            min-width: 250px;
+        }
+        
+        .metric-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .metric-item:last-child {
+            border-bottom: none;
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+        
+        .metric-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            font-variant-numeric: tabular-nums;
+        }
+        
+        /* Info Cards */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
         }
-
-        .disclaimer {
-            background: #fef3c7;
-            border: 2px solid #f59e0b;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            text-align: center;
-            font-weight: 500;
-        }
-
-        .pattern-selector {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 3rem 0;
-            flex-wrap: wrap;
-        }
-
-        .pattern-card {
-            background: white;
-            border: 2px solid #e5e7eb;
+        
+        .info-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 16px;
             padding: 2rem;
-            cursor: pointer;
             transition: all 0.3s ease;
-            text-align: center;
-            min-width: 200px;
-        }
-
-        .pattern-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-color: #667eea;
-        }
-
-        .pattern-card.active {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-        }
-
-        .explorer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .explorer-module {
-            background: white;
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
-        }
-
-        .module-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-        }
-
-        .module-icon {
-            font-size: 2rem;
-            margin-right: 1rem;
-        }
-
-        .resonance-display {
-            background: #f3f4f6;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1rem 0;
-        }
-
-        .resonance-bar {
-            height: 30px;
-            background: #e5e7eb;
-            border-radius: 15px;
+            position: relative;
             overflow: hidden;
-            margin: 0.5rem 0;
         }
-
-        .resonance-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            transition: width 0.5s ease;
+        
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+        
+        .info-card:hover::before {
+            transform: translateX(0);
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.1);
+        }
+        
+        .info-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .info-card .icon {
+            font-size: 1.5rem;
+        }
+        
+        .info-card p {
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+        
+        /* CTA Buttons */
+        .cta-container {
+            display: flex;
+            gap: 1rem;
             justify-content: center;
-            color: white;
-            font-weight: bold;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 1s forwards;
         }
-
-        .button {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            width: 100%;
-            margin-top: 1rem;
+        
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-
-        .button:hover {
-            background: #764ba2;
+        
+        .cta-button.primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--bg-darker);
         }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 0.75rem;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            font-size: 1rem;
-            margin: 0.5rem 0;
+        
+        .cta-button.secondary {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid rgba(255, 255, 255, 0.2);
         }
-
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 255, 136, 0.3);
+        }
+        
+        .cta-button.secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        /* Footer */
         .footer {
-            background: #1f2937;
-            color: white;
-            padding: 2rem;
             text-align: center;
-            margin-top: 4rem;
+            padding: 3rem 2rem;
+            color: var(--text-dim);
+            font-size: 0.9rem;
         }
-
+        
         .footer a {
-            color: #667eea;
+            color: var(--primary);
             text-decoration: none;
         }
-
+        
+        /* Responsive */
         @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .explorer-grid { grid-template-columns: 1fr; }
+            .controls, .metrics {
+                position: static;
+                margin: 1rem;
+                max-width: none;
+            }
+            
+            #demoCanvas {
+                height: 400px;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="hero">
-        <h1>TIDE-resonance</h1>
-        <p class="subtitle">Exploring Cognitive-Sensory Resonance Patterns</p>
-    </div>
-
+    <canvas id="bgCanvas"></canvas>
+    
     <div class="container">
-        <div class="disclaimer">
-            <strong>🔬 Research Tool:</strong> This explorer generates theoretical resonance patterns for research hypothesis generation.
-            <br>All values are simulated and require empirical validation.
-        </div>
-
-        <section>
-            <h2 style="text-align: center; margin: 2rem 0;">Select Your TIDE Pattern</h2>
-            <div class="pattern-selector">
-                <div class="pattern-card" onclick="selectPattern('NT-TIDE')">
-                    <h3>NT-TIDE</h3>
-                    <p>Neurotypical</p>
-                    <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Flexible • Adaptive • Contextual</p>
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>TIDE-Resonance</h1>
+            <p class="subtitle">
+                Discover how different minds create harmony through trust and shared experiences
+            </p>
+            <div class="cta-container">
+                <a href="#demo" class="cta-button primary">
+                    <span>🎵</span> Experience the Symphony
+                </a>
+                <a href="advanced_explorer.html" class="cta-button secondary">
+                    <span>🔬</span> Advanced Research Tools
+                </a>
+            </div>
+        </section>
+        
+        <!-- Interactive Demo -->
+        <section id="demo" class="demo-section">
+            <div class="demo-container">
+                <canvas id="demoCanvas"></canvas>
+                
+                <div class="controls">
+                    <div class="control-header">
+                        <div class="live-indicator"></div>
+                        <h3>Live Controls</h3>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Cognitive Diversity</label>
+                        <select id="diversityMode">
+                            <option value="balanced">Balanced Team</option>
+                            <option value="homogeneous">Homogeneous Group</option>
+                            <option value="complementary">Complementary Pairs</option>
+                            <option value="diverse">Maximum Diversity</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Musical Environment <span class="value-display" id="musicLabel">Structured</span></label>
+                        <input type="range" id="musicType" min="0" max="3" value="0" step="1">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Trust Evolution Speed <span class="value-display" id="trustSpeedValue">0.10</span></label>
+                        <input type="range" id="trustSpeed" min="0.01" max="0.3" step="0.01" value="0.10">
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Interaction Density <span class="value-display" id="densityValue">5</span></label>
+                        <input type="range" id="agentCount" min="3" max="12" value="5">
+                    </div>
                 </div>
-                <div class="pattern-card" onclick="selectPattern('ASD-TIDE')">
-                    <h3>ASD-TIDE</h3>
-                    <p>Autism Spectrum</p>
-                    <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Structured • Predictable • Consistent</p>
-                </div>
-                <div class="pattern-card" onclick="selectPattern('ADHD-TIDE')">
-                    <h3>ADHD-TIDE</h3>
-                    <p>ADHD</p>
-                    <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">Dynamic • Immediate • Intense</p>
+                
+                <div class="metrics">
+                    <h3 style="margin-bottom: 1rem; font-size: 1.1rem;">System Metrics</h3>
+                    <div class="metric-item">
+                        <span class="metric-label">Collective Trust</span>
+                        <span class="metric-value" id="trustMetric">0.000</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Resonance Level</span>
+                        <span class="metric-value" id="resonanceMetric">0.000</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Diversity Bonus</span>
+                        <span class="metric-value" id="diversityMetric">0.000</span>
+                    </div>
                 </div>
             </div>
         </section>
-
-        <div class="explorer-grid">
-            <div class="explorer-module">
-                <div class="module-header">
-                    <span class="module-icon">🎵</span>
-                    <h2>Music Resonance Explorer</h2>
-                </div>
-                <p>Analyze how music features resonate with different TIDE patterns</p>
-                <input type="text" id="spotify-input" placeholder='{"energy": 0.8, "valence": 0.6, "tempo": 120, "danceability": 0.7}'>
-                <button class="button" onclick="analyzeMusicResonance()">Analyze Resonance</button>
-                <div id="music-results" style="display: none;">
-                    <div class="resonance-display">
-                        <h4>Pattern Resonance Analysis (SIMULATED)</h4>
-                        <div id="resonance-scores"></div>
-                    </div>
-                </div>
+        
+        <!-- Info Cards -->
+        <section class="info-grid">
+            <div class="info-card">
+                <h3><span class="icon">🧠</span> Cognitive Architectures</h3>
+                <p>
+                    Based on TIDE framework, we model how NT, ASD, and ADHD cognitive patterns 
+                    create unique resonance signatures when exposed to different sensory stimuli.
+                </p>
             </div>
-
-            <div class="explorer-module">
-                <div class="module-header">
-                    <span class="module-icon">🌊</span>
-                    <h2>Rhythm Pattern Explorer</h2>
-                </div>
-                <p>Discover theoretical rhythm preferences for your pattern</p>
-                <div id="rhythm-display">
-                    <p style="color: #666;">Select a TIDE pattern above to explore rhythm preferences</p>
-                </div>
+            
+            <div class="info-card">
+                <h3><span class="icon">🤝</span> Trust Dynamics</h3>
+                <p>
+                    Using game-theoretic models, we simulate how trust evolves between different 
+                    cognitive architectures through repeated interactions and shared experiences.
+                </p>
             </div>
-
-            <div class="explorer-module">
-                <div class="module-header">
-                    <span class="module-icon">🎨</span>
-                    <h2>Sensory Profile Builder</h2>
-                </div>
-                <p>Map theoretical sensory preferences across modalities</p>
-                <div id="sensory-profile">
-                    <div class="resonance-display">
-                        <p style="color: #666;">Select a pattern to view sensory profile</p>
-                    </div>
-                </div>
+            
+            <div class="info-card">
+                <h3><span class="icon">🎼</span> Musical Resonance</h3>
+                <p>
+                    Different minds respond uniquely to musical structures. Watch how structured, 
+                    flowing, dynamic, and ambient soundscapes create different interaction patterns.
+                </p>
             </div>
-
-            <div class="explorer-module">
-                <div class="module-header">
-                    <span class="module-icon">🔬</span>
-                    <h2>Research Hypotheses</h2>
-                </div>
-                <p>Generated hypotheses for empirical testing</p>
-                <div class="resonance-display">
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="margin: 0.5rem 0;">📊 Musical tempo preferences correlate with temporal processing patterns</li>
-                        <li style="margin: 0.5rem 0;">🎯 Rhythmic entrainment varies by dimensional organization</li>
-                        <li style="margin: 0.5rem 0;">🧩 Sensory integration profiles predict regulation strategies</li>
-                        <li style="margin: 0.5rem 0;">🔄 Pattern transitions follow predictable pathways</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <p>
+                Built on <a href="https://github.com/HillaryDanan/TIDE" target="_blank">TIDE</a> • 
+                Powered by <a href="https://github.com/HillaryDanan/game-theory-trust-suite" target="_blank">Game Theory Trust Suite</a> • 
+                <a href="https://github.com/HillaryDanan/TIDE-resonance" target="_blank">GitHub</a>
+            </p>
+            <p style="margin-top: 1rem; font-size: 0.8rem;">
+                Research simulation for theoretical exploration. All parameters are hypothetical.
+            </p>
+        </footer>
     </div>
-
-    <div style="text-align: center; margin: 3rem 0;">
-        <a href="advanced_explorer.html" style="color: #667eea; text-decoration: none; font-weight: 600; font-size: 1.1rem;">
-            🔬 Launch Advanced Research Explorer →
-        </a>
-        <p style="color: #666; font-size: 0.9rem; margin-top: 0.5rem;">For researchers: dimensional analysis, resonance matrices, and hypothesis generation</p>
-    </div>
-    <footer class="footer">
-        <p>Part of the <a href="https://github.com/HillaryDanan/TIDE">TIDE Framework</a></p>
-        <p>Exploring cognitive diversity through dimensional organization</p>
-        <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
-            <a href="https://github.com/HillaryDanan/TIDE-resonance">GitHub</a> • 
-            <a href="https://github.com/HillaryDanan/TIDE-resonance/blob/main/ETHICS.md">Ethics</a> • 
-            <a href="https://github.com/HillaryDanan/TIDE-resonance/blob/main/COLLABORATION.md">Collaborate</a>
-        </p>
-    </footer>
-
+    
     <script>
-        let selectedPattern = null;
-
-        function selectPattern(pattern) {
-            selectedPattern = pattern;
+        // Background animation
+        const bgCanvas = document.getElementById('bgCanvas');
+        const bgCtx = bgCanvas.getContext('2d');
+        
+        function resizeCanvases() {
+            bgCanvas.width = window.innerWidth;
+            bgCanvas.height = window.innerHeight;
             
-            // Update card styles
-            document.querySelectorAll('.pattern-card').forEach(card => {
-                card.classList.remove('active');
+            const demoCanvas = document.getElementById('demoCanvas');
+            demoCanvas.width = demoCanvas.offsetWidth;
+            demoCanvas.height = 600;
+        }
+        resizeCanvases();
+        window.addEventListener('resize', resizeCanvases);
+        
+        // Background particles
+        class BGParticle {
+            constructor() {
+                this.reset();
+            }
+            
+            reset() {
+                this.x = Math.random() * bgCanvas.width;
+                this.y = Math.random() * bgCanvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
+            
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                if (this.x < 0 || this.x > bgCanvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > bgCanvas.height) this.speedY *= -1;
+            }
+            
+            draw() {
+                bgCtx.fillStyle = `rgba(0, 255, 136, ${this.opacity})`;
+                bgCtx.beginPath();
+                bgCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                bgCtx.fill();
+            }
+        }
+        
+        const bgParticles = Array.from({length: 50}, () => new BGParticle());
+        
+        // Main demo
+        const demoCanvas = document.getElementById('demoCanvas');
+        const ctx = demoCanvas.getContext('2d');
+        
+        // Architecture configurations
+        const ARCHITECTURES = {
+            NT: {
+                color: '#3b82f6',
+                glow: 'rgba(59, 130, 246, 0.5)',
+                trust: { initial: 0.5, learning: 0.1, decay: 0.05, threshold: 0.6 },
+                movement: 'smooth',
+                music: { structured: 0.7, flowing: 0.8, dynamic: 0.6, ambient: 0.5 }
+            },
+            ASD: {
+                color: '#f59e0b',
+                glow: 'rgba(245, 158, 11, 0.5)',
+                trust: { initial: 0.3, learning: 0.15, decay: 0.02, threshold: 0.8 },
+                movement: 'grid',
+                music: { structured: 0.9, flowing: 0.4, dynamic: 0.3, ambient: 0.7 }
+            },
+            ADHD: {
+                color: '#ef4444',
+                glow: 'rgba(239, 68, 68, 0.5)',
+                trust: { initial: 0.7, learning: 0.2, decay: 0.1, threshold: 0.4 },
+                movement: 'chaotic',
+                music: { structured: 0.3, flowing: 0.6, dynamic: 0.9, ambient: 0.4 }
+            }
+        };
+        
+        const MUSIC_TYPES = ['structured', 'flowing', 'dynamic', 'ambient'];
+        
+        class Agent {
+            constructor(id, type, x, y) {
+                this.id = id;
+                this.type = type;
+                this.config = ARCHITECTURES[type];
+                this.x = x;
+                this.y = y;
+                this.vx = 0;
+                this.vy = 0;
+                this.angle = Math.random() * Math.PI * 2;
+                this.radius = 30;
+                this.pulsePhase = Math.random() * Math.PI * 2;
+                this.resonance = 0;
+                this.trustMatrix = {};
+                this.connections = [];
+            }
+            
+            update(agents, musicType, trustSpeed) {
+                // Movement patterns
+                if (this.config.movement === 'smooth') {
+                    this.angle += (Math.random() - 0.5) * 0.1;
+                    this.vx = Math.cos(this.angle) * 1.5;
+                    this.vy = Math.sin(this.angle) * 1.5;
+                } else if (this.config.movement === 'grid') {
+                    if (Math.random() < 0.02) {
+                        this.angle = Math.round(this.angle / (Math.PI/2)) * (Math.PI/2);
+                    }
+                    this.vx = Math.cos(this.angle) * 1.2;
+                    this.vy = Math.sin(this.angle) * 1.2;
+                } else {
+                    this.angle += (Math.random() - 0.5) * 0.5;
+                    this.vx = Math.cos(this.angle) * 2;
+                    this.vy = Math.sin(this.angle) * 2;
+                }
+                
+                // Apply forces
+                agents.forEach(other => {
+                    if (other.id !== this.id) {
+                        const dx = other.x - this.x;
+                        const dy = other.y - this.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (dist < 100 && dist > 0) {
+                            const force = (100 - dist) / 100;
+                            this.vx -= (dx / dist) * force * 0.5;
+                            this.vy -= (dy / dist) * force * 0.5;
+                        }
+                    }
+                });
+                
+                // Update position
+                this.vx *= 0.95;
+                this.vy *= 0.95;
+                this.x += this.vx;
+                this.y += this.vy;
+                
+                // Boundaries
+                const margin = this.radius + 20;
+                if (this.x < margin) this.x = margin, this.vx = Math.abs(this.vx);
+                if (this.x > demoCanvas.width - margin) this.x = demoCanvas.width - margin, this.vx = -Math.abs(this.vx);
+                if (this.y < margin) this.y = margin, this.vy = Math.abs(this.vy);
+                if (this.y > demoCanvas.height - margin) this.y = demoCanvas.height - margin, this.vy = -Math.abs(this.vy);
+                
+                // Update resonance
+                this.resonance = this.config.music[musicType];
+                this.pulsePhase += this.resonance * 0.1;
+                
+                // Update trust
+                this.connections = [];
+                agents.forEach(other => {
+                    if (other.id !== this.id) {
+                        if (!this.trustMatrix[other.id]) {
+                            this.trustMatrix[other.id] = this.config.trust.initial;
+                        }
+                        
+                        const dx = other.x - this.x;
+                        const dy = other.y - this.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (dist < 200) {
+                            const proximity = 1 - dist / 200;
+                            const resonanceMatch = 1 - Math.abs(this.resonance - other.resonance);
+                            const quality = proximity * resonanceMatch;
+                            
+                            const trust = this.trustMatrix[other.id];
+                            const success = quality > this.config.trust.threshold ? 1 : 0;
+                            const delta = this.config.trust.learning * (success - trust) * trustSpeed;
+                            const decay = -this.config.trust.decay * (trust - this.config.trust.initial) * 0.1;
+                            
+                            this.trustMatrix[other.id] = Math.max(0, Math.min(1, trust + delta + decay));
+                            
+                            if (this.trustMatrix[other.id] > 0.3) {
+                                this.connections.push({
+                                    other: other,
+                                    trust: this.trustMatrix[other.id]
+                                });
+                            }
+                        }
+                    }
+                });
+            }
+            
+            draw() {
+                // Draw connections
+                this.connections.forEach(conn => {
+                    const gradient = ctx.createLinearGradient(this.x, this.y, conn.other.x, conn.other.y);
+                    gradient.addColorStop(0, this.config.color + Math.floor(conn.trust * 100).toString(16).padStart(2, '0'));
+                    gradient.addColorStop(1, conn.other.config.color + Math.floor(conn.trust * 100).toString(16).padStart(2, '0'));
+                    
+                    ctx.strokeStyle = gradient;
+                    ctx.lineWidth = conn.trust * 3;
+                    ctx.beginPath();
+                    ctx.moveTo(this.x, this.y);
+                    ctx.lineTo(conn.other.x, conn.other.y);
+                    ctx.stroke();
+                });
+                
+                // Draw resonance field
+                const pulse = Math.sin(this.pulsePhase) * 10 * this.resonance;
+                const gradient = ctx.createRadialGradient(this.x, this.y, this.radius, this.x, this.y, this.radius + 30 + pulse);
+                gradient.addColorStop(0, this.config.glow);
+                gradient.addColorStop(1, 'transparent');
+                
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius + 30 + pulse, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Draw agent
+                ctx.shadowBlur = 20;
+                ctx.shadowColor = this.config.color;
+                ctx.fillStyle = this.config.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+                
+                // Inner circle
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius * 0.8, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Label
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 14px -apple-system, BlinkMacSystemFont, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(this.type, this.x, this.y);
+            }
+        }
+        
+        // Simulation state
+        let agents = [];
+        let diversityMode = 'balanced';
+        let musicType = 'structured';
+        let trustSpeed = 0.1;
+        let agentCount = 5;
+        
+        function initAgents() {
+            agents = [];
+            const types = getDiversityDistribution();
+            
+            for (let i = 0; i < agentCount; i++) {
+                const angle = (i / agentCount) * Math.PI * 2;
+                const radius = Math.min(demoCanvas.width, demoCanvas.height) * 0.3;
+                const x = demoCanvas.width / 2 + Math.cos(angle) * radius;
+                const y = demoCanvas.height / 2 + Math.sin(angle) * radius;
+                agents.push(new Agent(i, types[i % types.length], x, y));
+            }
+        }
+        
+        function getDiversityDistribution() {
+            switch(diversityMode) {
+                case 'balanced': return ['NT', 'ASD', 'ADHD'];
+                case 'homogeneous': return ['NT', 'NT', 'NT'];
+                case 'complementary': return ['NT', 'ASD', 'NT', 'ASD'];
+                case 'diverse': return ['NT', 'ASD', 'ADHD', 'NT', 'ASD', 'ADHD'];
+                default: return ['NT', 'ASD', 'ADHD'];
+            }
+        }
+        
+        function updateMetrics() {
+            let totalTrust = 0;
+            let trustCount = 0;
+            let totalResonance = 0;
+            
+            agents.forEach(agent => {
+                totalResonance += agent.resonance;
+                Object.values(agent.trustMatrix).forEach(trust => {
+                    totalTrust += trust;
+                    trustCount++;
+                });
             });
-            event.currentTarget.classList.add('active');
             
-            // Update displays
-            updateRhythmDisplay(pattern);
-            updateSensoryProfile(pattern);
+            const avgTrust = trustCount > 0 ? totalTrust / trustCount : 0;
+            const avgResonance = totalResonance / agents.length;
+            
+            // Diversity calculation
+            const types = {};
+            agents.forEach(agent => {
+                types[agent.type] = (types[agent.type] || 0) + 1;
+            });
+            const diversity = Object.keys(types).length / 3;
+            const diversityBonus = diversity * avgTrust;
+            
+            document.getElementById('trustMetric').textContent = avgTrust.toFixed(3);
+            document.getElementById('resonanceMetric').textContent = avgResonance.toFixed(3);
+            document.getElementById('diversityMetric').textContent = diversityBonus.toFixed(3);
         }
-
-        function updateRhythmDisplay(pattern) {
-            const rhythmDisplay = document.getElementById('rhythm-display');
+        
+        // Animation loops
+        function animateBG() {
+            bgCtx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height);
             
-            const profiles = {
-                "NT-TIDE": {
-                    tempo: "90-120 BPM",
-                    variability: "Moderate",
-                    entrainment: "Flexible",
-                    hypothesis: "Adapts rhythm preferences to context"
-                },
-                "ASD-TIDE": {
-                    tempo: "60-90 BPM",
-                    variability: "Low",
-                    entrainment: "Strong when matched",
-                    hypothesis: "Prefers predictable, stable rhythms"
-                },
-                "ADHD-TIDE": {
-                    tempo: "120-160 BPM",
-                    variability: "High",
-                    entrainment: "Immediate but variable",
-                    hypothesis: "Seeks novel, energetic rhythms"
-                }
-            };
+            bgParticles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
             
-            const profile = profiles[pattern];
-            rhythmDisplay.innerHTML = '<div class="resonance-display">' +
-                '<h4>' + pattern + ' Rhythm Profile</h4>' +
-                '<p><strong>Preferred Tempo:</strong> ' + profile.tempo + '</p>' +
-                '<p><strong>Variability Tolerance:</strong> ' + profile.variability + '</p>' +
-                '<p><strong>Entrainment Style:</strong> ' + profile.entrainment + '</p>' +
-                '<p style="margin-top: 1rem; font-style: italic; color: #666;">' +
-                'Hypothesis: ' + profile.hypothesis + '</p></div>';
+            requestAnimationFrame(animateBG);
         }
-
-        function updateSensoryProfile(pattern) {
-            const sensoryProfile = document.getElementById('sensory-profile');
+        
+        function animate() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, demoCanvas.width, demoCanvas.height);
             
-            const profiles = {
-                "NT-TIDE": {
-                    auditory: "Moderate, context-dependent",
-                    visual: "Flexible brightness/contrast",
-                    tactile: "Variable texture preferences",
-                    integration: "Dynamic multi-modal"
-                },
-                "ASD-TIDE": {
-                    auditory: "Specific frequency preferences",
-                    visual: "Consistent lighting needs",
-                    tactile: "Predictable textures",
-                    integration: "Sequential processing"
-                },
-                "ADHD-TIDE": {
-                    auditory: "High stimulation tolerance",
-                    visual: "Bright, dynamic preferred",
-                    tactile: "Seeks varied input",
-                    integration: "Simultaneous multi-modal"
-                }
-            };
+            agents.forEach(agent => {
+                agent.update(agents, musicType, trustSpeed);
+            });
             
-            const profile = profiles[pattern];
-            sensoryProfile.innerHTML = '<div class="resonance-display">' +
-                '<h4>' + pattern + ' Sensory Profile</h4>' +
-                '<p><strong>Auditory:</strong> ' + profile.auditory + '</p>' +
-                '<p><strong>Visual:</strong> ' + profile.visual + '</p>' +
-                '<p><strong>Tactile:</strong> ' + profile.tactile + '</p>' +
-                '<p><strong>Integration:</strong> ' + profile.integration + '</p></div>';
+            agents.forEach(agent => {
+                agent.draw();
+            });
+            
+            updateMetrics();
+            requestAnimationFrame(animate);
         }
-
-        function analyzeMusicResonance() {
-            const input = document.getElementById('spotify-input').value;
-            if (!input) {
-                alert('Please enter Spotify audio features');
-                return;
-            }
-            
-            try {
-                const features = JSON.parse(input);
-                displayMusicAnalysis(features);
-            } catch (e) {
-                alert('Please enter valid JSON format. Example: {"energy": 0.8, "valence": 0.6}');
-            }
-        }
-
-        function displayMusicAnalysis(features) {
-            const resultsDiv = document.getElementById('music-results');
-            const scoresDiv = document.getElementById('resonance-scores');
-            
-            // Calculate SIMULATED theoretical resonance
-            const ntScore = Math.round(
-                (features.valence || 0.5) * 40 +
-                (features.energy || 0.5) * 30 +
-                (features.danceability || 0.5) * 30
-            );
-            
-            const asdScore = Math.round(
-                (1 - (features.speechiness || 0)) * 30 +
-                (features.instrumentalness || 0) * 40 +
-                (features.acousticness || 0) * 30
-            );
-            
-            const adhdScore = Math.round(
-                (features.energy || 0) * 50 +
-                (features.danceability || 0) * 30 +
-                Math.min((features.tempo || 120) / 4, 20)
-            );
-            
-            scoresDiv.innerHTML = 
-                '<div style="margin: 1rem 0;">' +
-                '<p><strong>NT-TIDE Resonance</strong></p>' +
-                '<div class="resonance-bar">' +
-                '<div class="resonance-fill" style="width: ' + ntScore + '%">' + ntScore + '%</div>' +
-                '</div></div>' +
-                '<div style="margin: 1rem 0;">' +
-                '<p><strong>ASD-TIDE Resonance</strong></p>' +
-                '<div class="resonance-bar">' +
-                '<div class="resonance-fill" style="width: ' + asdScore + '%">' + asdScore + '%</div>' +
-                '</div></div>' +
-                '<div style="margin: 1rem 0;">' +
-                '<p><strong>ADHD-TIDE Resonance</strong></p>' +
-                '<div class="resonance-bar">' +
-                '<div class="resonance-fill" style="width: ' + adhdScore + '%">' + adhdScore + '%</div>' +
-                '</div></div>';
-            
-            resultsDiv.style.display = 'block';
-        }
+        
+        // Event listeners
+        document.getElementById('diversityMode').addEventListener('change', (e) => {
+            diversityMode = e.target.value;
+            initAgents();
+        });
+        
+        document.getElementById('musicType').addEventListener('input', (e) => {
+            const value = parseInt(e.target.value);
+            musicType = MUSIC_TYPES[value];
+            document.getElementById('musicLabel').textContent = 
+                musicType.charAt(0).toUpperCase() + musicType.slice(1);
+        });
+        
+        document.getElementById('trustSpeed').addEventListener('input', (e) => {
+            trustSpeed = parseFloat(e.target.value);
+            document.getElementById('trustSpeedValue').textContent = trustSpeed.toFixed(2);
+        });
+        
+        document.getElementById('agentCount').addEventListener('input', (e) => {
+            agentCount = parseInt(e.target.value);
+            document.getElementById('densityValue').textContent = agentCount;
+            initAgents();
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Initialize
+        initAgents();
+        animateBG();
+        animate();
     </script>
 </body>
 </html>
