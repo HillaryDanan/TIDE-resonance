@@ -19,6 +19,14 @@ Different TIDE configurations (NT-TIDE, ASD-TIDE, ADHD-TIDE) may exhibit charact
 ### Trust Dynamics Integration
 Drawing from game theory and cooperation research, we explore how trust evolves differently between cognitive architecture pairings, affecting the depth and sustainability of resonance achieved.
 
+### Language Abstraction Effects (Toy Example)
+Inspired by [concrete-overflow-detector](https://github.com/HillaryDanan/concrete-overflow-detector), we've added a toy demonstration of how language abstraction levels might affect trust and resonance:
+- **NT architectures**: Balanced preference (peak at 0.5 abstractness)
+- **ASD architectures**: Higher resonance with concrete language
+- **ADHD architectures**: Higher resonance with abstract language
+
+*Note: This is a simplified demonstration to explore how language processing differences could influence trust formation.*
+
 ## Status
 🔬 **Research Phase**: Generating hypotheses and building exploration tools
 
@@ -35,7 +43,7 @@ Beautiful real-time visualization of how different cognitive architectures build
 Focused exploration environment for studying trust dynamics and resonance patterns between cognitive architectures.
 
 ### 🔬 [Advanced Research Explorer](https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html)
-For researchers and deep divers - includes dimensional analysis, cross-pattern resonance matrices, hypothesis generation tools, and **trust dynamics modeling**.
+For researchers and deep divers - includes dimensional analysis, cross-pattern resonance matrices, hypothesis generation tools, **trust dynamics modeling**, and **language abstraction effects**.
 
 ## Research Framework
 
@@ -55,6 +63,12 @@ For researchers and deep divers - includes dimensional analysis, cross-pattern r
 - Cooperative stability in heterogeneous pairings
 - Based on [game-theory-trust-suite](https://github.com/HillaryDanan/game-theory-trust-suite) framework
 
+### 4. Language Processing Effects (NEW)
+- Abstractness preference patterns
+- Trust acceleration through matched communication styles
+- Resonance modulation via lyrical content
+- Demonstrates potential for [concrete-overflow-detector](https://github.com/HillaryDanan/concrete-overflow-detector) applications
+
 ## Key Features
 
 ### 🔬 Research Tools
@@ -63,6 +77,7 @@ For researchers and deep divers - includes dimensional analysis, cross-pattern r
 - Sensory profile builders
 - Empirical prediction generators
 - **Trust evolution simulators** (NEW)
+- **Language abstraction slider** (toy example)
 
 ### 📊 Analysis Framework
 - Multi-dimensional resonance matrices
@@ -70,6 +85,7 @@ For researchers and deep divers - includes dimensional analysis, cross-pattern r
 - Cross-modal integration mapping
 - Temporal entrainment analysis
 - **Trust-resonance correlation analysis** (NEW)
+- **Language-trust interaction patterns** (demonstration)
 
 ### 🔗 Integration
 - Connects to [TIDE](https://github.com/HillaryDanan/TIDE) core framework
@@ -77,6 +93,7 @@ For researchers and deep divers - includes dimensional analysis, cross-pattern r
 - Links to [Information-Atoms](https://github.com/HillaryDanan/information-atoms)
 - Incorporates [Hexagonal](https://github.com/HillaryDanan/hexagonal-consciousness-suite) structure
 - **Integrates [Game-Theory-Trust](https://github.com/HillaryDanan/game-theory-trust-suite) dynamics** (NEW)
+- **Demonstrates [Concrete-Overflow-Detector](https://github.com/HillaryDanan/concrete-overflow-detector) concepts** (NEW)
 
 ### 🛡️ Scientific Standards
 - All tools include theoretical disclaimers
@@ -84,6 +101,7 @@ For researchers and deep divers - includes dimensional analysis, cross-pattern r
 - Validation framework included
 - Ethical guidelines enforced
 - Trust parameters documented as theoretical
+- Language effects marked as toy demonstrations
 - [Cognitive diversity perspective](https://github.com/HillaryDanan/TIDE/blob/main/DISCLAIMER.md)
 
 ## Getting Started
@@ -112,7 +130,7 @@ python experiments/trust_dynamics_example.py
 - [BIND Systems](https://github.com/HillaryDanan/BIND): Boundary dynamics framework
 - [Hexagonal Consciousness Suite](https://github.com/HillaryDanan/hexagonal-consciousness-suite): Structural organization model
 - [Information Atoms](https://github.com/HillaryDanan/information-atoms): Discrete information processing
-- [Concrete Overflow Detector](https://github.com/HillaryDanan/concrete-overflow-detector): Alternative processing patterns
+- [Concrete Overflow Detector](https://github.com/HillaryDanan/concrete-overflow-detector): Language abstraction analysis
 - [Hexagonal Vision Research](https://github.com/HillaryDanan/hexagonal-vision-research): Visual processing studies
 
 ## Contributing
