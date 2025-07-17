@@ -24,7 +24,7 @@ We're investigating how different AI architectures (GPT-4, Claude, Gemini, etc.)
 #### Method 1: Advanced Explorer Study
 1. Visit our [Advanced Explorer](https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html)
 2. Explore the visualization for 2-3 minutes
-3. Click "Contribute to Research" button (top right)
+3. Then go to our Research Portal
 4. Follow the prompts to test with your AI
 5. Submit your results
 
@@ -35,10 +35,10 @@ We're investigating how different AI architectures (GPT-4, Claude, Gemini, etc.)
 4. Submit responses
 
 ### 📈 Current Research Stats
-- **Models Tested**: 5 (GPT-4, Claude-3, Gemini, Llama-2, Mistral)
-- **Sessions Collected**: 12
-- **Unique Patterns Found**: 3 distinct description clusters
-- **Contributors**: 8 researchers worldwide
+- **Study Launch**: July 2025
+- **Models Testing**: GPT-4, Claude-3, Gemini, and more
+- **Goal**: 100+ sessions across 10+ AI models
+- **Status**: Actively collecting data - be our first contributors!
 
 ### 🔍 Research Questions
 
@@ -55,12 +55,19 @@ We're investigating how different AI architectures (GPT-4, Claude, Gemini, etc.)
 
 ### Research Tools
 - 📊 [Data Collection Portal](https://hillarydanan.github.io/TIDE-resonance/collect.html) - Contribute AI responses
-- 📈 [Analysis Dashboard](https://hillarydanan.github.io/TIDE-resonance/analysis.html) - Live research results
-- 🔍 [Pattern Explorer](https://hillarydanan.github.io/TIDE-resonance/patterns.html) - Browse discovered patterns
+- 📈 Analysis Dashboard - *Coming soon*
+- 🔍 Pattern Explorer - *In development*
 
 ## Theoretical Framework
 
 TIDE-resonance extends the [TIDE (Temporal-Internal Dimensional Encoding)](https://github.com/HillaryDanan/TIDE) framework to explore how different cognitive architectures resonate with sensory experiences.
+
+## Integrated Research Tools
+
+This project integrates insights from our other research:
+- 🎯 [Game Theory Trust Suite](https://github.com/HillaryDanan/game-theory-trust-suite) - Models how different cognitive architectures build trust through synchronization
+- 🔤 [Concrete Overflow Detector](https://github.com/HillaryDanan/concrete-overflow-detector) - Analyzes how language abstraction affects cognitive resonance
+- 🔷 [Hexagonal Consciousness](https://github.com/HillaryDanan/hexagonal-consciousness-suite) - Alternative frameworks for understanding perception
 
 ### Core Concepts
 - **Crystalline resonance (ASD-TIDE)**: Structured, repetitive, predictable
