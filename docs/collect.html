@@ -212,27 +212,27 @@
         <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; margin: 20px 0;">
             <h3 style="margin-bottom: 15px;">🚀 Quick Access to AI Models</h3>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
-                <a href="https://chat.openai.com" target="_blank" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
+                <a href="https://chat.openai.com" target="_blank" onclick="setModel('gpt-4')" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
                     🤖 ChatGPT
                 </a>
-                <a href="https://claude.ai" target="_blank" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
+                <a href="https://claude.ai" target="_blank" onclick="setModel('claude-3.5-sonnet')" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
                     🧠 Claude
                 </a>
-                <a href="https://gemini.google.com" target="_blank" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
+                <a href="https://gemini.google.com" target="_blank" onclick="setModel('gemini-2.0-flash')" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
                     ✨ Gemini
                 </a>
-                <a href="https://copilot.microsoft.com" target="_blank" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
+                <a href="https://copilot.microsoft.com" target="_blank" onclick="setModel('gpt-4')" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
                     🪟 Copilot
                 </a>
-                <a href="https://poe.com" target="_blank" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
+                <a href="https://poe.com" target="_blank" onclick="setModel('other')" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
                     🎭 Poe
                 </a>
-                <a href="https://perplexity.ai" target="_blank" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
+                <a href="https://perplexity.ai" target="_blank" onclick="setModel('other')" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
                     🔍 Perplexity
                 </a>
             </div>
             <p style="margin-top: 15px; color: #888; font-size: 0.9em;">
-                💡 Open AI in new tab → Start fresh chat → Use the prompt below
+                💡 Click an AI above - it will open in a new tab AND auto-select the model for you!
             </p>
         </div>
         
@@ -350,6 +350,44 @@ Please reflect on any connections between these visualization patterns and your 
     </div>
     
     <script>
+        // Auto-select model when clicking AI links
+        function setModel(modelValue) {
+            // Store the selected model
+            localStorage.setItem('selectedModel', modelValue);
+            
+            // If we're already on step 3, update the dropdown
+            const modelDropdown = document.getElementById('aiModel');
+            if (modelDropdown && !document.getElementById('step3').classList.contains('hidden')) {
+                modelDropdown.value = modelValue;
+                
+                // Flash the dropdown to show it was updated
+                modelDropdown.style.borderColor = '#00ff00';
+                setTimeout(() => {
+                    modelDropdown.style.borderColor = '';
+                }, 1000);
+            }
+        }
+        
+        // Check if a model was pre-selected when page loads
+        window.addEventListener('load', function() {
+            const savedModel = localStorage.getItem('selectedModel');
+            if (savedModel) {
+                // We'll apply this when step 3 becomes visible
+                const checkStep3 = setInterval(() => {
+                    const step3 = document.getElementById('step3');
+                    const modelDropdown = document.getElementById('aiModel');
+                    if (step3 && !step3.classList.contains('hidden') && modelDropdown) {
+                        modelDropdown.value = savedModel;
+                        localStorage.removeItem('selectedModel'); // Clear after using
+                        clearInterval(checkStep3);
+                    }
+                }, 100);
+                
+                // Stop checking after 30 seconds
+                setTimeout(() => clearInterval(checkStep3), 30000);
+            }
+        });
+        
         // Show next steps as user fills out form
         document.getElementById('response1').addEventListener('input', function() {
             if (this.value.length > 50) {
