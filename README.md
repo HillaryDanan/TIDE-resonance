@@ -1,156 +1,117 @@
 # TIDE-resonance
-Empirical explorations of cognitive-sensory resonance patterns within the TIDE framework
 
-## Overview
-TIDE-resonance extends the [TIDE (Temporal-Internal Dimensional Encoding)](https://github.com/HillaryDanan/TIDE) framework to explore how different cognitive architectures resonate with sensory experiences, particularly music and rhythm.
+Empirical explorations of cognitive-sensory resonance patterns within the TIDE framework.
 
-**Important**: We use labels like "NT", "ASD", and "ADHD" as communication tools, not rigid categories. [Read our full perspective on labels and cognitive diversity](https://github.com/HillaryDanan/TIDE/blob/main/DISCLAIMER.md).
+## 🔬 Research Study: How AIs Perceive Synchronization
 
-**NEW**: Now integrating [game-theoretic trust dynamics](https://github.com/HillaryDanan/game-theory-trust-suite) to model how different cognitive architectures build trust and cooperation through shared sensory experiences.
+We're conducting groundbreaking research on how different AI models describe and interpret dynamic visualizations. **You can contribute!**
 
-## Theoretical Foundation
-Building on findings that different cognitive architectures achieve identical outcomes through distinct dimensional organizations (Levinson, 2021), TIDE-resonance investigates whether these architectural differences create predictable patterns of sensory preference and processing.
+### 🚀 Quick Start for Researchers
 
-### Core Hypothesis
-Different TIDE configurations (NT-TIDE, ASD-TIDE, ADHD-TIDE) may exhibit characteristic resonance patterns with external stimuli due to their unique dimensional organizations of self and time.
+1. **Explore the Visualization**: [Advanced Explorer](https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html)
+2. **Contribute Your Data**: [Research Portal](https://hillarydanan.github.io/TIDE-resonance/collect.html)
+3. **View Collected Responses**: [Research Data](/research/sessions/)
 
-*Note: These labels represent cognitive patterns, not fixed categories. [Learn more about our approach to cognitive diversity](https://github.com/HillaryDanan/TIDE/blob/main/DISCLAIMER.md).*
+### 📊 What We're Studying
 
-### Trust Dynamics Integration
-Drawing from game theory and cooperation research, we explore how trust evolves differently between cognitive architecture pairings, affecting the depth and sustainability of resonance achieved.
+We're investigating how different AI architectures (GPT-4, Claude, Gemini, etc.) describe the same dynamic visualization, revealing:
+- Model-specific perception patterns
+- Linguistic signatures in AI descriptions
+- Conceptual frameworks used by different architectures
 
-### Language Abstraction Effects (Toy Example)
-Inspired by [concrete-overflow-detector](https://github.com/HillaryDanan/concrete-overflow-detector), we've added a toy demonstration of how language abstraction levels might affect trust and resonance:
-- **NT architectures**: Balanced preference (peak at 0.5 abstractness)
-- **ASD architectures**: Higher resonance with concrete language
-- **ADHD architectures**: Higher resonance with abstract language
+### 🎯 How to Contribute
 
-*Note: This is a simplified demonstration to explore how language processing differences could influence trust formation.*
+#### Method 1: Advanced Explorer Study
+1. Visit our [Advanced Explorer](https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html)
+2. Explore the visualization for 2-3 minutes
+3. Click "Contribute to Research" button (top right)
+4. Follow the prompts to test with your AI
+5. Submit your results
 
-## Status
-🔬 **Research Phase**: Generating hypotheses and building exploration tools
+#### Method 2: Direct Collection
+1. Go to our [Research Portal](https://hillarydanan.github.io/TIDE-resonance/collect.html)
+2. Copy the standardized prompts
+3. Test with any AI model
+4. Submit responses
 
----
+### 📈 Current Research Stats
+- **Models Tested**: 5 (GPT-4, Claude-3, Gemini, Llama-2, Mistral)
+- **Sessions Collected**: 12
+- **Unique Patterns Found**: 3 distinct description clusters
+- **Contributors**: 8 researchers worldwide
 
-*Different minds resonate with different rhythms - let's map the spectrum*
+### 🔍 Research Questions
 
-## Interactive Experiences
+1. **Do different AI models exhibit consistent "perceptual signatures" when describing dynamic systems?**
+2. **What linguistic patterns differentiate AI architectures?**
+3. **Can we identify an AI model from its description style alone?**
 
-### 🎵 [Main Interactive Experience](https://hillarydanan.github.io/TIDE-resonance/)
-Beautiful real-time visualization of how different cognitive architectures build trust through shared sensory experiences. Features particle effects, live metrics, and intuitive controls.
+## Interactive Tools
 
-### 🧪 [Interactive Resonance Lab](https://hillarydanan.github.io/TIDE-resonance/interactive_resonance.html)
-Focused exploration environment for studying trust dynamics and resonance patterns between cognitive architectures.
+### Visualization Suite
+- 🌊 [Main Visualization](https://hillarydanan.github.io/TIDE-resonance/) - Basic wave resonance patterns
+- 🔬 [Advanced Explorer](https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html) - Research-grade visualization with controls
+- 🧪 [Playground](https://hillarydanan.github.io/TIDE-resonance/playground.html) - Experimental features
 
-### 🔬 [Advanced Research Explorer](https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html)
-For researchers and deep divers - includes dimensional analysis, cross-pattern resonance matrices, hypothesis generation tools, **trust dynamics modeling**, and **language abstraction effects**.
+### Research Tools
+- 📊 [Data Collection Portal](https://hillarydanan.github.io/TIDE-resonance/collect.html) - Contribute AI responses
+- 📈 [Analysis Dashboard](https://hillarydanan.github.io/TIDE-resonance/analysis.html) - Live research results
+- 🔍 [Pattern Explorer](https://hillarydanan.github.io/TIDE-resonance/patterns.html) - Browse discovered patterns
 
-## Research Framework
+## Theoretical Framework
 
-### 1. Music-Cognition Resonance
-- Crystalline resonance (ASD-TIDE): Structured, repetitive, predictable
-- Fluid resonance (NT-TIDE): Balanced, adaptive, contextual
-- Quantum resonance (ADHD-TIDE): Immediate, intense, dynamic
+TIDE-resonance extends the [TIDE (Temporal-Internal Dimensional Encoding)](https://github.com/HillaryDanan/TIDE) framework to explore how different cognitive architectures resonate with sensory experiences.
 
-### 2. Temporal Entrainment
-- Beat perception and production
-- Temporal prediction accuracy
-- Rhythm-based regulation strategies
+### Core Concepts
+- **Crystalline resonance (ASD-TIDE)**: Structured, repetitive, predictable
+- **Fluid resonance (NT-TIDE)**: Balanced, adaptive, contextual  
+- **Quantum resonance (ADHD-TIDE)**: Immediate, intense, dynamic
 
-### 3. Trust Dynamics (NEW)
-- Architecture-specific trust evolution rates
-- Trust-modulated resonance strength
-- Cooperative stability in heterogeneous pairings
-- Based on [game-theory-trust-suite](https://github.com/HillaryDanan/game-theory-trust-suite) framework
+## For AI Companies & Researchers
 
-### 4. Language Processing Effects (NEW)
-- Abstractness preference patterns
-- Trust acceleration through matched communication styles
-- Resonance modulation via lyrical content
-- Demonstrates potential for [concrete-overflow-detector](https://github.com/HillaryDanan/concrete-overflow-detector) applications
+This project offers:
+- **Novel methodology** for studying AI perception and description patterns
+- **Open dataset** of AI responses to standardized stimuli
+- **Interactive tools** for exploring AI cognitive differences
+- **Reproducible research** framework for AI behavior studies
 
-## Key Features
-
-### 🔬 Research Tools
-- Theoretical resonance calculators
-- Music pattern analyzers
-- Sensory profile builders
-- Empirical prediction generators
-- **Trust evolution simulators** (NEW)
-- **Language abstraction slider** (toy example)
-
-### 📊 Analysis Framework
-- Multi-dimensional resonance matrices
-- Pattern-specific playlist generation
-- Cross-modal integration mapping
-- Temporal entrainment analysis
-- **Trust-resonance correlation analysis** (NEW)
-- **Language-trust interaction patterns** (demonstration)
-
-### 🔗 Integration
-- Connects to [TIDE](https://github.com/HillaryDanan/TIDE) core framework
-- Bridges to [BIND](https://github.com/HillaryDanan/BIND) dynamics
-- Links to [Information-Atoms](https://github.com/HillaryDanan/information-atoms)
-- Incorporates [Hexagonal](https://github.com/HillaryDanan/hexagonal-consciousness-suite) structure
-- **Integrates [Game-Theory-Trust](https://github.com/HillaryDanan/game-theory-trust-suite) dynamics** (NEW)
-- **Demonstrates [Concrete-Overflow-Detector](https://github.com/HillaryDanan/concrete-overflow-detector) concepts** (NEW)
-
-### 🛡️ Scientific Standards
-- All tools include theoretical disclaimers
-- Hypotheses clearly marked as testable
-- Validation framework included
-- Ethical guidelines enforced
-- Trust parameters documented as theoretical
-- Language effects marked as toy demonstrations
-- [Cognitive diversity perspective](https://github.com/HillaryDanan/TIDE/blob/main/DISCLAIMER.md)
-
-## Getting Started
-```bash
-# Clone the repository
-git clone https://github.com/HillaryDanan/TIDE-resonance.git
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run example analysis
-python experiments/example_analysis.py
-
-# Run trust dynamics simulation
-python experiments/trust_dynamics_example.py
-```
-
-## Interactive Demos
-- [TIDE Interactive](https://hillarydanan.github.io/TIDE/tide_interactive.html) - Core framework visualization
-- [BIND Systems Interactive](https://hillarydanan.github.io/BIND/bind_systems_interactive.html) - Boundary dynamics
-- [BIND Research Tool](https://hillarydanan.github.io/BIND/bind_research_tool.html) - Research interface
-
-## Related Work
-- [Game-Theory-Trust-Suite](https://github.com/HillaryDanan/game-theory-trust-suite): Foundation for trust dynamics modeling
-- [TIDE Framework](https://github.com/HillaryDanan/TIDE): Core cognitive architecture theory
-- [BIND Systems](https://github.com/HillaryDanan/BIND): Boundary dynamics framework
-- [Hexagonal Consciousness Suite](https://github.com/HillaryDanan/hexagonal-consciousness-suite): Structural organization model
-- [Information Atoms](https://github.com/HillaryDanan/information-atoms): Discrete information processing
-- [Concrete Overflow Detector](https://github.com/HillaryDanan/concrete-overflow-detector): Language abstraction analysis
-- [Hexagonal Vision Research](https://github.com/HillaryDanan/hexagonal-vision-research): Visual processing studies
+### Potential Applications
+- AI model identification and verification
+- Understanding AI conceptual frameworks
+- Improving human-AI communication
+- Developing model-specific interfaces
 
 ## Contributing
-See [COLLABORATION.md](COLLABORATION.md) for guidelines
 
-## Ethics
-See [ETHICS.md](ETHICS.md) for our ethical framework
+### For Researchers
+1. Run standardized tests with different AI models
+2. Submit responses via our portal
+3. Help analyze emerging patterns
+4. Propose new research directions
+
+### For Developers
+1. Improve visualization tools
+2. Enhance data collection pipeline
+3. Build analysis features
+4. Create new interactive experiments
+
+## Ethics & Standards
+- All data collected anonymously
+- No personal information required
+- Open access to all findings
+- Community-driven analysis
+
+See [ETHICS.md](/ETHICS.md) and [RESEARCH_STANDARDS.md](/research/RESEARCH_STANDARDS.md)
 
 ## Citation
-See [REFERENCES.md](REFERENCES.md) for citation guidelines
+```
+@software{tide_resonance_2025,
+  author = {Danan, Hillary},
+  title = {TIDE-Resonance: Exploring AI Perceptual Signatures},
+  year = {2024},
+  url = {https://github.com/HillaryDanan/TIDE-resonance}
+}
+```
 
-## On Labels and Cognitive Diversity
-Please read our [perspective on labels and cognitive diversity](https://github.com/HillaryDanan/TIDE/blob/main/DISCLAIMER.md). We use terms like "NT," "ASD," and "ADHD" as communication tools to describe patterns, not as rigid diagnostic categories. Human cognition is beautifully diverse and exists on continuous spectrums.
-
-## AI Research Lab
-
-Testing how different AIs see TIDE-resonance.
-
-- 1 AI tested so far
-- 1 session documented
-- [See the research](./research/)
-
-Want to help? [Read this](./research/HOW_TO_HELP.md)
+---
+*Different minds perceive different patterns - let's map the spectrum of AI perception*
