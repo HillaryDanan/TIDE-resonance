@@ -108,7 +108,7 @@ See [ETHICS.md](/ETHICS.md) and [RESEARCH_STANDARDS.md](/research/RESEARCH_STAND
 @software{tide_resonance_2025,
   author = {Danan, Hillary},
   title = {TIDE-Resonance: Exploring AI Perceptual Signatures},
-  year = {2024},
+  year = {2025},
   url = {https://github.com/HillaryDanan/TIDE-resonance}
 }
 ```
