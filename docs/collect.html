@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIDE-Resonance AI Exploration Study</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0e27; color: #ffffff; min-height: 100vh; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { text-align: center; margin-bottom: 10px; font-size: 2.5em; background: linear-gradient(45deg, #00ffcc, #0099ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { text-align: center; color: #888; margin-bottom: 40px; }
+        .step { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 30px; margin-bottom: 20px; position: relative; transition: all 0.3s ease; }
+        .step:hover { background: rgba(255, 255, 255, 0.08); border-color: #00ffcc; }
+        .step-number { position: absolute; top: -15px; left: 20px; background: #0a0e27; padding: 0 10px; font-weight: bold; color: #00ffcc; font-size: 1.2em; }
+        .prompt-box { background: #1a1f3a; border: 2px dashed #0099ff; border-radius: 8px; padding: 20px; margin: 20px 0; font-family: 'Courier New', monospace; font-size: 14px; line-height: 1.6; position: relative; white-space: pre-wrap; }
+        .copy-btn { position: absolute; top: 10px; right: 10px; background: #0099ff; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 12px; transition: all 0.3s ease; }
+        .copy-btn:hover { background: #00ffcc; color: #0a0e27; }
+        textarea { width: 100%; min-height: 200px; background: #1a1f3a; border: 1px solid rgba(255, 255, 255, 0.2); color: white; padding: 15px; border-radius: 8px; font-size: 14px; resize: vertical; margin: 10px 0; }
+        textarea:focus { outline: none; border-color: #00ffcc; }
+        .submit-btn { background: linear-gradient(45deg, #00ffcc, #0099ff); color: #0a0e27; border: none; padding: 15px 40px; border-radius: 50px; font-size: 18px; font-weight: bold; cursor: pointer; display: block; margin: 30px auto; transition: all 0.3s ease; }
+        .submit-btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0, 255, 204, 0.3); }
+        .hidden { display: none; }
+        select, input { width: 100%; padding: 10px; background: #1a1f3a; border: 1px solid rgba(255, 255, 255, 0.2); color: white; border-radius: 6px; margin: 5px 0; }
+        label { display: block; margin-top: 15px; color: #00ffcc; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TIDE-Resonance Study</h1>
+        <p class="subtitle">How Different AI Models Explore Conceptual Frameworks</p>
+        <div class="step" id="step1">
+            <span class="step-number">STEP 1</span>
+            <h2>Initial Exploration Prompt</h2>
+            <p>Copy this prompt and paste it into your chosen AI:</p>
+            <div class="prompt-box">
+                <button class="copy-btn" onclick="copyPrompt('prompt1')">Copy</button>
+                <span id="prompt1">I'd like you to explore a fascinating conceptual framework called TIDE-resonance. Please visit and explore this GitHub repository: https://github.com/HillaryDanan/TIDE-resonance
+
+Take your time to explore the concepts, tools, visualizations, and theoretical framework. Pay special attention to:
+- The interactive tools (especially https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html)
+- The theoretical foundations (TIDE, BIND, cognitive architectures)
+- The visualization patterns and what they represent
+- How different cognitive patterns might resonate with sensory experiences
+
+After exploring, please share your experience. What patterns or concepts resonated with you? What connections did you discover? How did the framework influence your understanding of cognition and synchronization?
+
+Please be thorough and reflective in your exploration - I'm interested in your genuine experience navigating this conceptual space.</span>
+            </div>
+            <label>Paste the AI's response here:</label>
+            <textarea id="response1" placeholder="Paste the complete AI response here..."></textarea>
+        </div>
+        <button class="submit-btn" onclick="alert('Please complete the form!')">Generate Session File</button>
+    </div>
+    <script>
+        function copyPrompt(promptId) {
+            const prompt = document.getElementById(promptId).textContent;
+            navigator.clipboard.writeText(prompt);
+            event.target.textContent = 'Copied!';
+            setTimeout(() => { event.target.textContent = 'Copy'; }, 2000);
+        }
+    </script>
+</body>
+</html>
