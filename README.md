@@ -144,3 +144,13 @@ See [REFERENCES.md](REFERENCES.md) for citation guidelines
 
 ## On Labels and Cognitive Diversity
 Please read our [perspective on labels and cognitive diversity](https://github.com/HillaryDanan/TIDE/blob/main/DISCLAIMER.md). We use terms like "NT," "ASD," and "ADHD" as communication tools to describe patterns, not as rigid diagnostic categories. Human cognition is beautifully diverse and exists on continuous spectrums.
+
+## AI Research Lab
+
+Testing how different AIs see TIDE-resonance.
+
+- 1 AI tested so far
+- 1 session documented
+- [See the research](./research/)
+
+Want to help? [Read this](./research/HOW_TO_HELP.md)
