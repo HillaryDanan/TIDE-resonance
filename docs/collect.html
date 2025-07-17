@@ -99,6 +99,11 @@
             border-radius: 6px; 
             cursor: pointer; 
             font-size: 12px; 
+            transition: all 0.3s ease;
+        }
+        .copy-btn:hover {
+            background: #00ffcc;
+            color: #0a0e27;
         }
         textarea { 
             width: 100%; 
@@ -112,6 +117,10 @@
             resize: vertical; 
             margin: 10px 0; 
         }
+        textarea:focus {
+            outline: none;
+            border-color: #00ffcc;
+        }
         .submit-btn { 
             background: linear-gradient(45deg, #00ffcc, #0099ff); 
             color: #0a0e27; 
@@ -123,6 +132,11 @@
             cursor: pointer; 
             display: block; 
             margin: 30px auto; 
+            transition: all 0.3s ease;
+        }
+        .submit-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.3);
         }
         .hidden { display: none; }
         select, input { 
@@ -133,6 +147,10 @@
             color: white; 
             border-radius: 6px; 
             margin: 5px 0; 
+        }
+        select:focus, input:focus {
+            outline: none;
+            border-color: #00ffcc;
         }
         label { display: block; margin-top: 15px; color: #00ffcc; }
         
@@ -169,23 +187,23 @@
         
         <div class="stats">
             <div class="stat-box">
-                <div class="stat-number">5</div>
+                <div class="stat-number">10+</div>
                 <div class="stat-label">AI Models</div>
             </div>
             <div class="stat-box">
-                <div class="stat-number">12</div>
-                <div class="stat-label">Sessions</div>
+                <div class="stat-number">NEW</div>
+                <div class="stat-label">Study Launch</div>
             </div>
             <div class="stat-box">
-                <div class="stat-number">3</div>
-                <div class="stat-label">Pattern Clusters</div>
+                <div class="stat-number">∞</div>
+                <div class="stat-label">Patterns to Find</div>
             </div>
         </div>
         
         <div class="visualization-preview">
             <h3>📊 The Visualization to Analyze</h3>
             <p style="margin: 15px 0;">First, explore our Advanced Explorer to understand what you'll be asking AIs to describe:</p>
-            <a href="https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html" target="_blank" class="explore-btn">
+            <a href="advanced_explorer.html" target="_blank" class="explore-btn">
                 🔬 Open Advanced Explorer
             </a>
             <p style="margin-top: 15px; color: #888;">Spend 2-3 minutes exploring the patterns, controls, and behaviors</p>
@@ -196,7 +214,7 @@
             <h2>Ask AI to Describe the Visualization</h2>
             <p>After exploring the visualization yourself, copy this prompt for your AI:</p>
             <div class="prompt-box">
-                <button class="copy-btn" onclick="copyPrompt('prompt1')">Copy</button>
+                <button class="copy-btn" onclick="copyPrompt('prompt1', this)">Copy</button>
                 <span id="prompt1">I'm looking at an interactive visualization called TIDE-resonance Advanced Explorer. It shows dynamic patterns of particles and waves that synchronize and desynchronize over time. The visualization includes:
 
 - Particles moving in wave-like patterns
@@ -220,7 +238,7 @@ Be specific and detailed in your description of the expected behaviors.</span>
             <h2>AI Self-Reflection</h2>
             <p>Now ask the AI to reflect on its own processing:</p>
             <div class="prompt-box">
-                <button class="copy-btn" onclick="copyPrompt('prompt2')">Copy</button>
+                <button class="copy-btn" onclick="copyPrompt('prompt2', this)">Copy</button>
                 <span id="prompt2">Thank you for that description. Now I'm curious about your own information processing: 
 
 Do you see any parallels between the synchronization dynamics you described and how you process, integrate, or generate information? 
@@ -238,16 +256,21 @@ Please reflect on any connections between these visualization patterns and your 
             <label>Which AI model did you use?</label>
             <select id="aiModel" required>
                 <option value="">Select AI Model...</option>
+                <option value="gpt-4o">GPT-4o</option>
                 <option value="gpt-4">GPT-4</option>
                 <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                <option value="claude-3.5-sonnet">Claude 3.5 Sonnet</option>
                 <option value="claude-3-opus">Claude 3 Opus</option>
                 <option value="claude-3-sonnet">Claude 3 Sonnet</option>
-                <option value="claude-2">Claude 2</option>
-                <option value="gemini-pro">Gemini Pro</option>
-                <option value="gemini-ultra">Gemini Ultra</option>
-                <option value="llama-2">Llama 2</option>
-                <option value="mistral">Mistral</option>
-                <option value="other">Other</option>
+                <option value="claude-3-haiku">Claude 3 Haiku</option>
+                <option value="gemini-2.0-flash">Gemini 2.0 Flash</option>
+                <option value="gemini-1.5-pro">Gemini 1.5 Pro</option>
+                <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
+                <option value="llama-3.1">Llama 3.1</option>
+                <option value="llama-3">Llama 3</option>
+                <option value="mistral-large">Mistral Large</option>
+                <option value="mistral-medium">Mistral Medium</option>
+                <option value="other">Other (specify in notes)</option>
             </select>
             
             <label>Did you explore the Advanced Explorer first?</label>
@@ -260,19 +283,22 @@ Please reflect on any connections between these visualization patterns and your 
             <input type="text" id="researcher" placeholder="Anonymous">
             
             <label>Session notes (optional):</label>
-            <textarea id="notes" placeholder="Any observations about the AI's response style, unusual behaviors, etc."></textarea>
+            <textarea id="notes" placeholder="Any observations about the AI's response style, unusual behaviors, web access enabled, etc."></textarea>
         </div>
         
         <button class="submit-btn" onclick="processResponses()">Generate Session File</button>
         
         <div class="hidden" id="success" style="background: rgba(0,255,0,0.2); padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0;">
             <h3>✅ Session Downloaded!</h3>
-            <p style="margin-top: 10px;">Please submit your file via:</p>
+            <p style="margin-top: 10px;">Thank you for contributing! Please share your file:</p>
             <ol style="text-align: left; max-width: 500px; margin: 10px auto;">
-                <li>GitHub: Create a pull request to /research/sessions/</li>
-                <li>Email: tide.resonance.research@gmail.com</li>
-                <li>Or open an issue on GitHub with your data</li>
+                <li>Email to: <strong>tide.resonance@gmail.com</strong></li>
+                <li>Or create a GitHub issue with your data</li>
+                <li>Or submit a pull request to /research/sessions/</li>
             </ol>
+            <p style="margin-top: 20px;">
+                <a href="#" onclick="location.reload()" style="color: #00ffcc;">→ Run another session</a>
+            </p>
         </div>
     </div>
     
@@ -290,14 +316,32 @@ Please reflect on any connections between these visualization patterns and your 
             }
         });
         
-        function copyPrompt(promptId) {
+        // Fixed copy function with button parameter
+        function copyPrompt(promptId, button) {
             const text = document.getElementById(promptId).textContent;
             navigator.clipboard.writeText(text).then(() => {
-                event.target.textContent = 'Copied!';
-                event.target.style.background = '#00ff00';
+                const originalText = button.textContent;
+                const originalBg = button.style.background;
+                button.textContent = 'Copied!';
+                button.style.background = '#00ff00';
                 setTimeout(() => {
-                    event.target.textContent = 'Copy';
-                    event.target.style.background = '#0099ff';
+                    button.textContent = originalText;
+                    button.style.background = originalBg;
+                }, 2000);
+            }).catch(err => {
+                // Fallback for browsers that don't support clipboard API
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                button.textContent = 'Copied!';
+                button.style.background = '#00ff00';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.style.background = '#0099ff';
                 }, 2000);
             });
         }
