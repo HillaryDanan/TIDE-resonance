@@ -10,7 +10,7 @@ We're conducting groundbreaking research on how different AI models perceive and
 
 1. **Explore the Visualization**: [Advanced Explorer](https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html)
 2. **Contribute Your Data**: [Research Portal](https://hillarydanan.github.io/TIDE-resonance/collect.html)
-3. **View Collected Responses**: [Research Data](/research/sessions/)
+3. **Submit Results**: Via GitHub issues or pull requests
 
 ### 📊 What We're Actually Studying
 
@@ -25,7 +25,7 @@ When different AI models describe the TIDE-resonance visualization, they reveal:
 1. Visit our [Research Portal](https://hillarydanan.github.io/TIDE-resonance/collect.html)
 2. Explore the [Advanced Explorer](https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html) visualization
 3. Test with any AI model using our standardized prompts
-4. Submit your session data
+4. Submit your session data via GitHub
 
 ### 📈 Current Research Stats
 - **Study Launch**: July 2025
