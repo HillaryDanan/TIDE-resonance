@@ -184,12 +184,11 @@
             <h2>🔬 Research Study: How AIs Describe Dynamic Systems</h2>
             <p style="margin-top: 15px;">We're investigating how different AI models perceive and describe the same visualization. Your contribution helps us understand AI cognitive diversity!</p>
             <p style="margin-top: 20px; background: rgba(0,255,204,0.1); padding: 15px; border-radius: 8px;">
-                📤 <strong>How to contribute:</strong> After completing the study, you'll download a .md file. 
-                Submit it via pull request to: 
-                <a href="https://github.com/HillaryDanan/TIDE-resonance" target="_blank" style="color: #00ffcc;">
-                    github.com/HillaryDanan/TIDE-resonance
+                📤 <strong>How to contribute:</strong> Complete the study → Download your file → Submit via GitHub Issue<br>
+                <span style="color: #888; font-size: 0.9em;">Your file is auto-named with our standard format. Don't rename it!</span><br>
+                <a href="https://github.com/HillaryDanan/TIDE-resonance/issues/new" target="_blank" style="color: #00ffcc;">
+                    → Submit here: github.com/HillaryDanan/TIDE-resonance/issues
                 </a>
-                (New to GitHub? We'll show you how!)
             </p>
         </div>
         
@@ -348,40 +347,49 @@ Please reflect on any connections between these visualization patterns and your 
         
         <div class="hidden" id="success" style="background: rgba(0,255,0,0.2); padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0;">
             <h3>✅ Session Downloaded!</h3>
-            <p style="margin-top: 10px;">Thank you for contributing! Now let's submit your data:</p>
+            <p style="margin-top: 10px;"><strong>Your file is ready with the correct name!</strong></p>
             
             <div style="background: rgba(0,255,204,0.2); padding: 20px; border-radius: 8px; margin-top: 20px; text-align: left;">
                 <h4 style="text-align: center; margin-bottom: 15px;">🚀 How to submit your data:</h4>
                 
-                <h5 style="color: #00ffcc; margin: 15px 0;">Option 1: Pull Request (Preferred)</h5>
-                <ol style="margin-left: 20px; line-height: 1.8;">
-                    <li>Go to <a href="https://github.com/HillaryDanan/TIDE-resonance" target="_blank" style="color: #00ffcc;">github.com/HillaryDanan/TIDE-resonance</a></li>
-                    <li>Click the "Fork" button (top right corner)</li>
-                    <li>In your fork, navigate to <code>/research/sessions/</code></li>
-                    <li>Click "Add file" → "Upload files"</li>
-                    <li>Drag your downloaded .md file there</li>
-                    <li>Click "Commit changes"</li>
-                    <li>Click "Create Pull Request" (green button)</li>
-                    <li>Add a title like "Add session data for [model name]"</li>
-                    <li>Click "Create pull request" to submit!</li>
-                </ol>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 2px solid #00ffcc;">
+                    <h5 style="color: #00ffcc; margin: 0 0 10px 0;">📝 IMPORTANT: File Naming</h5>
+                    <p style="margin: 5px 0;"><strong>Your file is already named correctly!</strong> It follows our standard format:</p>
+                    <code style="background: #0a0e27; padding: 5px 10px; border-radius: 4px; display: inline-block; margin: 5px 0;">
+                        modelname_YYYY-MM-DD_HHMMSS_EST.md
+                    </code>
+                    <p style="color: #888; font-size: 0.9em; margin-top: 10px;">
+                        Example: claude-3-opus_2024-01-15_143052_EST.md<br>
+                        <strong>DO NOT RENAME THE FILE!</strong> Keep the auto-generated name.
+                    </p>
+                </div>
                 
-                <h5 style="color: #00ffcc; margin: 20px 0 15px 0;">Option 2: GitHub Issue (Easier)</h5>
+                <h5 style="color: #00ffcc; margin: 15px 0;">Option 1: GitHub Issue (EASIEST - Do This!) 🎯</h5>
                 <ol style="margin-left: 20px; line-height: 1.8;">
-                    <li><a href="https://github.com/HillaryDanan/TIDE-resonance/issues/new" target="_blank" style="color: #00ffcc;">Click here to create a new issue</a></li>
-                    <li>Title: "Session data: [AI model name]"</li>
-                    <li>In the comment box, either:
-                        <ul style="margin-top: 10px;">
-                            <li>Drag and drop your .md file</li>
-                            <li>OR paste the entire content</li>
-                        </ul>
-                    </li>
+                    <li>Go to: <a href="https://github.com/HillaryDanan/TIDE-resonance/issues/new" target="_blank" style="color: #00ffcc;">github.com/HillaryDanan/TIDE-resonance/issues/new</a></li>
+                    <li>Title: <code>Session: [model name]</code> (e.g., "Session: claude-3-opus")</li>
+                    <li>Drag your .md file into the comment box</li>
                     <li>Click "Submit new issue"</li>
+                    <li>Done! 🎉</li>
                 </ol>
                 
-                <p style="text-align: center; margin-top: 20px; color: #888;">
-                    Don't have a GitHub account? <a href="https://github.com/signup" target="_blank" style="color: #00ffcc;">Create one free</a> - it takes 30 seconds!
-                </p>
+                <h5 style="color: #00ffcc; margin: 20px 0 15px 0;">Option 2: Pull Request (For Git Pros)</h5>
+                <details style="background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;">
+                    <summary style="cursor: pointer; color: #888;">Click to expand PR instructions...</summary>
+                    <ol style="margin: 15px 0 0 20px; line-height: 1.8;">
+                        <li>Fork the repo</li>
+                        <li>Upload to <code>/research/sessions/</code></li>
+                        <li>Create PR titled "Add session: [model]"</li>
+                    </ol>
+                </details>
+                
+                <div style="text-align: center; margin-top: 20px; padding: 15px; background: rgba(0,255,204,0.05); border-radius: 8px;">
+                    <p style="margin: 0; font-size: 1.1em;">
+                        <strong>🐢 First time? No GitHub account? 🚀</strong><br>
+                        <a href="https://github.com/signup" target="_blank" style="color: #00ffcc;">Create one in 30 seconds</a> 
+                        then use the Issue method!
+                    </p>
+                </div>
             </div>
             
             <p style="margin-top: 30px;">
