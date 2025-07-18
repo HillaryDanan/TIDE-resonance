@@ -59,7 +59,7 @@ Each AI's response to TIDE-resonance becomes a window into how they process conc
 
 - 🌊 [Main Visualization](https://hillarydanan.github.io/TIDE-resonance/) - Basic wave resonance patterns
 - 🔬 [Advanced Explorer](https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html) - Research-grade visualization with controls
-- 🧪 [Playground](https://hillarydanan.github.io/TIDE-resonance/playground.html) - Experimental features
+- 🧪 [Playground](https://hillarydanan.github.io/TIDE-resonance/collect.html) - Experimental features
 
 ## Theoretical Background
 
