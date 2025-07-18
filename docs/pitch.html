@@ -476,6 +476,59 @@
             box-shadow: 0 10px 30px rgba(0, 255, 204, 0.4);
         }
         
+        /* Supporting Tools Section */
+        .supporting-tools {
+            background: linear-gradient(135deg, rgba(0, 153, 255, 0.05), rgba(255, 0, 110, 0.05));
+            padding: 80px 20px;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .tool-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 153, 255, 0.2);
+            border-color: var(--secondary);
+        }
+        
+        .tool-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .tool-name {
+            font-size: 1.3rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        
+        .tool-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .tool-link:hover {
+            color: var(--secondary);
+            transform: scale(1.05);
+        }
+        
         /* Utilities */
         h2 {
             font-size: 2.5rem;
@@ -575,6 +628,7 @@
                 <li><a href="#solution">Frameworks</a></li>
                 <li><a href="#research">Active Study</a></li>
                 <li><a href="#demos">Demos</a></li>
+                <li><a href="#tools">Supporting Tools</a></li>
                 <li><a href="#companies">For Companies</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -590,8 +644,8 @@
             
             <div class="hero-stats fade-in">
                 <div class="stat">
-                    <span class="stat-number">8+</span>
-                    <span class="stat-label">Interactive Tools</span>
+                    <span class="stat-number">12+</span>
+                    <span class="stat-label">Research Tools</span>
                 </div>
                 <div class="stat">
                     <span class="stat-number">PhD</span>
@@ -686,8 +740,8 @@
     <!-- Solution Section -->
     <section id="solution" class="solution">
         <div class="container">
-            <h2 class="fade-in">Research Framework Architecture</h2>
-            <p class="section-subtitle fade-in">Experimental frameworks exploring neurodiversity as computational innovation</p>
+            <h2 class="fade-in">Core Research Frameworks</h2>
+            <p class="section-subtitle fade-in">Mathematical foundations exploring neurodiversity as computational innovation</p>
             
             <div class="solution-showcase fade-in">
                 <div class="solution-item">
@@ -721,12 +775,12 @@
                 </div>
                 
                 <div class="solution-item">
-                    <h3 style="color: var(--primary); margin-bottom: 20px;">🔷 Supporting Frameworks</h3>
-                    <p>Information-Atoms, Hexagonal structures, Game Theory Trust models - each revealing different aspects of cognitive computation.</p>
+                    <h3 style="color: var(--primary); margin-bottom: 20px;">🎯 Integrated Vision</h3>
+                    <p>All frameworks work together to reveal how cognitive diversity creates computational advantages through complementary processing strategies.</p>
                     <ul style="margin-top: 20px; list-style: none;">
-                        <li>✓ Discrete information units</li>
-                        <li>✓ Optimal packing structures</li>
-                        <li>✓ Trust evolution mathematics</li>
+                        <li>✓ Multi-framework synthesis</li>
+                        <li>✓ Cross-architecture validation</li>
+                        <li>✓ Emergent robustness patterns</li>
                     </ul>
                 </div>
             </div>
@@ -785,8 +839,8 @@
     <!-- Demo Section -->
     <section id="demos" class="demos">
         <div class="container">
-            <h2 class="fade-in">Live Research Tools</h2>
-            <p class="section-subtitle fade-in">Experimental prototypes exploring novel approaches to AI interpretability</p>
+            <h2 class="fade-in">Live Interactive Demos</h2>
+            <p class="section-subtitle fade-in">Core framework implementations ready for exploration</p>
             
             <div class="demo-grid fade-in">
                 <div class="demo-card">
@@ -841,6 +895,67 @@
                         <p>Boundary Information Neural Dynamics visualization</p>
                         <a href="https://hillarydanan.github.io/BIND/bind_systems_interactive.html" target="_blank" class="demo-link">Launch Demo →</a>
                     </div>
+                </div>
+                
+                <div class="demo-card">
+                    <div class="demo-preview">📈</div>
+                    <div class="demo-info">
+                        <h3 class="demo-title">BIND Research Tool</h3>
+                        <p>Professional Φ (integrated information) analysis and visualization</p>
+                        <a href="https://hillarydanan.github.io/BIND/bind_research_tool.html" target="_blank" class="demo-link">Launch Demo →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Supporting Tools Section -->
+    <section id="tools" class="supporting-tools">
+        <div class="container">
+            <h2 class="fade-in">Supporting Research Tools</h2>
+            <p class="section-subtitle fade-in">Additional frameworks and experimental prototypes from the 4-week sprint</p>
+            
+            <div class="tools-grid fade-in">
+                <div class="tool-card">
+                    <div class="tool-icon">🔷</div>
+                    <h3 class="tool-name">Hexagonal Consciousness Suite</h3>
+                    <p>Information geometry visualization using optimal hexagonal packing structures for consciousness mapping</p>
+                    <a href="https://github.com/HillaryDanan/hexagonal-consciousness-suite" target="_blank" class="tool-link">View Repository →</a>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">🎮</div>
+                    <h3 class="tool-name">Game Theory Trust Suite</h3>
+                    <p>Mathematical models of trust evolution, cooperation, and deception in multi-agent systems</p>
+                    <a href="https://github.com/HillaryDanan/game-theory-trust-suite" target="_blank" class="tool-link">View Repository →</a>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">⚛️</div>
+                    <h3 class="tool-name">Information Atoms</h3>
+                    <p>Discrete units of information as fundamental building blocks - exploring information quantization</p>
+                    <a href="https://github.com/HillaryDanan/information-atoms" target="_blank" class="tool-link">View Repository →</a>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">👁️</div>
+                    <h3 class="tool-name">Hexagonal Vision Research</h3>
+                    <p>Computer vision experiments using hexagonal grids for pattern recognition and visual processing</p>
+                    <a href="https://github.com/HillaryDanan/hexagonal-vision-research" target="_blank" class="tool-link">View Repository →</a>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">🏗️</div>
+                    <h3 class="tool-name">Concrete Overflow Detector</h3>
+                    <p>Pattern detection algorithms for identifying phase transitions and overflow conditions in complex systems</p>
+                    <a href="https://github.com/HillaryDanan/concrete-overflow-detector" target="_blank" class="tool-link">View Repository →</a>
+                </div>
+                
+                <div class="tool-card">
+                    <div class="tool-icon">🧩</div>
+                    <h3 class="tool-name">Meta-Repository</h3>
+                    <p>Comprehensive overview connecting all frameworks into unified cognitive architecture research</p>
+                    <a href="https://github.com/HillaryDanan/cognitive-architectures-ai" target="_blank" class="tool-link">View Repository →</a>
                 </div>
             </div>
         </div>
@@ -997,8 +1112,8 @@
                 <h3 style="color: var(--primary); margin-bottom: 20px;">What I Offer:</h3>
                 <ul style="line-height: 2; margin-left: 20px; margin-bottom: 30px;">
                     <li>✓ PhD research exploring cognitive diversity as computational strategy</li>
-                    <li>✓ 6 working interactive research prototypes</li>
-                    <li>✓ Experimental frameworks (TIDE, BIND, Game Theory)</li>
+                    <li>✓ 12+ working interactive research prototypes from 4-week sprint</li>
+                    <li>✓ Core frameworks (TIDE, BIND) with supporting tools</li>
                     <li>✓ Novel exploration: neurodiversity as potential AI robustness feature</li>
                     <li>✓ Active research study generating unique AI perception data</li>
                     <li>✓ Open source commitment with clear documentation</li>
