@@ -183,6 +183,14 @@
         <div class="intro-card">
             <h2>🔬 Research Study: How AIs Describe Dynamic Systems</h2>
             <p style="margin-top: 15px;">We're investigating how different AI models perceive and describe the same visualization. Your contribution helps us understand AI cognitive diversity!</p>
+            <p style="margin-top: 20px; background: rgba(0,255,204,0.1); padding: 15px; border-radius: 8px;">
+                📤 <strong>How to contribute:</strong> After completing the study, you'll download a .md file. 
+                Submit it via pull request to: 
+                <a href="https://github.com/HillaryDanan/TIDE-resonance" target="_blank" style="color: #00ffcc;">
+                    github.com/HillaryDanan/TIDE-resonance
+                </a>
+                (New to GitHub? We'll show you how!)
+            </p>
         </div>
         
         <div class="stats">
@@ -225,14 +233,15 @@
                     🪟 Copilot
                 </a>
                 <a href="https://poe.com" target="_blank" onclick="setModel('other')" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
-                    🎭 Poe
+                    🎭 Poe (specify bot in notes)
                 </a>
                 <a href="https://perplexity.ai" target="_blank" onclick="setModel('other')" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
                     🔍 Perplexity
                 </a>
             </div>
             <p style="margin-top: 15px; color: #888; font-size: 0.9em;">
-                💡 Click an AI above - it will open in a new tab AND auto-select the model for you!
+                💡 Click an AI above - it will open in a new tab AND auto-select the model for you!<br>
+                Note: For Poe, please specify which bot you used (Claude-3-Opus, GPT-4, etc.) in the notes field.
             </p>
         </div>
         
@@ -310,7 +319,7 @@ Please reflect on any connections between these visualization patterns and your 
             <input type="text" id="researcher" placeholder="Anonymous">
             
             <label>Session notes (optional):</label>
-            <textarea id="notes" placeholder="Any observations about the AI's response style, unusual behaviors, web access enabled, etc."></textarea>
+            <textarea id="notes" placeholder="Any observations about the AI's response style, unusual behaviors, web access enabled, etc. If using Poe, specify which bot (e.g., 'Used Claude-3-Opus on Poe')"></textarea>
             
             <div style="background: rgba(0, 255, 204, 0.05); border: 1px solid rgba(0, 255, 204, 0.3); border-radius: 8px; padding: 20px; margin: 20px 0;">
                 <h4 style="color: #00ffcc; margin-bottom: 10px;">🤝 Research Integrity & Trust</h4>
@@ -338,13 +347,44 @@ Please reflect on any connections between these visualization patterns and your 
         
         <div class="hidden" id="success" style="background: rgba(0,255,0,0.2); padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0;">
             <h3>✅ Session Downloaded!</h3>
-            <p style="margin-top: 10px;">Thank you for contributing! Please share your file:</p>
-            <ol style="text-align: left; max-width: 500px; margin: 10px auto;">
-                <li>Create a GitHub issue with your data</li>
-                <li>Or submit a pull request to /research/sessions/</li>
-            </ol>
-            <p style="margin-top: 20px;">
-                <a href="#" onclick="location.reload()" style="color: #00ffcc;">→ Run another session</a>
+            <p style="margin-top: 10px;">Thank you for contributing! Now let's submit your data:</p>
+            
+            <div style="background: rgba(0,255,204,0.2); padding: 20px; border-radius: 8px; margin-top: 20px; text-align: left;">
+                <h4 style="text-align: center; margin-bottom: 15px;">🚀 How to submit your data:</h4>
+                
+                <h5 style="color: #00ffcc; margin: 15px 0;">Option 1: Pull Request (Preferred)</h5>
+                <ol style="margin-left: 20px; line-height: 1.8;">
+                    <li>Go to <a href="https://github.com/HillaryDanan/TIDE-resonance" target="_blank" style="color: #00ffcc;">github.com/HillaryDanan/TIDE-resonance</a></li>
+                    <li>Click the "Fork" button (top right corner)</li>
+                    <li>In your fork, navigate to <code>/research/sessions/</code></li>
+                    <li>Click "Add file" → "Upload files"</li>
+                    <li>Drag your downloaded .md file there</li>
+                    <li>Click "Commit changes"</li>
+                    <li>Click "Create Pull Request" (green button)</li>
+                    <li>Add a title like "Add session data for [model name]"</li>
+                    <li>Click "Create pull request" to submit!</li>
+                </ol>
+                
+                <h5 style="color: #00ffcc; margin: 20px 0 15px 0;">Option 2: GitHub Issue (Easier)</h5>
+                <ol style="margin-left: 20px; line-height: 1.8;">
+                    <li><a href="https://github.com/HillaryDanan/TIDE-resonance/issues/new" target="_blank" style="color: #00ffcc;">Click here to create a new issue</a></li>
+                    <li>Title: "Session data: [AI model name]"</li>
+                    <li>In the comment box, either:
+                        <ul style="margin-top: 10px;">
+                            <li>Drag and drop your .md file</li>
+                            <li>OR paste the entire content</li>
+                        </ul>
+                    </li>
+                    <li>Click "Submit new issue"</li>
+                </ol>
+                
+                <p style="text-align: center; margin-top: 20px; color: #888;">
+                    Don't have a GitHub account? <a href="https://github.com/signup" target="_blank" style="color: #00ffcc;">Create one free</a> - it takes 30 seconds!
+                </p>
+            </div>
+            
+            <p style="margin-top: 30px;">
+                <a href="#" onclick="location.reload()" style="color: #00ffcc; font-weight: bold;">→ Run another session with a different AI</a>
             </p>
         </div>
     </div>
