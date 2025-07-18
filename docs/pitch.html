@@ -255,6 +255,12 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            z-index: 1;
+        }
+        
+        .research-card > * {
+            position: relative;
+            z-index: 2;
         }
         
         .research-card::before {
@@ -266,6 +272,7 @@
             height: 200%;
             background: radial-gradient(circle, rgba(0, 255, 204, 0.1), transparent);
             animation: pulse 4s ease-in-out infinite;
+            z-index: 0;
         }
         
         @keyframes pulse {
@@ -840,7 +847,7 @@
                     </ul>
                 </div>
                 
-                <a href="https://hillarydanan.github.io/TIDE-resonance/collect.html" target="_blank" class="demo-link" style="background: var(--accent); margin-top: 20px;">
+                <a href="https://hillarydanan.github.io/TIDE-resonance/collect.html" target="_blank" class="demo-link" style="background: var(--accent); margin-top: 20px; position: relative; z-index: 10;">
                     Participate in Research →
                 </a>
                 
