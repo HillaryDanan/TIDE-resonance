@@ -367,10 +367,10 @@ Please reflect on any connections between these visualization patterns and your 
                     <h5 style="color: #00ffcc; margin: 0 0 10px 0;">📝 IMPORTANT: File Naming</h5>
                     <p style="margin: 5px 0;"><strong>Your file is already named correctly!</strong> It follows our standard format:</p>
                     <code style="background: #0a0e27; padding: 5px 10px; border-radius: 4px; display: inline-block; margin: 5px 0;">
-                        modelname_YYYY-MM-DD_HHMMSS_EST.md
+                        modelname_YYYY-MM-DD_HHMMSS.md
                     </code>
                     <p style="color: #888; font-size: 0.9em; margin-top: 10px;">
-                        Example: claude-3-opus_2024-01-15_143052_EST.md<br>
+                        Example: claude-3-opus_2024-01-15_143052.md<br>
                         <strong>DO NOT RENAME THE FILE!</strong> Keep the auto-generated name.
                     </p>
                 </div>
@@ -541,7 +541,7 @@ Please reflect on any connections between these visualization patterns and your 
             const timestamp = estTime.toISOString().replace('Z', ' EST');
             const date = estTime.toISOString().split('T')[0];
             const time = estTime.toISOString().split('T')[1].split('.')[0].replace(/:/g, '');
-            const filename = `${model}_${date}_${time}_EST.md`;
+            const filename = `${model}_${date}_${time}.md`;
             
             const content = `# TIDE-Resonance Visualization Description Study
 
