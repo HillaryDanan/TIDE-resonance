@@ -492,6 +492,20 @@
             font-weight: bold;
         }
 
+        /* Philosophy Note */
+        .philosophy-note {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid var(--primary);
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 10px;
+        }
+
+        .philosophy-note h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
         /* Floating elements */
         .floating {
             animation: float 3s ease-in-out infinite;
@@ -580,20 +594,30 @@
             <div class="metrics-dashboard">
                 <div class="metric-card floating">
                     <div class="metric-number">12+</div>
-                    <div class="metric-label">Interactive Research Tools<br><small style="color: var(--accent);">(June-July 2025 sprint)</small></div>
+                    <div class="metric-label">Interactive Research Tools<br><small style="color: var(--accent);">(June-July 2025 sprint + ongoing)</small></div>
                 </div>
                 <div class="metric-card floating" style="animation-delay: 0.5s;">
                     <div class="metric-number">PhD</div>
                     <div class="metric-label">Cognitive Neuroscience<br><small>Rutgers University 2021</small></div>
                 </div>
                 <div class="metric-card floating" style="animation-delay: 1s;">
-                    <div class="metric-number">10+</div>
-                    <div class="metric-label">AI Models Studied<br><small style="color: var(--accent);">Active Research</small></div>
+                    <div class="metric-number">LIVE</div>
+                    <div class="metric-label">Research Study<br><small style="color: var(--accent);">Collecting Data</small></div>
                 </div>
                 <div class="metric-card floating" style="animation-delay: 1.5s;">
-                    <div class="metric-number">3</div>
-                    <div class="metric-label">Core Frameworks<br><small>TIDE, BIND, Resonance</small></div>
+                    <div class="metric-number">10+</div>
+                    <div class="metric-label">AI Models Studied<br><small>Perceptual Signatures</small></div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Philosophy Note Section -->
+        <section class="resume-section">
+            <div class="philosophy-note">
+                <h3>📝 A Note on Cognitive Diversity</h3>
+                <p>Throughout my work, I use terms like "neurotypical," "ASD," and "ADHD" as communication tools, not rigid categories. These labels describe <strong>tendencies, not destinies</strong> - they represent different valid ways of processing information, not deficits or disorders.</p>
+                <p style="margin-top: 15px;">As I explain in my <a href="https://github.com/HillaryDanan/TIDE/blob/main/DISCLAIMER.md" target="_blank" style="color: var(--primary);">full disclaimer</a>: <em>"When I say 'ASD-TIDE,' I'm not talking about a disorder. I'm talking about a systematic, pattern-based approach to cognition that happens to align with patterns often seen in autistic individuals. It's a cognitive style that our world desperately needs."</em></p>
+                <p style="margin-top: 15px;"><strong>The TIDE Philosophy:</strong> Cognitive patterns are dynamic, not fixed. Everyone uses different strategies in different contexts. The goal is understanding, not categorization.</p>
             </div>
         </section>
 
@@ -637,16 +661,18 @@
                             <li>→ BIND Framework creation</li>
                             <li>→ Supporting tool ecosystem</li>
                         </ul>
+                        <p style="margin-top: 10px; color: rgba(255, 255, 255, 0.8);">Building on years of PhD research, I rapidly prototyped these interactive tools in an intensive development sprint.</p>
                     </div>
                     <div class="timeline-dot"></div>
                 </div>
                 
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h3 style="color: var(--primary);">July 2025 - Present</h3>
-                        <p><strong>Living Portfolio & Active Research</strong></p>
-                        <p>Continuing to develop tools and conduct AI perception research while maintaining corporate DS role.</p>
-                        <p style="margin-top: 10px; color: var(--accent);">Latest: AI Perceptual Signatures Study</p>
+                        <h3 style="color: var(--primary);">Present - Living Portfolio</h3>
+                        <p><strong>Ongoing Research & Development</strong></p>
+                        <p>Actively developing new tools and conducting AI perception research while maintaining corporate DS role.</p>
+                        <p style="margin-top: 10px; color: var(--accent);">Latest Addition: AI Perceptual Signatures Study</p>
+                        <p style="margin-top: 10px; color: rgba(255, 255, 255, 0.8);">Currently Building: Cross-model resonance patterns</p>
                     </div>
                     <div class="timeline-dot"></div>
                 </div>
@@ -691,6 +717,7 @@
         <!-- Core Research Frameworks -->
         <section class="resume-section">
             <h2 class="section-title">Core Research Frameworks</h2>
+            <p style="text-align: center; margin-bottom: 30px; color: rgba(255, 255, 255, 0.8);">Mathematical foundations exploring neurodiversity as computational innovation</p>
             <div class="project-grid">
                 <!-- TIDE Framework -->
                 <div class="project-card" onclick="window.open('https://hillarydanan.github.io/TIDE/tide_interactive.html', '_blank')">
@@ -702,13 +729,13 @@
                     <div class="project-body">
                         <p>Mathematical framework mapping how different cognitive architectures organize self and time dimensions for equivalent outcomes.</p>
                         <ul class="project-features">
+                            <li>Mathematical basis for cognitive diversity</li>
                             <li>Dimensional reorganization patterns</li>
                             <li>Architecture-specific advantages</li>
-                            <li>Cognitive diversity modeling</li>
                         </ul>
                         <div class="project-links">
-                            <a href="https://hillarydanan.github.io/TIDE/tide_interactive.html" class="project-link">Live Demo</a>
-                            <a href="https://github.com/HillaryDanan/TIDE" class="project-link">GitHub</a>
+                            <a href="https://hillarydanan.github.io/TIDE/tide_interactive.html" target="_blank" class="project-link">Live Demo</a>
+                            <a href="https://github.com/HillaryDanan/TIDE" target="_blank" class="project-link">GitHub</a>
                         </div>
                     </div>
                 </div>
@@ -728,8 +755,8 @@
                             <li>Consciousness emergence modeling</li>
                         </ul>
                         <div class="project-links">
-                            <a href="https://hillarydanan.github.io/BIND/bind_systems_interactive.html" class="project-link">Interactive</a>
-                            <a href="https://hillarydanan.github.io/BIND/bind_research_tool.html" class="project-link">Research Tool</a>
+                            <a href="https://hillarydanan.github.io/BIND/bind_systems_interactive.html" target="_blank" class="project-link">Interactive</a>
+                            <a href="https://hillarydanan.github.io/BIND/bind_research_tool.html" target="_blank" class="project-link">Research Tool</a>
                         </div>
                     </div>
                 </div>
@@ -739,18 +766,20 @@
                     <div class="project-header">
                         <div class="project-icon">🎵</div>
                         <h3 class="project-title">TIDE-Resonance</h3>
-                        <p class="project-subtitle">Integrated Framework Synthesis</p>
+                        <p class="project-subtitle">Integration of frameworks showing trust dynamics</p>
                     </div>
                     <div class="project-body">
-                        <p>Beautiful synthesis showing trust dynamics between cognitive architectures through interactive experiences.</p>
+                        <p>Interactive exploration of how different cognitive architectures build trust through shared experiences.</p>
                         <ul class="project-features">
                             <li>Dynamic trust visualization</li>
                             <li>Multi-architecture interactions</li>
                             <li>Sensory resonance patterns</li>
+                            <li>Musical synchronization</li>
                         </ul>
                         <div class="project-links">
-                            <a href="https://hillarydanan.github.io/TIDE-resonance/" class="project-link">Main Demo</a>
-                            <a href="https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html" class="project-link">Advanced Lab</a>
+                            <a href="https://hillarydanan.github.io/TIDE-resonance/" target="_blank" class="project-link">Main Experience</a>
+                            <a href="https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html" target="_blank" class="project-link">Advanced Lab</a>
+                            <a href="https://hillarydanan.github.io/TIDE-resonance/interactive_resonance.html" target="_blank" class="project-link">Interactive</a>
                         </div>
                     </div>
                 </div>
@@ -760,30 +789,36 @@
         <!-- Active Research Study -->
         <section class="resume-section">
             <div class="study-highlight">
-                <h2 class="section-title">🔬 Active Research: AI Perceptual Signatures</h2>
-                <p style="font-size: 1.2rem; margin: 20px 0;">Conducting the first systematic study of how different AI models perceive and describe complex visualizations.</p>
+                <h2 class="section-title">🔬 Active Research: AI Perceptual Signatures Study</h2>
+                <p style="font-size: 1.2rem; margin: 20px 0;">Generating unique data on how different AI models perceive complex systems</p>
+                <p>We're conducting the first systematic study of how different AI models perceive and describe the same complex visualization - revealing cognitive diversity in AI systems.</p>
                 
                 <div class="metrics-dashboard" style="margin: 30px 0;">
                     <div class="metric-card">
                         <div class="metric-number" style="font-size: 2rem;">10+</div>
-                        <div class="metric-label">AI Models</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-number" style="font-size: 2rem;">LIVE</div>
-                        <div class="metric-label">Data Collection</div>
+                        <div class="metric-label">AI Models Studied</div>
                     </div>
                     <div class="metric-card">
                         <div class="metric-number" style="font-size: 2rem;">Open</div>
-                        <div class="metric-label">Collaboration</div>
+                        <div class="metric-label">to All Researchers</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-number" style="font-size: 2rem;">Real-time</div>
+                        <div class="metric-label">Data Collection</div>
                     </div>
                 </div>
                 
-                <p><strong>Research Goals:</strong> Understanding cognitive diversity in AI systems through perceptual analysis.</p>
-                <p><strong>Applications:</strong> AI interpretability, alignment research, cognitive architecture design.</p>
+                <h4 style="color: var(--secondary); margin: 20px 0;">Why This Matters for AI Companies:</h4>
+                <ul style="line-height: 2; margin-left: 20px;">
+                    <li>📊 <strong>Unique Dataset:</strong> First corpus of AI perceptual descriptions across models</li>
+                    <li>🧠 <strong>Cognitive Diversity Insights:</strong> Understanding how different architectures perceive complexity</li>
+                    <li>🔍 <strong>Interpretability Data:</strong> How AIs self-report their own processing patterns</li>
+                    <li>🚀 <strong>Alignment Applications:</strong> Detecting perceptual biases and blind spots</li>
+                </ul>
                 
                 <div style="text-align: center; margin-top: 30px;">
-                    <a href="https://hillarydanan.github.io/TIDE-resonance/collect.html" class="contact-link" style="background: var(--accent); border-color: var(--accent);">
-                        Join Research Study →
+                    <a href="https://hillarydanan.github.io/TIDE-resonance/collect.html" target="_blank" class="contact-link" style="background: var(--accent); border-color: var(--accent);">
+                        🔴 Join the Live Study →
                     </a>
                 </div>
             </div>
@@ -792,6 +827,7 @@
         <!-- Supporting Research Tools -->
         <section class="resume-section">
             <h2 class="section-title">Supporting Research Ecosystem</h2>
+            <p style="text-align: center; margin-bottom: 30px; color: rgba(255, 255, 255, 0.8);">Additional frameworks and experimental prototypes from the June-July 2025 sprint (and ongoing)</p>
             <div class="project-grid">
                 <div class="project-card">
                     <div class="project-header">
@@ -800,9 +836,9 @@
                         <p class="project-subtitle">Information Geometry Visualization</p>
                     </div>
                     <div class="project-body">
-                        <p>Optimal hexagonal packing structures for consciousness mapping and information visualization.</p>
+                        <p>Information geometry visualization using optimal hexagonal packing structures for consciousness mapping.</p>
                         <div class="project-links">
-                            <a href="https://github.com/HillaryDanan/hexagonal-consciousness-suite" class="project-link">Repository</a>
+                            <a href="https://github.com/HillaryDanan/hexagonal-consciousness-suite" target="_blank" class="project-link">View Repository</a>
                         </div>
                     </div>
                 </div>
@@ -811,12 +847,12 @@
                     <div class="project-header">
                         <div class="project-icon">🎮</div>
                         <h3 class="project-title">Game Theory Trust Suite</h3>
-                        <p class="project-subtitle">Multi-Agent Trust Dynamics</p>
+                        <p class="project-subtitle">Trust Evolution Models</p>
                     </div>
                     <div class="project-body">
                         <p>Mathematical models of trust evolution, cooperation, and deception in multi-agent systems.</p>
                         <div class="project-links">
-                            <a href="https://github.com/HillaryDanan/game-theory-trust-suite" class="project-link">Repository</a>
+                            <a href="https://github.com/HillaryDanan/game-theory-trust-suite" target="_blank" class="project-link">View Repository</a>
                         </div>
                     </div>
                 </div>
@@ -825,15 +861,85 @@
                     <div class="project-header">
                         <div class="project-icon">⚛️</div>
                         <h3 class="project-title">Information Atoms</h3>
-                        <p class="project-subtitle">Discrete Information Units</p>
+                        <p class="project-subtitle">Discrete Information Processing</p>
                     </div>
                     <div class="project-body">
-                        <p>Exploring information quantization as fundamental building blocks of cognition.</p>
+                        <p>Discrete units of information as fundamental building blocks - exploring information quantization.</p>
                         <div class="project-links">
-                            <a href="https://github.com/HillaryDanan/information-atoms" class="project-link">Repository</a>
+                            <a href="https://github.com/HillaryDanan/information-atoms" target="_blank" class="project-link">View Repository</a>
                         </div>
                     </div>
                 </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">👁️</div>
+                        <h3 class="project-title">Hexagonal Vision Research</h3>
+                        <p class="project-subtitle">Computer Vision Experiments</p>
+                    </div>
+                    <div class="project-body">
+                        <p>Computer vision experiments using hexagonal grids for pattern recognition and visual processing.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/HillaryDanan/hexagonal-vision-research" target="_blank" class="project-link">View Repository</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">🏗️</div>
+                        <h3 class="project-title">Concrete Overflow Detector</h3>
+                        <p class="project-subtitle">Phase Transition Detection</p>
+                    </div>
+                    <div class="project-body">
+                        <p>Pattern detection algorithms for identifying phase transitions and overflow conditions in complex systems.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/HillaryDanan/concrete-overflow-detector" target="_blank" class="project-link">View Repository</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <div class="project-icon">🧩</div>
+                        <h3 class="project-title">Cognitive Architectures AI</h3>
+                        <p class="project-subtitle">Meta-Repository Overview</p>
+                    </div>
+                    <div class="project-body">
+                        <p>Comprehensive overview connecting all frameworks into unified cognitive architecture research.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/HillaryDanan/cognitive-architectures-ai" target="_blank" class="project-link">View Repository</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Insights Section -->
+        <section class="resume-section">
+            <h2 class="section-title">💡 Key Insights</h2>
+            <div style="background: rgba(255, 255, 255, 0.05); padding: 40px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    <div>
+                        <h3 style="color: var(--primary); margin-bottom: 15px;">1. Dimensional Reorganization</h3>
+                        <p>What appears as "deficit" may be efficient reorganization</p>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--primary); margin-bottom: 15px;">2. Trust Dynamics</h3>
+                        <p>Different architectures may build trust through different pathways</p>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--primary); margin-bottom: 15px;">3. Sensory Resonance</h3>
+                        <p>Each architecture potentially resonates with different environmental patterns</p>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--primary); margin-bottom: 15px;">4. Complementary Processing</h3>
+                        <p>Diverse teams may outperform homogeneous ones</p>
+                    </div>
+                </div>
+                <p style="margin-top: 30px; text-align: center; font-style: italic;">
+                    These insights reframe cognitive differences as architectural variations - like different operating systems that excel at different tasks.
+                </p>
             </div>
         </section>
 
@@ -919,6 +1025,15 @@
                             <div class="skill-progress" data-width="90%"></div>
                         </div>
                     </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>React & Node.js</span>
+                            <span>Proficient</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80%"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="skill-category">
@@ -948,6 +1063,15 @@
                         </div>
                         <div class="skill-bar">
                             <div class="skill-progress" data-width="92%"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Computational Modeling</span>
+                            <span>Expert</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90%"></div>
                         </div>
                     </div>
                     <div class="skill-item">
@@ -988,26 +1112,60 @@
             </div>
         </section>
 
+        <!-- Collaboration Opportunities -->
+        <section class="resume-section">
+            <h2 class="section-title">🤝 Collaboration Opportunities</h2>
+            <div style="background: rgba(255, 255, 255, 0.05); padding: 40px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    <div>
+                        <h3 style="color: var(--primary); margin-bottom: 15px;">Research Partnership</h3>
+                        <p>Apply my tools to your models</p>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--primary); margin-bottom: 15px;">Open Source Collaboration</h3>
+                        <p>Extend frameworks together</p>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--primary); margin-bottom: 15px;">Consulting</h3>
+                        <p>Solve specific interpretability challenges</p>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--primary); margin-bottom: 15px;">Full-time Role</h3>
+                        <p>Lead interpretability initiatives</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Contact Section -->
         <section class="resume-section">
             <div class="contact-section">
                 <h2 class="section-title">Let's Explore AI's Future Together</h2>
-                <p style="font-size: 1.2rem; margin: 20px 0;">Open to research partnerships, collaborations, and full-time opportunities</p>
+                <p style="font-size: 1.2rem; margin: 20px 0;">Interested in exploring how these experimental approaches might apply to your AI systems?</p>
                 
                 <div class="contact-links">
-                    <a href="https://github.com/HillaryDanan" class="contact-link">
+                    <a href="https://github.com/HillaryDanan" target="_blank" class="contact-link">
                         <span>📂</span> GitHub Portfolio
                     </a>
-                    <a href="https://www.linkedin.com/in/hillarydanan/" class="contact-link">
+                    <a href="https://www.linkedin.com/in/hillarydanan/" target="_blank" class="contact-link">
                         <span>💼</span> LinkedIn
                     </a>
-                    <a href="https://hillarydanan.github.io/TIDE-resonance/pitch.html" class="contact-link">
+                    <a href="https://hillarydanan.github.io/TIDE-resonance/pitch.html" target="_blank" class="contact-link">
                         <span>🚀</span> Full Portfolio
                     </a>
                 </div>
                 
-                <p style="margin-top: 40px; color: rgba(255, 255, 255, 0.7);">
-                    Living Portfolio • Last Updated: <span id="last-updated"></span>
+                <div style="margin-top: 40px; padding: 20px; background: rgba(0, 255, 204, 0.05); border-radius: 15px;">
+                    <p style="text-align: center; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7);">
+                        <em>All frameworks and visualizations presented are experimental research tools designed to explore novel approaches to AI interpretability and cognitive modeling.</em>
+                    </p>
+                    <p style="text-align: center; margin-top: 10px;">
+                        <em>Remember: Labels are maps. Cognition is the territory. Let's explore it together.</em>
+                    </p>
+                </div>
+                
+                <p style="margin-top: 20px; color: rgba(255, 255, 255, 0.7); text-align: center;">
+                    Portfolio v2.1 | Living Document | Last Updated: <span id="last-updated"></span>
                 </p>
             </div>
         </section>
