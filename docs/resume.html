@@ -295,6 +295,24 @@
             position: relative;
         }
 
+        .project-card.highlight {
+            border: 2px solid var(--accent);
+        }
+
+        .project-card.highlight::before {
+            content: 'ACTIVE STUDY';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 10;
+        }
+
         .project-card::after {
             content: '';
             position: absolute;
@@ -364,6 +382,7 @@
             display: flex;
             gap: 15px;
             margin-top: 20px;
+            flex-wrap: wrap;
         }
 
         .project-link {
@@ -380,6 +399,14 @@
         .project-link:hover {
             background: var(--secondary);
             transform: scale(1.05);
+        }
+
+        .project-link.accent {
+            background: var(--accent);
+        }
+
+        .project-link.accent:hover {
+            background: var(--secondary);
         }
 
         /* Skills Visualization */
@@ -576,7 +603,7 @@
     <header class="header">
         <h1 class="name">Hillary Danan</h1>
         <p class="tagline">"Different minds resonate with different rhythms - let's map the spectrum"</p>
-        <p class="subtitle">Data Scientist | Cognitive Neuroscience PhD | AI Research Engineer</p>
+        <p class="subtitle">Data Scientist | Cognitive Neuroscience PhD | Exploring Cognitive Architectures for AI</p>
         
         <!-- Interactive Pattern Selector -->
         <div class="pattern-selector">
@@ -594,7 +621,7 @@
             <div class="metrics-dashboard">
                 <div class="metric-card floating">
                     <div class="metric-number">12+</div>
-                    <div class="metric-label">Interactive Research Tools<br><small style="color: var(--accent);">(June-July 2025 sprint + ongoing)</small></div>
+                    <div class="metric-label">Interactive Research Tools<br><small style="color: var(--accent);">(and counting)</small></div>
                 </div>
                 <div class="metric-card floating" style="animation-delay: 0.5s;">
                     <div class="metric-number">PhD</div>
@@ -608,6 +635,21 @@
                     <div class="metric-number">10+</div>
                     <div class="metric-label">AI Models Studied<br><small>Perceptual Signatures</small></div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Living Portfolio Notice -->
+        <section class="resume-section">
+            <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 30px; background: rgba(255, 255, 255, 0.05); border-radius: 15px; border: 1px solid rgba(0, 255, 204, 0.3);">
+                <p style="font-size: 1.1rem; line-height: 1.8; color: rgba(255, 255, 255, 0.9);">
+                    <strong style="color: var(--primary);">Living Portfolio</strong> | Portfolio v2.1<br>
+                    This is a dynamic research portfolio representing ongoing experimental work in AI interpretability and cognitive modeling. New tools and frameworks are added regularly as research progresses.
+                </p>
+                <p style="margin-top: 15px; color: rgba(255, 255, 255, 0.7);">
+                    <strong>Initial Sprint:</strong> June-July 2025 (4 weeks) | <strong>Status:</strong> Actively developing<br>
+                    <strong style="color: var(--accent);">Latest Addition:</strong> AI Perceptual Signatures Study | 
+                    <strong style="color: var(--secondary);">Currently Building:</strong> Cross-model resonance patterns
+                </p>
             </div>
         </section>
 
@@ -659,6 +701,7 @@
                         <ul style="margin-top: 10px; list-style: none;">
                             <li>→ TIDE Framework development</li>
                             <li>→ BIND Framework creation</li>
+                            <li>→ TIDE-Resonance integration</li>
                             <li>→ Supporting tool ecosystem</li>
                         </ul>
                         <p style="margin-top: 10px; color: rgba(255, 255, 255, 0.8);">Building on years of PhD research, I rapidly prototyped these interactive tools in an intensive development sprint.</p>
@@ -714,13 +757,51 @@
             </div>
         </section>
 
+        <!-- Active Research Study - PROMINENT -->
+        <section class="resume-section">
+            <div class="study-highlight">
+                <h2 class="section-title">🔬 Active Research: AI Perceptual Signatures Study</h2>
+                <p style="font-size: 1.2rem; margin: 20px 0;">Generating unique data on how different AI models perceive complex systems</p>
+                <p>We're conducting the first systematic study of how different AI models perceive and describe the same complex visualization - revealing cognitive diversity in AI systems.</p>
+                
+                <div class="metrics-dashboard" style="margin: 30px 0;">
+                    <div class="metric-card">
+                        <div class="metric-number" style="font-size: 2rem;">10+</div>
+                        <div class="metric-label">AI Models Studied</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-number" style="font-size: 2rem;">Open</div>
+                        <div class="metric-label">to All Researchers</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-number" style="font-size: 2rem;">Real-time</div>
+                        <div class="metric-label">Data Collection</div>
+                    </div>
+                </div>
+                
+                <h4 style="color: var(--secondary); margin: 20px 0;">Why This Matters for AI Companies:</h4>
+                <ul style="line-height: 2; margin-left: 20px;">
+                    <li>📊 <strong>Unique Dataset:</strong> First corpus of AI perceptual descriptions across models</li>
+                    <li>🧠 <strong>Cognitive Diversity Insights:</strong> Understanding how different architectures perceive complexity</li>
+                    <li>🔍 <strong>Interpretability Data:</strong> How AIs self-report their own processing patterns</li>
+                    <li>🚀 <strong>Alignment Applications:</strong> Detecting perceptual biases and blind spots</li>
+                </ul>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="https://hillarydanan.github.io/TIDE-resonance/collect.html" target="_blank" class="contact-link" style="background: var(--accent); border-color: var(--accent);">
+                        🔴 Join the Live Study →
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <!-- Core Research Frameworks -->
         <section class="resume-section">
             <h2 class="section-title">Core Research Frameworks</h2>
             <p style="text-align: center; margin-bottom: 30px; color: rgba(255, 255, 255, 0.8);">Mathematical foundations exploring neurodiversity as computational innovation</p>
             <div class="project-grid">
                 <!-- TIDE Framework -->
-                <div class="project-card" onclick="window.open('https://hillarydanan.github.io/TIDE/tide_interactive.html', '_blank')">
+                <div class="project-card" onclick="window.open('https://github.com/HillaryDanan/TIDE', '_blank')">
                     <div class="project-header">
                         <div class="project-icon">🌊</div>
                         <h3 class="project-title">TIDE Framework</h3>
@@ -741,7 +822,7 @@
                 </div>
 
                 <!-- BIND Framework -->
-                <div class="project-card" onclick="window.open('https://hillarydanan.github.io/BIND/bind_systems_interactive.html', '_blank')">
+                <div class="project-card" onclick="window.open('https://github.com/HillaryDanan/BIND', '_blank')">
                     <div class="project-header">
                         <div class="project-icon">🧬</div>
                         <h3 class="project-title">BIND Framework</h3>
@@ -783,43 +864,27 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Active Research Study -->
-        <section class="resume-section">
-            <div class="study-highlight">
-                <h2 class="section-title">🔬 Active Research: AI Perceptual Signatures Study</h2>
-                <p style="font-size: 1.2rem; margin: 20px 0;">Generating unique data on how different AI models perceive complex systems</p>
-                <p>We're conducting the first systematic study of how different AI models perceive and describe the same complex visualization - revealing cognitive diversity in AI systems.</p>
-                
-                <div class="metrics-dashboard" style="margin: 30px 0;">
-                    <div class="metric-card">
-                        <div class="metric-number" style="font-size: 2rem;">10+</div>
-                        <div class="metric-label">AI Models Studied</div>
+                <!-- AI Perception Study - HIGHLIGHTED -->
+                <div class="project-card highlight" onclick="window.open('https://hillarydanan.github.io/TIDE-resonance/collect.html', '_blank')">
+                    <div class="project-header">
+                        <div class="project-icon">📊</div>
+                        <h3 class="project-title">AI Perception Research Study</h3>
+                        <p class="project-subtitle">First systematic study of AI cognitive diversity</p>
                     </div>
-                    <div class="metric-card">
-                        <div class="metric-number" style="font-size: 2rem;">Open</div>
-                        <div class="metric-label">to All Researchers</div>
+                    <div class="project-body">
+                        <p>Contribute to groundbreaking research on how different AI models perceive and describe complex systems.</p>
+                        <ul class="project-features">
+                            <li>10+ AI Models Being Studied</li>
+                            <li>Open to All Researchers</li>
+                            <li>Real-time Data Collection</li>
+                            <li>Results Will Be Published Openly</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="https://hillarydanan.github.io/TIDE-resonance/collect.html" target="_blank" class="project-link accent">🔴 Join Study</a>
+                            <a href="https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html" target="_blank" class="project-link">View Demo</a>
+                        </div>
                     </div>
-                    <div class="metric-card">
-                        <div class="metric-number" style="font-size: 2rem;">Real-time</div>
-                        <div class="metric-label">Data Collection</div>
-                    </div>
-                </div>
-                
-                <h4 style="color: var(--secondary); margin: 20px 0;">Why This Matters for AI Companies:</h4>
-                <ul style="line-height: 2; margin-left: 20px;">
-                    <li>📊 <strong>Unique Dataset:</strong> First corpus of AI perceptual descriptions across models</li>
-                    <li>🧠 <strong>Cognitive Diversity Insights:</strong> Understanding how different architectures perceive complexity</li>
-                    <li>🔍 <strong>Interpretability Data:</strong> How AIs self-report their own processing patterns</li>
-                    <li>🚀 <strong>Alignment Applications:</strong> Detecting perceptual biases and blind spots</li>
-                </ul>
-                
-                <div style="text-align: center; margin-top: 30px;">
-                    <a href="https://hillarydanan.github.io/TIDE-resonance/collect.html" target="_blank" class="contact-link" style="background: var(--accent); border-color: var(--accent);">
-                        🔴 Join the Live Study →
-                    </a>
                 </div>
             </div>
         </section>
@@ -827,7 +892,7 @@
         <!-- Supporting Research Tools -->
         <section class="resume-section">
             <h2 class="section-title">Supporting Research Ecosystem</h2>
-            <p style="text-align: center; margin-bottom: 30px; color: rgba(255, 255, 255, 0.8);">Additional frameworks and experimental prototypes from the June-July 2025 sprint (and ongoing)</p>
+            <p style="text-align: center; margin-bottom: 30px; color: rgba(255, 255, 255, 0.8);">Additional frameworks and experimental prototypes from the 4-week sprint (and ongoing)</p>
             <div class="project-grid">
                 <div class="project-card">
                     <div class="project-header">
@@ -1119,19 +1184,19 @@
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
                     <div>
                         <h3 style="color: var(--primary); margin-bottom: 15px;">Research Partnership</h3>
-                        <p>Apply my tools to your models</p>
+                        <p>Apply my tools to your models and explore cognitive diversity in AI systems</p>
                     </div>
                     <div>
                         <h3 style="color: var(--primary); margin-bottom: 15px;">Open Source Collaboration</h3>
-                        <p>Extend frameworks together</p>
+                        <p>Extend frameworks together and contribute to the growing research ecosystem</p>
                     </div>
                     <div>
                         <h3 style="color: var(--primary); margin-bottom: 15px;">Consulting</h3>
-                        <p>Solve specific interpretability challenges</p>
+                        <p>Solve specific interpretability challenges using novel visualization approaches</p>
                     </div>
                     <div>
                         <h3 style="color: var(--primary); margin-bottom: 15px;">Full-time Role</h3>
-                        <p>Lead interpretability initiatives</p>
+                        <p>Lead interpretability initiatives and bridge neuroscience with AI development</p>
                     </div>
                 </div>
             </div>
