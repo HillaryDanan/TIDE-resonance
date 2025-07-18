@@ -178,7 +178,7 @@
 <body>
     <div class="container">
         <h1>TIDE-Resonance Research Portal</h1>
-        <p class="subtitle">Mapping AI Perceptual Signatures Through Dynamic Visualizations</p>
+        <p class="subtitle">Mapping AI Perceptual Signatures Through Dynamic Visualizations 🐢🚀</p>
         
         <div class="intro-card">
             <h2>🔬 Research Study: How AIs Describe Dynamic Systems</h2>
@@ -486,10 +486,17 @@ Please reflect on any connections between these visualization patterns and your 
                 return;
             }
             
-            const timestamp = new Date().toISOString();
-            const date = timestamp.split('T')[0];
-            const time = timestamp.split('T')[1].split('.')[0].replace(/:/g, '');
-            const filename = `${model}_${date}_${time}.md`;
+            // Get EST timestamp
+            const now = new Date();
+            const estOffset = -5; // EST is UTC-5 (use -4 for EDT)
+            const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+            const estTime = new Date(utc + (3600000 * estOffset));
+            
+            // Format timestamp
+            const timestamp = estTime.toISOString().replace('Z', ' EST');
+            const date = estTime.toISOString().split('T')[0];
+            const time = estTime.toISOString().split('T')[1].split('.')[0].replace(/:/g, '');
+            const filename = `${model}_${date}_${time}_EST.md`;
             
             const content = `# TIDE-Resonance Visualization Description Study
 
