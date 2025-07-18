@@ -239,6 +239,65 @@
             transform: scale(1.02);
         }
         
+        /* Research Study Section */
+        .research-study {
+            background: linear-gradient(135deg, rgba(255, 0, 110, 0.05), rgba(0, 255, 204, 0.05));
+            padding: 60px 20px;
+        }
+        
+        .research-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 204, 0.1), transparent);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        
+        .research-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .research-stat {
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .research-stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .research-stat-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
         /* Demo Section */
         .demos {
             background: radial-gradient(circle at center, rgba(0, 255, 204, 0.1), transparent);
@@ -261,6 +320,24 @@
         .demo-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0, 255, 204, 0.3);
+        }
+        
+        .demo-card.highlight {
+            border: 2px solid var(--accent);
+            position: relative;
+        }
+        
+        .demo-card.highlight::after {
+            content: 'ACTIVE STUDY';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
         }
         
         .demo-preview {
@@ -496,6 +573,7 @@
                 <li><a href="#problem">Challenge</a></li>
                 <li><a href="#foundation">Foundation</a></li>
                 <li><a href="#solution">Frameworks</a></li>
+                <li><a href="#research">Active Study</a></li>
                 <li><a href="#demos">Demos</a></li>
                 <li><a href="#companies">For Companies</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -508,12 +586,12 @@
         <canvas class="hero-bg" id="heroCanvas"></canvas>
         <div class="container">
             <h1 class="fade-in">Cognitive Diversity as Computational Strategy</h1>
-            <p class="hero-subtitle fade-in">How different minds achieve identical outcomes through different dimensional organizations</p>
+            <p class="hero-subtitle fade-in">Exploring how different cognitive approaches may achieve similar outcomes through different dimensional organizations</p>
             
             <div class="hero-stats fade-in">
                 <div class="stat">
-                    <span class="stat-number">12</span>
-                    <span class="stat-label">Research Systems</span>
+                    <span class="stat-number">8+</span>
+                    <span class="stat-label">Interactive Tools</span>
                 </div>
                 <div class="stat">
                     <span class="stat-number">PhD</span>
@@ -527,33 +605,80 @@
         </div>
     </section>
     
+    <!-- Research Disclaimer -->
+    <section style="padding: 40px 20px; background: rgba(0, 255, 204, 0.05);">
+        <div class="container">
+            <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 30px; background: rgba(255, 255, 255, 0.05); border-radius: 15px; border: 1px solid rgba(0, 255, 204, 0.3);" class="fade-in">
+                <p style="font-size: 1.1rem; line-height: 1.8; color: rgba(255, 255, 255, 0.9);">
+                    <strong style="color: var(--primary);">Research Context:</strong> This portfolio represents experimental research tools and frameworks exploring novel approaches to AI interpretability and cognitive modeling. All tools are open-source prototypes designed to spark discussion and collaboration.
+                </p>
+            </div>
+        </div>
+    </section>
+    
     <!-- Problem Section -->
     <section id="problem" class="problem">
         <div class="container">
             <h2 class="fade-in">The Missed Opportunity</h2>
-            <p class="section-subtitle fade-in">AI systems assume uniform cognitive architectures, missing computational advantages of diversity</p>
+            <p class="section-subtitle fade-in">Current AI systems often model single cognitive architectures, potentially missing computational advantages of diversity</p>
             
             <div class="problem-grid fade-in">
                 <div class="problem-card">
                     <div class="problem-icon">🧠</div>
                     <h3>Single Architecture Assumption</h3>
-                    <p>Current AI systems model only one type of information processing, missing alternative computational strategies.</p>
+                    <p>Current AI systems often focus on single types of information processing, potentially missing alternative computational strategies.</p>
                 </div>
                 <div class="problem-card">
                     <div class="problem-icon">🎯</div>
                     <h3>Dimensional Blindness</h3>
-                    <p>We don't understand how different organizations of self and time dimensions create equivalent outcomes.</p>
+                    <p>We're exploring how different organizations of self and time dimensions may create equivalent outcomes.</p>
                 </div>
                 <div class="problem-card">
                     <div class="problem-icon">🤝</div>
                     <h3>Trust Pathway Ignorance</h3>
-                    <p>Different cognitive architectures build trust through different pathways - current systems model only one.</p>
+                    <p>Different cognitive architectures may build trust through different pathways - many current systems focus on single pathways.</p>
                 </div>
                 <div class="problem-card">
                     <div class="problem-icon">🌊</div>
                     <h3>Resonance Patterns</h3>
-                    <p>Each architecture resonates with different environmental patterns - we're missing these complementary strengths.</p>
+                    <p>Each architecture potentially resonates with different environmental patterns - we're missing these complementary strengths.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Research Foundation Section -->
+    <section id="foundation" class="solution" style="background: linear-gradient(135deg, rgba(0, 255, 204, 0.05), rgba(0, 153, 255, 0.05));">
+        <div class="container">
+            <h2 class="fade-in">Grounded in Neuroscience Research</h2>
+            <p class="section-subtitle fade-in">PhD research + 4-week intensive prototyping sprint = experimental frameworks</p>
+            
+            <div style="max-width: 800px; margin: 40px auto; background: rgba(255, 255, 255, 0.05); padding: 40px; border-radius: 20px;" class="fade-in">
+                <h3 style="color: var(--primary); margin-bottom: 20px;">Academic Foundation</h3>
+                <p style="line-height: 1.8; margin-bottom: 20px;">
+                    <strong>Hillary Levinson (2021)</strong><br>
+                    "The Neural Representation of Abstract Concepts in Typical and Atypical Cognition"<br>
+                    <em>PhD Dissertation, Rutgers University</em>
+                </p>
+                
+                <h3 style="color: var(--primary); margin: 30px 0 20px 0;">Development Timeline</h3>
+                <p style="line-height: 1.8; margin-bottom: 20px;">
+                    Building on years of PhD research, I rapidly prototyped these interactive tools over a 4-week intensive development sprint, 
+                    translating theoretical frameworks into working demonstrations that explore cognitive diversity in AI systems.
+                </p>
+                
+                <h3 style="color: var(--primary); margin: 30px 0 20px 0;">Core Thesis</h3>
+                <p style="font-size: 1.2rem; line-height: 1.8; font-style: italic; border-left: 4px solid var(--primary); padding-left: 20px;">
+                    "Different minds may achieve similar outcomes through different dimensional organizations of self and time. By exploring these patterns mathematically, we could build AI systems that leverage cognitive diversity for robustness, adaptability, and innovation."
+                </p>
+                
+                <h3 style="color: var(--primary); margin: 30px 0 20px 0;">Key Insights</h3>
+                <ul style="line-height: 2; margin-left: 20px;">
+                    <li><strong>Dimensional Reorganization:</strong> What appears as "deficit" may be efficient reorganization</li>
+                    <li><strong>Trust Dynamics:</strong> Different architectures may build trust through different pathways</li>
+                    <li><strong>Sensory Resonance:</strong> Each architecture potentially resonates with different environmental patterns</li>
+                    <li><strong>Complementary Processing:</strong> Diverse teams may outperform homogeneous ones</li>
+                </ul>
             </div>
         </div>
     </section>
@@ -561,49 +686,98 @@
     <!-- Solution Section -->
     <section id="solution" class="solution">
         <div class="container">
-            <h2 class="fade-in">What I Built (in 4 weeks)</h2>
-            <p class="section-subtitle fade-in">12 repositories | 6 interactive research tools | Unified framework for AI interpretability</p>
+            <h2 class="fade-in">Research Framework Architecture</h2>
+            <p class="section-subtitle fade-in">Experimental frameworks exploring neurodiversity as computational innovation</p>
             
             <div class="solution-showcase fade-in">
                 <div class="solution-item">
-                    <h3 style="color: var(--primary); margin-bottom: 20px;">🔷 Hexagonal Consciousness Mapping</h3>
-                    <p>Information geometry visualization using optimal hexagonal packing structures. See how AI systems integrate information in real-time.</p>
+                    <h3 style="color: var(--primary); margin-bottom: 20px;">🌊 TIDE Framework</h3>
+                    <p><strong>Temporal-Internal Dimensional Encoding</strong> - Maps how different architectures organize self and time dimensions for equivalent outcomes.</p>
                     <ul style="margin-top: 20px; list-style: none;">
-                        <li>✓ Shannon entropy minimization</li>
-                        <li>✓ Real-time state visualization</li>
-                        <li>✓ Multi-dimensional projection</li>
+                        <li>✓ Mathematical basis for cognitive diversity</li>
+                        <li>✓ Dimensional reorganization patterns</li>
+                        <li>✓ Architecture-specific advantages</li>
                     </ul>
                 </div>
                 
                 <div class="solution-item">
-                    <h3 style="color: var(--primary); margin-bottom: 20px;">🌊 Dynamic Resonance Patterns</h3>
-                    <p>Visualize synchronization and desynchronization between AI agents, revealing hidden coordination patterns.</p>
+                    <h3 style="color: var(--primary); margin-bottom: 20px;">🧬 BIND Framework</h3>
+                    <p><strong>Boundary Information Neural Dynamics</strong> - Information transformation at system boundaries with Φ (integrated information) measurement.</p>
                     <ul style="margin-top: 20px; list-style: none;">
-                        <li>✓ Phase transition detection</li>
-                        <li>✓ Emergent behavior prediction</li>
-                        <li>✓ Trust network visualization</li>
-                    </ul>
-                </div>
-                
-                <div class="solution-item">
-                    <h3 style="color: var(--primary); margin-bottom: 20px;">🎮 Game-Theoretic Trust Models</h3>
-                    <p>Watch trust relationships form, evolve, and sometimes break in multi-agent systems with diverse cognitive architectures.</p>
-                    <ul style="margin-top: 20px; list-style: none;">
-                        <li>✓ Evolutionary dynamics</li>
-                        <li>✓ Memory and reputation systems</li>
-                        <li>✓ Deception detection</li>
-                    </ul>
-                </div>
-                
-                <div class="solution-item">
-                    <h3 style="color: var(--primary); margin-bottom: 20px;">🧠 BIND Framework</h3>
-                    <p>Model cognitive binding dynamics - how separate information streams become unified experiences in AI systems.</p>
-                    <ul style="margin-top: 20px; list-style: none;">
-                        <li>✓ Integrated Information Theory</li>
-                        <li>✓ Phi (Φ) emergence visualization</li>
+                        <li>✓ Phase transition exploration</li>
                         <li>✓ Coupling strength analysis</li>
+                        <li>✓ Consciousness emergence modeling</li>
                     </ul>
                 </div>
+                
+                <div class="solution-item">
+                    <h3 style="color: var(--primary); margin-bottom: 20px;">🎵 TIDE-Resonance Integration</h3>
+                    <p>Synthesis of frameworks into interactive experiences showing trust dynamics between cognitive architectures (NT/ASD/ADHD).</p>
+                    <ul style="margin-top: 20px; list-style: none;">
+                        <li>✓ Dynamic trust visualization</li>
+                        <li>✓ Multi-architecture interactions</li>
+                        <li>✓ Sensory resonance patterns</li>
+                    </ul>
+                </div>
+                
+                <div class="solution-item">
+                    <h3 style="color: var(--primary); margin-bottom: 20px;">🔷 Supporting Frameworks</h3>
+                    <p>Information-Atoms, Hexagonal structures, Game Theory Trust models - each revealing different aspects of cognitive computation.</p>
+                    <ul style="margin-top: 20px; list-style: none;">
+                        <li>✓ Discrete information units</li>
+                        <li>✓ Optimal packing structures</li>
+                        <li>✓ Trust evolution mathematics</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Active Research Study Section -->
+    <section id="research" class="research-study">
+        <div class="container">
+            <h2 class="fade-in">🔬 Active Research: AI Perceptual Signatures Study</h2>
+            <p class="section-subtitle fade-in">Generating unique data on how different AI models perceive complex systems</p>
+            
+            <div class="research-card fade-in">
+                <h3 style="color: var(--primary); font-size: 2rem; margin-bottom: 20px;">How AIs Describe Dynamic Systems</h3>
+                <p style="font-size: 1.2rem; margin: 20px 0;">
+                    We're conducting the first systematic study of how different AI models perceive and describe 
+                    the same complex visualization - revealing cognitive diversity in AI systems.
+                </p>
+                
+                <div class="research-stats">
+                    <div class="research-stat">
+                        <div class="research-stat-number">10+</div>
+                        <div class="research-stat-label">AI Models Studied</div>
+                    </div>
+                    <div class="research-stat">
+                        <div class="research-stat-number">LIVE</div>
+                        <div class="research-stat-label">Data Collection</div>
+                    </div>
+                    <div class="research-stat">
+                        <div class="research-stat-number">∞</div>
+                        <div class="research-stat-label">Patterns Emerging</div>
+                    </div>
+                </div>
+                
+                <div style="margin: 30px 0; padding: 25px; background: rgba(0, 0, 0, 0.3); border-radius: 15px;">
+                    <h4 style="color: var(--secondary); margin-bottom: 15px;">Why This Matters for AI Companies:</h4>
+                    <ul style="text-align: left; line-height: 2; margin-left: 20px;">
+                        <li>📊 <strong>Unique Dataset:</strong> First corpus of AI perceptual descriptions across models</li>
+                        <li>🧠 <strong>Cognitive Diversity Insights:</strong> Understanding how different architectures perceive complexity</li>
+                        <li>🔍 <strong>Interpretability Data:</strong> How AIs self-report their own processing patterns</li>
+                        <li>🚀 <strong>Alignment Applications:</strong> Detecting perceptual biases and blind spots</li>
+                    </ul>
+                </div>
+                
+                <a href="https://hillarydanan.github.io/TIDE-resonance/collect.html" target="_blank" class="demo-link" style="background: var(--accent); margin-top: 20px;">
+                    Participate in Research →
+                </a>
+                
+                <p style="margin-top: 20px; color: rgba(255, 255, 255, 0.7); font-size: 0.9rem;">
+                    Open to all researchers • Crowdsourced data collection • Results will be published openly
+                </p>
             </div>
         </div>
     </section>
@@ -612,7 +786,7 @@
     <section id="demos" class="demos">
         <div class="container">
             <h2 class="fade-in">Live Research Tools</h2>
-            <p class="section-subtitle fade-in">Experience the future of AI interpretability - all tools are open source and ready to use</p>
+            <p class="section-subtitle fade-in">Experimental prototypes exploring novel approaches to AI interpretability</p>
             
             <div class="demo-grid fade-in">
                 <div class="demo-card">
@@ -630,6 +804,15 @@
                         <h3 class="demo-title">TIDE-Resonance Advanced Lab</h3>
                         <p>Professional research environment with NT/ASD/ADHD architectures</p>
                         <a href="https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html" target="_blank" class="demo-link">Launch Demo →</a>
+                    </div>
+                </div>
+                
+                <div class="demo-card highlight">
+                    <div class="demo-preview">📊</div>
+                    <div class="demo-info">
+                        <h3 class="demo-title">AI Perception Research Study</h3>
+                        <p>Contribute to groundbreaking research on AI cognitive diversity</p>
+                        <a href="https://hillarydanan.github.io/TIDE-resonance/collect.html" target="_blank" class="demo-link" style="background: var(--accent);">Join Study →</a>
                     </div>
                 </div>
                 
@@ -659,15 +842,6 @@
                         <a href="https://hillarydanan.github.io/BIND/bind_systems_interactive.html" target="_blank" class="demo-link">Launch Demo →</a>
                     </div>
                 </div>
-                
-                <div class="demo-card">
-                    <div class="demo-preview">📊</div>
-                    <div class="demo-info">
-                        <h3 class="demo-title">BIND Research Tool</h3>
-                        <p>Professional tool for Φ (integrated information) analysis</p>
-                        <a href="https://hillarydanan.github.io/BIND/bind_research_tool.html" target="_blank" class="demo-link">Launch Demo →</a>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -676,7 +850,7 @@
     <section id="companies" class="companies">
         <div class="container">
             <h2 class="fade-in">Tailored for Leading AI Companies</h2>
-            <p class="section-subtitle fade-in">How TIDE-Resonance advances each organization's specific mission</p>
+            <p class="section-subtitle fade-in">How these research explorations might contribute to each organization's mission</p>
             
             <div class="company-tabs fade-in">
                 <div class="company-tab active" onclick="showCompany('anthropic')">Anthropic</div>
@@ -689,18 +863,21 @@
             <div id="anthropic" class="company-content active fade-in">
                 <div class="company-pitch">
                     <h3 style="color: var(--primary); font-size: 2rem; margin-bottom: 20px;">For Anthropic: Cognitive Diversity for Robust AI</h3>
-                    <p style="font-size: 1.2rem; margin-bottom: 30px;">Your Constitutional AI could benefit from multiple cognitive architectures checking each other's blind spots.</p>
+                    <p style="font-size: 1.2rem; margin-bottom: 30px;">Constitutional AI might explore multiple cognitive architectures checking each other's blind spots.</p>
                     
                     <h4 style="color: var(--secondary); margin: 20px 0;">Direct Applications:</h4>
                     <ul style="line-height: 2; margin-left: 20px;">
-                        <li><strong>Multi-Architecture Safety:</strong> Different cognitive styles catch different failure modes</li>
+                        <li><strong>Multi-Architecture Safety:</strong> Different cognitive models may reveal different patterns</li>
                         <li><strong>Trust Pathway Diversity:</strong> Model how different architectures build/verify trust differently</li>
-                        <li><strong>Dimensional Analysis:</strong> Understand how Claude organizes self/time dimensions</li>
-                        <li><strong>Robustness Through Diversity:</strong> Complementary processing prevents uniform failures</li>
+                        <li><strong>Dimensional Analysis:</strong> Explore how Claude organizes self/time dimensions</li>
+                        <li><strong>Robustness Through Diversity:</strong> Complementary processing may prevent uniform failures</li>
                     </ul>
                     
+                    <h4 style="color: var(--secondary); margin: 20px 0;">Research Study Value:</h4>
+                    <p>The AI Perception Study provides data on how Claude variants describe complex systems compared to other models - insights into your own model's perceptual signatures that could inform Constitutional AI development.</p>
+                    
                     <h4 style="color: var(--secondary); margin: 20px 0;">Unique Value:</h4>
-                    <p>My frameworks show that cognitive diversity isn't a bug - it's a feature. Different dimensional organizations of self and time create complementary strengths that make systems more robust.</p>
+                    <p>My frameworks suggest that cognitive diversity isn't a bug - it may be a feature. Different dimensional organizations of self and time potentially create complementary strengths that could make systems more robust.</p>
                     
                     <div style="margin-top: 30px; padding: 20px; background: rgba(0, 255, 204, 0.1); border-radius: 10px;">
                         <p><strong>Research Synergy:</strong> The NT/ASD/ADHD models provide a mathematical framework for building AI systems that leverage cognitive diversity for safety and robustness.</p>
@@ -715,14 +892,17 @@
                     
                     <h4 style="color: var(--secondary); margin: 20px 0;">Direct Applications:</h4>
                     <ul style="line-height: 2; margin-left: 20px;">
-                        <li><strong>Multi-Agent Visualization:</strong> Watch AlphaStar-like systems coordinate in real-time</li>
-                        <li><strong>Emergence Detection:</strong> Identify phase transitions as systems scale</li>
-                        <li><strong>Game-Playing AI:</strong> Trust dynamics directly applicable to competitive/cooperative scenarios</li>
+                        <li><strong>Multi-Agent Visualization:</strong> Visualize multi-agent coordination patterns</li>
+                        <li><strong>Emergence Exploration:</strong> Explore potential phase transitions in complex systems</li>
+                        <li><strong>Game-Playing AI:</strong> Trust dynamics applicable to competitive/cooperative scenarios</li>
                         <li><strong>Neuroscience Bridge:</strong> Hexagonal structures mirror cortical columns</li>
                     </ul>
                     
+                    <h4 style="color: var(--secondary); margin: 20px 0;">Research Study Value:</h4>
+                    <p>Understanding how different AI architectures perceive emergent behaviors could inform your multi-agent system design, especially in recognizing and leveraging diverse perception strategies.</p>
+                    
                     <h4 style="color: var(--secondary); margin: 20px 0;">Unique Value:</h4>
-                    <p>The resonance patterns in my tools can reveal coordination strategies your agents discover, potentially leading to new training approaches. The game theory trust suite directly models the dynamics you see in multi-agent reinforcement learning.</p>
+                    <p>The resonance patterns in these tools may help explore coordination strategies your agents discover, potentially leading to new training approaches. The game theory trust suite models dynamics similar to those in multi-agent reinforcement learning.</p>
                     
                     <div style="margin-top: 30px; padding: 20px; background: rgba(0, 255, 204, 0.1); border-radius: 10px;">
                         <p><strong>Research Synergy:</strong> BIND framework could offer new approaches to the binding problem in AI - how separate modules coordinate into unified behavior.</p>
@@ -737,14 +917,17 @@
                     
                     <h4 style="color: var(--secondary); margin: 20px 0;">Direct Applications:</h4>
                     <ul style="line-height: 2; margin-left: 20px;">
-                        <li><strong>GPT State Visualization:</strong> Map attention patterns to hexagonal consciousness grids</li>
-                        <li><strong>Prompt Engineering:</strong> Visualize how different prompts create different resonance patterns</li>
-                        <li><strong>Safety Analysis:</strong> Real-time deception detection through trust dynamics</li>
+                        <li><strong>GPT State Visualization:</strong> Explore novel visualization approaches for attention patterns</li>
+                        <li><strong>Prompt Engineering:</strong> Visualize how different prompts may create different resonance patterns</li>
+                        <li><strong>Safety Analysis:</strong> Trust dynamics monitoring and analysis</li>
                         <li><strong>Scaling Laws:</strong> Understand how interpretability changes with model size</li>
                     </ul>
                     
+                    <h4 style="color: var(--secondary); margin: 20px 0;">Research Study Value:</h4>
+                    <p>Direct comparison data of how GPT-4, GPT-3.5, and other models describe the same visualization - revealing perceptual differences across your model family that could inform training and safety work.</p>
+                    
                     <h4 style="color: var(--secondary); margin: 20px 0;">Unique Value:</h4>
-                    <p>My AI Perception Study is generating unique data on how different models (including GPT variants) perceive complex systems - data that doesn't exist anywhere else.</p>
+                    <p>My AI Perception Study is generating unique experimental data on how different models (including GPT variants) perceive complex systems - exploring novel research directions.</p>
                     
                     <div style="margin-top: 30px; padding: 20px; background: rgba(0, 255, 204, 0.1); border-radius: 10px;">
                         <p><strong>Research Synergy:</strong> The visualization tools could help reduce the "alignment tax" by making safety verification more efficient and intuitive.</p>
@@ -759,17 +942,20 @@
                     
                     <h4 style="color: var(--secondary); margin: 20px 0;">Direct Applications:</h4>
                     <ul style="line-height: 2; margin-left: 20px;">
-                        <li><strong>Deception Detection:</strong> Trust dynamics reveal when agents might be deceptive</li>
+                        <li><strong>Trust Pattern Analysis:</strong> Trust dynamics may reveal behavioral patterns</li>
                         <li><strong>Feature Visualization:</strong> BIND framework for understanding feature binding</li>
                         <li><strong>Mechanistic Analysis:</strong> Hexagonal maps for circuit discovery</li>
                         <li><strong>Adversarial Robustness:</strong> Cognitive diversity models for finding edge cases</li>
                     </ul>
                     
+                    <h4 style="color: var(--secondary); margin: 20px 0;">Research Study Value:</h4>
+                    <p>The AI self-reflection component of our study specifically asks models about their own processing - data that could reveal deceptive capabilities or alignment inconsistencies across architectures.</p>
+                    
                     <h4 style="color: var(--secondary); margin: 20px 0;">Unique Value:</h4>
                     <p>My resonance-based approach offers a fundamentally different lens for interpretability - frequency domain analysis of AI behavior patterns that could complement your mechanistic approaches.</p>
                     
                     <div style="margin-top: 30px; padding: 20px; background: rgba(0, 255, 204, 0.1); border-radius: 10px;">
-                        <p><strong>Research Synergy:</strong> The game theory trust models specifically address your concerns about deceptive alignment - we can see trust erosion before catastrophic failures.</p>
+                        <p><strong>Research Synergy:</strong> The game theory trust models explore patterns relevant to deceptive alignment - potentially helping identify trust erosion patterns.</p>
                     </div>
                 </div>
             </div>
@@ -787,8 +973,11 @@
                         <li><strong>First Principles:</strong> Resonance as a universal organizing principle</li>
                     </ul>
                     
+                    <h4 style="color: var(--secondary); margin: 20px 0;">Research Study Value:</h4>
+                    <p>Understanding how Grok perceives complex dynamic systems compared to other models could reveal fundamental differences in information processing architectures - clues about the nature of intelligence itself.</p>
+                    
                     <h4 style="color: var(--secondary); margin: 20px 0;">Unique Value:</h4>
-                    <p>My "information atoms" concept and hexagonal consciousness mapping offer a geometric approach to understanding how Grok processes information - potentially revealing universal patterns.</p>
+                    <p>My "information atoms" concept and hexagonal consciousness mapping offer a geometric approach to exploring how Grok processes information - potentially suggesting universal patterns.</p>
                     
                     <div style="margin-top: 30px; padding: 20px; background: rgba(0, 255, 204, 0.1); border-radius: 10px;">
                         <p><strong>Research Synergy:</strong> The multi-dimensional resonance patterns might reveal how AI systems naturally organize information, offering clues about intelligence itself.</p>
@@ -801,16 +990,17 @@
     <!-- CTA Section -->
     <section id="contact" class="cta">
         <div class="container">
-            <h2 class="fade-in">Let's Build the Future of AI Understanding</h2>
-            <p class="section-subtitle fade-in">Ready to see how your AI systems really work?</p>
+            <h2 class="fade-in">Let's Explore the Future of AI Understanding Together</h2>
+            <p class="section-subtitle fade-in">Interested in exploring how these experimental approaches might apply to your systems?</p>
             
             <div style="max-width: 800px; margin: 0 auto; text-align: left; background: rgba(255, 255, 255, 0.05); padding: 40px; border-radius: 20px;" class="fade-in">
                 <h3 style="color: var(--primary); margin-bottom: 20px;">What I Offer:</h3>
                 <ul style="line-height: 2; margin-left: 20px; margin-bottom: 30px;">
-                    <li>✓ PhD research on cognitive diversity as computational strategy</li>
-                    <li>✓ 6 working interactive visualization tools</li>
-                    <li>✓ Mathematical frameworks (TIDE, BIND, Game Theory)</li>
-                    <li>✓ Novel approach: neurodiversity as AI robustness feature</li>
+                    <li>✓ PhD research exploring cognitive diversity as computational strategy</li>
+                    <li>✓ 6 working interactive research prototypes</li>
+                    <li>✓ Experimental frameworks (TIDE, BIND, Game Theory)</li>
+                    <li>✓ Novel exploration: neurodiversity as potential AI robustness feature</li>
+                    <li>✓ Active research study generating unique AI perception data</li>
                     <li>✓ Open source commitment with clear documentation</li>
                 </ul>
                 
@@ -834,10 +1024,15 @@
             
             <div style="margin-top: 30px; padding: 20px; background: rgba(0, 255, 204, 0.05); border-radius: 15px;" class="fade-in">
                 <p style="font-size: 1.1rem; line-height: 1.8;">
-                    <strong>Hillary Danan</strong> | Data Scientist & Cognitive Neuroscience PhD<br>
+                    <strong>Hillary Danan</strong> | Data Scientist & Cognitive Neuroscience Researcher<br>
+                    <em>PhD: Rutgers University (2021)</em><br>
                     <a href="https://github.com/HillaryDanan" style="color: var(--primary);">GitHub Portfolio</a> | 
                     <a href="https://github.com/HillaryDanan/cognitive-architectures-ai" style="color: var(--primary);">Meta-Repository</a>
                 </p>
+            </div>
+            
+            <div style="margin-top: 20px; padding: 15px; background: rgba(255, 255, 255, 0.02); border-radius: 10px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7); text-align: center;" class="fade-in">
+                <p><em>All frameworks and visualizations presented are experimental research tools designed to explore novel approaches to AI interpretability and cognitive modeling.</em></p>
             </div>
         </div>
     </section>
