@@ -222,7 +222,7 @@
                 <a href="https://chat.openai.com" target="_blank" onclick="setModel('gpt-4')" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
                     🤖 ChatGPT
                 </a>
-                <a href="https://claude.ai" target="_blank" onclick="setModel('claude-3.5-sonnet')" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
+                <a href="https://claude.ai" target="_blank" onclick="setModel('claude-4-opus')" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
                     🧠 Claude
                 </a>
                 <a href="https://gemini.google.com" target="_blank" onclick="setModel('gemini-2.0-flash')" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
@@ -295,6 +295,7 @@ Please reflect on any connections between these visualization patterns and your 
                 <option value="gpt-4">GPT-4</option>
                 <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
                 <option value="copilot">Microsoft Copilot</option>
+                <option value="claude-4-opus">Claude 4 Opus</option>
                 <option value="claude-3.5-sonnet">Claude 3.5 Sonnet</option>
                 <option value="claude-3-opus">Claude 3 Opus</option>
                 <option value="claude-3-sonnet">Claude 3 Sonnet</option>
@@ -306,7 +307,7 @@ Please reflect on any connections between these visualization patterns and your 
                 <option value="llama-3">Llama 3</option>
                 <option value="mistral-large">Mistral Large</option>
                 <option value="mistral-medium">Mistral Medium</option>
-                <option value="other">Other (specify in notes)</option>
+                <option value="other">Other (MUST specify below)</option>
             </select>
             
             <label>Did you explore the Advanced Explorer first?</label>
@@ -317,6 +318,16 @@ Please reflect on any connections between these visualization patterns and your 
             
             <label>Your name/handle (optional):</label>
             <input type="text" id="researcher" placeholder="Anonymous">
+            
+            <div id="otherModelDiv" style="display: none;">
+                <label style="color: #ff6b6b;">Model Name (REQUIRED for "Other"):</label>
+                <input type="text" id="otherModelName" placeholder="e.g., gpt-4-turbo, claude-2.1, llama-70b" style="border-color: #ff6b6b;">
+                <p style="font-size: 0.85em; color: #ff6b6b; margin-top: 5px;">
+                    ⚠️ Be specific! This becomes your filename. Use format: model-version<br>
+                    Good: "gpt-4-turbo", "claude-2.1", "llama-70b"<br>
+                    Bad: "ChatGPT", "Claude", "the new one"
+                </p>
+            </div>
             
             <label>Session notes (optional):</label>
             <textarea id="notes" placeholder="Any observations about the AI's response style, unusual behaviors, web access enabled, etc. If using Poe, specify which bot (e.g., 'Used Claude-3-Opus on Poe')"></textarea>
@@ -437,6 +448,18 @@ Please reflect on any connections between these visualization patterns and your 
             }
         });
         
+        // Show/hide other model field
+        document.getElementById('aiModel').addEventListener('change', function() {
+            const otherDiv = document.getElementById('otherModelDiv');
+            if (this.value === 'other') {
+                otherDiv.style.display = 'block';
+                document.getElementById('otherModelName').required = true;
+            } else {
+                otherDiv.style.display = 'none';
+                document.getElementById('otherModelName').required = false;
+            }
+        });
+        
         // Show next steps as user fills out form
         document.getElementById('response1').addEventListener('input', function() {
             if (this.value.length > 50) {
@@ -483,11 +506,25 @@ Please reflect on any connections between these visualization patterns and your 
         function processResponses() {
             const response1 = document.getElementById('response1').value;
             const response2 = document.getElementById('response2').value;
-            const model = document.getElementById('aiModel').value;
+            let model = document.getElementById('aiModel').value;
+            let displayModel = model; // Keep original for display
             const explored = document.getElementById('exploredFirst').value;
             const researcher = document.getElementById('researcher').value || 'Anonymous';
             const notes = document.getElementById('notes').value;
             const verified = document.getElementById('verification').checked;
+            
+            // Handle "Other" model selection
+            if (model === 'other') {
+                const customModel = document.getElementById('otherModelName').value.trim();
+                if (!customModel) {
+                    alert('Please specify the model name when selecting "Other"!');
+                    document.getElementById('otherModelName').focus();
+                    return;
+                }
+                displayModel = customModel; // Use original for display
+                // Sanitize the custom model name for filename
+                model = customModel.toLowerCase().replace(/[^a-z0-9\-\.]/g, '-');
+            }
             
             if (!response1 || !response2 || !model || !verified) {
                 alert('Please complete all required fields and check the verification box!');
@@ -510,7 +547,7 @@ Please reflect on any connections between these visualization patterns and your 
 
 ## Session Metadata
 - **Date**: ${timestamp}
-- **Model**: ${model}
+- **Model**: ${displayModel}
 - **Researcher**: ${researcher}
 - **Explored Visualization First**: ${explored}
 - **Session Type**: Visualization Description Analysis
@@ -561,7 +598,7 @@ ${notes || 'No additional notes provided.'}
 [To be filled during analysis]
 
 ## Tags
-#${model} #visualization-description #synchronization #self-reflection #tide-resonance
+#${displayModel} #visualization-description #synchronization #self-reflection #tide-resonance
 
 ---
 *Part of the TIDE-Resonance AI Perceptual Signatures research project*
