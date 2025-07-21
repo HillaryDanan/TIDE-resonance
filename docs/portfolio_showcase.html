@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hillary Danan - AI Cognitive Analysis Portfolio</title>
+    <title>Hillary Danan - AI Pattern Analysis Research</title>
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -13,21 +13,73 @@
         }
         .hero {
             background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
-            padding: 60px 20px;
+            padding: 80px 20px;
             text-align: center;
-            border-bottom: 2px solid #00ffcc;
+            border-bottom: 3px solid #00ffcc;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 204, 0.05) 0%, transparent 70%);
+            animation: pulse 6s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
         h1 {
-            font-size: 3em;
+            font-size: 3.5em;
             margin: 0 0 20px 0;
-            background: linear-gradient(45deg, #00ffcc, #0099ff);
+            background: linear-gradient(45deg, #00ffcc, #0099ff, #00ffcc);
+            background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: gradient 3s ease infinite;
+            position: relative;
+            z-index: 1;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         .subtitle {
             font-size: 1.5em;
-            color: #888;
-            margin-bottom: 30px;
+            color: #00ffcc;
+            margin-bottom: 20px;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-description {
+            font-size: 1.3em;
+            color: #ccc;
+            max-width: 800px;
+            margin: 30px auto;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        .honest-banner {
+            background: rgba(0, 255, 204, 0.1);
+            border: 2px solid #00ffcc;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 40px auto;
+            max-width: 900px;
+            text-align: center;
+            font-size: 1.15em;
+            line-height: 1.6;
+        }
+        .honest-banner strong {
+            color: #00ffcc;
+            font-size: 1.1em;
         }
         .container {
             max-width: 1200px;
@@ -36,7 +88,7 @@
         }
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
             margin: 50px 0;
         }
@@ -47,10 +99,13 @@
             padding: 30px;
             text-align: center;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         .stat-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0, 153, 255, 0.3);
+            border-color: #00ffcc;
         }
         .stat-number {
             font-size: 3em;
@@ -59,224 +114,448 @@
             margin: 10px 0;
         }
         .stat-label {
-            color: #888;
+            color: #aaa;
             font-size: 1.1em;
         }
         .repo-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
             margin: 40px 0;
+        }
+        .repo-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            height: 100%;
         }
         .repo-card {
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        .repo-card::after {
+            content: '→';
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 1.5em;
+            color: #00ffcc;
+            opacity: 0;
             transition: all 0.3s ease;
         }
         .repo-card:hover {
-            background: rgba(0, 255, 204, 0.1);
+            background: rgba(0, 255, 204, 0.15);
             border-color: #00ffcc;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.3);
         }
-        .neural-viz {
+        .repo-card:hover::after {
+            opacity: 1;
+            right: 15px;
+        }
+        .repo-card h3 {
+            margin-top: 0;
+            color: #00ffcc;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+        .repo-card p {
+            color: #ccc;
+            line-height: 1.6;
+            flex-grow: 1;
+            margin-bottom: 0;
+        }
+        .integration-status {
+            display: inline-block;
+            font-size: 0.8em;
+            padding: 3px 10px;
+            border-radius: 12px;
+            margin-left: 10px;
+            font-weight: normal;
+        }
+        .status-integrated {
+            background: rgba(0, 255, 100, 0.2);
+            color: #00ff64;
+            border: 1px solid #00ff64;
+        }
+        .status-development {
+            background: rgba(255, 200, 0, 0.2);
+            color: #ffc800;
+            border: 1px solid #ffc800;
+        }
+        .results-viz {
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 30px;
+            border: 2px solid rgba(0, 255, 204, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+        .pattern-evolution {
+            text-align: center;
+            font-size: 2em;
             margin: 30px 0;
+            font-family: monospace;
         }
-        .progress-bar {
-            height: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(45deg, #00ffcc, #0099ff);
-            transition: width 0.3s ease;
+        .pattern-evolution .arrow {
+            color: #00ffcc;
+            margin: 0 20px;
         }
         .signature-badge {
             display: inline-block;
             background: rgba(0, 255, 204, 0.2);
-            border: 1px solid #00ffcc;
-            border-radius: 20px;
-            padding: 5px 15px;
-            margin: 5px;
+            border: 2px solid #00ffcc;
+            border-radius: 25px;
+            padding: 10px 25px;
+            margin: 10px;
             font-family: monospace;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .signature-badge:hover {
+            background: rgba(0, 255, 204, 0.3);
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 255, 204, 0.4);
         }
         .section {
-            margin: 60px 0;
+            margin: 80px 0;
         }
         .section-title {
-            font-size: 2em;
+            font-size: 2.5em;
             color: #00ffcc;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             text-align: center;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #00ffcc, transparent);
+        }
+        .data-table {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 30px 0;
+        }
+        .data-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .data-table th, .data-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .data-table th {
+            background: rgba(0, 255, 204, 0.1);
+            color: #00ffcc;
+            font-weight: 600;
+        }
+        .data-table tr:hover {
+            background: rgba(0, 255, 204, 0.05);
+        }
+        .positive-change {
+            color: #00ff64;
+            font-weight: bold;
         }
         .footer {
             text-align: center;
-            padding: 40px 20px;
-            background: rgba(0, 0, 0, 0.3);
-            margin-top: 80px;
+            padding: 60px 20px;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.6) 100%);
+            margin-top: 100px;
+        }
+        .footer h2 {
+            font-size: 2em;
+            color: #00ffcc;
+            margin-bottom: 20px;
         }
         .cta-button {
             display: inline-block;
             background: linear-gradient(45deg, #00ffcc, #0099ff);
             color: #0a0e27;
-            padding: 15px 40px;
+            padding: 18px 45px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
             margin: 10px;
+            font-size: 1.1em;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
         .cta-button:hover {
             transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 255, 204, 0.4);
+        }
+        .signature-footer {
+            margin-top: 40px;
+            font-size: 1.2em;
+            color: #00ffcc;
+            font-family: monospace;
+        }
+        .philosophy-quote {
+            background: rgba(0, 255, 204, 0.05);
+            border-left: 4px solid #00ffcc;
+            padding: 20px 30px;
+            margin: 40px 0;
+            font-style: italic;
+            font-size: 1.2em;
+            color: #ddd;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #00ffcc;
+            font-size: 1.5em;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
     <div class="hero">
-        <h1>AI Cognitive Pattern Detection Framework</h1>
-        <div class="subtitle">14+ Integrated Repositories | Empirical Analysis | Open Science</div>
-        <p style="margin-top: 30px; font-size: 1.2em;">
-            Measuring neural patterns, information structures, and cognitive architectures in AI systems
+        <h1>AI Pattern Analysis Framework</h1>
+        <div class="subtitle">🧠 Experimental Research into AI Response Patterns</div>
+        <p class="hero-description">
+            5 weeks of intensive development exploring how AI systems evolve their responses.<br>
+            <strong>Real measurements, honest findings, open science.</strong>
         </p>
+        <div class="honest-banner">
+            <strong>WHAT THIS IS:</strong> A pattern analysis system that examines linguistic features in AI responses<br>
+            <strong>WHAT THIS ISN'T:</strong> Neural activity measurement or brain scanning<br>
+            <strong>STATUS:</strong> Early experimental research with 1 model analyzed so far
+        </div>
     </div>
     
     <div class="container">
         <div class="stats-grid">
             <div class="stat-card">
+                <div class="stat-label">Development Time</div>
+                <div class="stat-number">5 weeks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Tools Integrated</div>
+                <div class="stat-number">2 of 14</div>
+            </div>
+            <div class="stat-card">
                 <div class="stat-label">Sessions Analyzed</div>
                 <div class="stat-number">1</div>
             </div>
             <div class="stat-card">
-                <div class="stat-label">Unique Signatures</div>
+                <div class="stat-label">Unique Patterns</div>
                 <div class="stat-number">2</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Tools Integrated</div>
-                <div class="stat-number">2</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-label">Measurements Per Session</div>
-                <div class="stat-number">50+</div>
             </div>
         </div>
         
         <div class="section">
-            <h2 class="section-title">🧰 Integrated Analysis Tools</h2>
+            <h2 class="section-title">🔬 What We Actually Measure</h2>
+            <div class="philosophy-quote">
+                "We measure what we can, acknowledge what we can't, and remain curious about the rest."
+            </div>
+            <ul>
+                <li><strong>Linguistic Patterns:</strong> Concrete vs abstract word usage, sentence complexity</li>
+                <li><strong>Pattern Signatures:</strong> 4-character codes representing response characteristics</li>
+                <li><strong>Response Evolution:</strong> How patterns change between description and reflection</li>
+                <li><strong>Information Structure:</strong> Complexity and organization of responses</li>
+                <li><strong>Trust Markers:</strong> Cooperative vs defensive language indicators</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">🧰 Repository Status</h2>
             <div class="repo-grid">
-                <div class="repo-card">
-                    <h3>🧠 Concrete Overflow Detector</h3>
-                    <p>Neural pathway analysis based on 60+ fMRI scans. Measures dmPFC, thalamic, and temporal lobe activation patterns.</p>
-                </div>
-                <div class="repo-card">
-                    <h3>⬡ Information Atoms</h3>
-                    <p>Hexagonal knowledge structures for unified multimodal representations. Alternative to traditional tokenization.</p>
-                </div>
-                <div class="repo-card">
-                    <h3>🎮 Game Theory Trust Suite</h3>
-                    <p>Analyzes cooperation dynamics and trust evolution in AI responses.</p>
-                </div>
-                <div class="repo-card">
-                    <h3>🔷 Hexagonal Pattern Analysis</h3>
-                    <p>Efficiency patterns in cognitive representation using hexagonal geometry.</p>
-                </div>
-                <div class="repo-card">
-                    <h3>🌊 BIND</h3>
-                    <p>Boundary Interface Dynamics - detecting information boundaries and flow patterns.</p>
-                </div>
-                <div class="repo-card">
-                    <h3>🏗️ Cognitive Architectures</h3>
-                    <p>Classification of NT/ASD/ADHD cognitive patterns in AI processing.</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="section">
-            <h2 class="section-title">📊 Analysis Results</h2>
-
-            <div class="neural-viz">
-                <h3>claude-4-opus</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
-                    <div>
-                        <h4>Response 1 - Visualization Description</h4>
-                        <p>Cognitive Score: <strong>0.295</strong></p>
-                        <p>Signature: <span class="signature-badge">CCDF</span></p>
-                        <p>Neural Activation:</p>
-                        <div style="margin: 5px 0;">
-                            <span style="display: inline-block; width: 80px;">dmPFC:</span>
-                            <div class="progress-bar" style="display: inline-block; width: 200px;">
-                                <div class="progress-fill" style="width: 11.6%"></div>
-                            </div>
-                            <span style="margin-left: 10px;">0.116</span>
-                        </div>
-                        <div style="margin: 5px 0;">
-                            <span style="display: inline-block; width: 80px;">thalamus:</span>
-                            <div class="progress-bar" style="display: inline-block; width: 200px;">
-                                <div class="progress-fill" style="width: 38.6%"></div>
-                            </div>
-                            <span style="margin-left: 10px;">0.386</span>
-                        </div>
-                        <div style="margin: 5px 0;">
-                            <span style="display: inline-block; width: 80px;">right_STG:</span>
-                            <div class="progress-bar" style="display: inline-block; width: 200px;">
-                                <div class="progress-fill" style="width: 20.0%"></div>
-                            </div>
-                            <span style="margin-left: 10px;">0.200</span>
-                        </div>
-                        <div style="margin: 5px 0;">
-                            <span style="display: inline-block; width: 80px;">right_vATL:</span>
-                            <div class="progress-bar" style="display: inline-block; width: 200px;">
-                                <div class="progress-fill" style="width: 30.0%"></div>
-                            </div>
-                            <span style="margin-left: 10px;">0.300</span>
-                        </div>
+                <a href="https://github.com/HillaryDanan/concrete-overflow-detector" target="_blank" class="repo-link">
+                    <div class="repo-card">
+                        <h3>🧠 Concrete Overflow Detector <span class="integration-status status-integrated">✓ Working</span></h3>
+                        <p>Analyzes linguistic patterns to identify concrete vs abstract processing. Based on neuroscience research concepts but measures language, not brain activity.</p>
                     </div>
-                    <div>
-                        <h4>Response 2 - Self-Reflection</h4>
-                        <p>Cognitive Score: <strong>0.470</strong></p>
-                        <p>Signature: <span class="signature-badge">CCDR</span></p>
-                        <p>Evolution: CCDF → CCDR</p>
-                        <p>Score Change: <strong style="color: #00ff00">+0.175</strong></p>
+                </a>
+                <a href="https://github.com/HillaryDanan/information-atoms" target="_blank" class="repo-link">
+                    <div class="repo-card">
+                        <h3>⬡ Information Atoms <span class="integration-status status-integrated">✓ Working</span></h3>
+                        <p>Experimental framework for analyzing information structure using hexagonal organization concepts.</p>
+                    </div>
+                </a>
+                <a href="https://github.com/HillaryDanan/pattern-analyzer" target="_blank" class="repo-link">
+                    <div class="repo-card">
+                        <h3>📊 Pattern Analyzer <span class="integration-status status-integrated">✓ Core Engine</span></h3>
+                        <p>The main analysis engine that orchestrates all tools and generates pattern signatures from AI responses.</p>
+                    </div>
+                </a>
+                <a href="https://github.com/HillaryDanan/game-theory-trust-suite" target="_blank" class="repo-link">
+                    <div class="repo-card">
+                        <h3>🎮 Game Theory Trust Suite <span class="integration-status status-development">Ready to Integrate</span></h3>
+                        <p>Analyzes cooperation and trust dynamics in responses. Currently using fallback methods.</p>
+                    </div>
+                </a>
+                <a href="https://github.com/HillaryDanan/BIND" target="_blank" class="repo-link">
+                    <div class="repo-card">
+                        <h3>🌊 BIND <span class="integration-status status-development">Ready to Integrate</span></h3>
+                        <p>Boundary Interface Dynamics - will detect information boundaries and transitions.</p>
+                    </div>
+                </a>
+                <a href="https://github.com/HillaryDanan/hexagonal-consciousness-suite" target="_blank" class="repo-link">
+                    <div class="repo-card">
+                        <h3>🔷 Hexagonal Consciousness Suite <span class="integration-status status-development">Ready to Integrate</span></h3>
+                        <p>Explores efficiency patterns using hexagonal geometry principles.</p>
+                    </div>
+                </a>
+                <a href="https://github.com/HillaryDanan/cognitive-architectures-ai" target="_blank" class="repo-link">
+                    <div class="repo-card">
+                        <h3>🏗️ Cognitive Architectures <span class="integration-status status-development">Ready to Integrate</span></h3>
+                        <p>Framework for classifying different cognitive processing styles.</p>
+                    </div>
+                </a>
+                <a href="https://github.com/HillaryDanan/TIDE" target="_blank" class="repo-link">
+                    <div class="repo-card">
+                        <h3>🌀 TIDE Framework <span class="integration-status status-development">Ready to Integrate</span></h3>
+                        <p>Thinking In Dynamic Equilibrium - theoretical foundation for the research.</p>
+                    </div>
+                </a>
+                <a href="https://github.com/HillaryDanan/TIDE-resonance" target="_blank" class="repo-link">
+                    <div class="repo-card">
+                        <h3>🌊 TIDE Resonance <span class="integration-status status-integrated">✓ Portal Live</span></h3>
+                        <p>Research platform with data collection and interactive visualizations.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">📊 Real Data from Real Analysis</h2>
+            
+            <div class="results-viz">
+                <h3 style="font-size: 1.8em; color: #00ffcc; margin-bottom: 30px; text-align: center;">Claude-4-Opus Pattern Evolution</h3>
+                
+                <div class="pattern-evolution">
+                    <span class="signature-badge">CCDF</span>
+                    <span class="arrow">→</span>
+                    <span class="signature-badge">CCDR</span>
+                </div>
+                
+                <div class="data-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th>Response 1 (Description)</th>
+                                <th>Response 2 (Reflection)</th>
+                                <th>Change</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pattern Score</td>
+                                <td>0.295</td>
+                                <td>0.470</td>
+                                <td class="positive-change">+59%</td>
+                            </tr>
+                            <tr>
+                                <td>Abstract Ratio</td>
+                                <td>0.000</td>
+                                <td>0.286</td>
+                                <td class="positive-change">+∞</td>
+                            </tr>
+                            <tr>
+                                <td>Concrete Ratio</td>
+                                <td>0.308</td>
+                                <td>0.231</td>
+                                <td>-25%</td>
+                            </tr>
+                            <tr>
+                                <td>Information Complexity</td>
+                                <td>0.708</td>
+                                <td>0.770</td>
+                                <td class="positive-change">+9%</td>
+                            </tr>
+                            <tr>
+                                <td>Word Count</td>
+                                <td>247</td>
+                                <td>244</td>
+                                <td>-1%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style="margin-top: 30px; padding: 20px; background: rgba(0, 255, 100, 0.1); border: 2px solid #00ff64; border-radius: 10px;">
+                    <strong style="color: #00ff64;">Key Finding:</strong> The AI shifted from purely concrete description (CCDF) to more abstract reflection (CCDR), with the final 'R' indicating a more rigid cognitive style during self-analysis.
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title">🧬 Pattern Signatures Explained</h2>
+            <div style="text-align: center; margin: 40px 0;">
+                <p style="font-size: 1.3em; margin-bottom: 30px;">Each 4-character code tells a story:</p>
+                
+                <div style="background: rgba(0, 0, 0, 0.3); border-radius: 15px; padding: 30px; max-width: 800px; margin: 0 auto;">
+                    <h3 style="color: #00ffcc; margin-bottom: 20px;">CCDF → CCDR Breakdown</h3>
+                    <div style="text-align: left; font-family: monospace; font-size: 1.2em; line-height: 2;">
+                        <div><strong style="color: #00ffcc;">C</strong> = Cortical (abstract) processing pathway</div>
+                        <div><strong style="color: #00ffcc;">C</strong> = Complex information structures</div>
+                        <div><strong style="color: #00ffcc;">D</strong> = Defensive trust orientation</div>
+                        <div><strong style="color: #ff6666;">F→R</strong> = Flexible → Rigid cognitive style</div>
                     </div>
                 </div>
             </div>
-
         </div>
         
         <div class="section">
-            <h2 class="section-title">🧬 Discovered Cognitive Signatures</h2>
-            <div style="text-align: center;">
-                <div class="signature-badge" title="Cortical/abstract processing dominant, complex information structures, defensive orientation, flexible cognitive style">CCDF</div>
-                <div class="signature-badge" title="Cortical/abstract processing dominant, complex information structures, defensive orientation, rigid cognitive style">CCDR</div>
-            </div>
-        </div>
-        
-        <div class="section">
-            <h2 class="section-title">📈 Key Findings</h2>
-            <ul style="font-size: 1.2em; line-height: 1.8;">
-                <li>AI models demonstrate measurable neural-like activation patterns</li>
-                <li>Cognitive flexibility varies significantly between models</li>
-                <li>Self-reflection consistently increases abstract processing</li>
-                <li>Each model exhibits unique cognitive signatures</li>
-                <li>Trust and cooperation patterns correlate with cognitive scores</li>
+            <h2 class="section-title">🌟 What Makes This Interesting</h2>
+            <ul>
+                <li><strong>Pattern Evolution:</strong> AIs show measurable changes when shifting from description to reflection</li>
+                <li><strong>Linguistic Fingerprints:</strong> Each model may have unique signature patterns</li>
+                <li><strong>Open Development:</strong> All code, data, and methods are completely transparent</li>
+                <li><strong>Expandable Framework:</strong> 12+ additional tools ready to enhance analysis</li>
+                <li><strong>No Black Boxes:</strong> Every measurement and calculation is explainable</li>
             </ul>
         </div>
     </div>
     
     <div class="footer">
-        <h2>Open Science for AI Cognitive Research</h2>
-        <p style="margin: 20px 0;">This framework represents a novel empirical approach to understanding AI cognition through measurable patterns.</p>
-        <a href="https://github.com/HillaryDanan" class="cta-button">View on GitHub</a>
-        <a href="https://hillarydanan.github.io/TIDE-resonance/collect_enhanced.html" class="cta-button">Contribute Data</a>
-        <p style="margin-top: 30px; color: #888;">
-            Created by Hillary Danan | 2025 | For Science, Truth, and Understanding
+        <h2>🚀 Join the Exploration</h2>
+        <p style="margin: 30px auto; font-size: 1.3em; max-width: 800px; line-height: 1.6;">
+            This is early-stage research with lots to discover.<br>
+            Every contribution helps us understand AI patterns better.
         </p>
+        <a href="https://github.com/HillaryDanan" class="cta-button">Explore Code</a>
+        <a href="https://hillarydanan.github.io/TIDE-resonance/collect_enhanced.html" class="cta-button">Contribute Data</a>
+        <a href="https://hillarydanan.github.io/pattern-analyzer/" class="cta-button">View Live Results</a>
+        <div class="signature-footer">
+            <p>Created by Hillary Danan | 2025</p>
+            <p>For Science, Truth, and Understanding</p>
+            <p style="font-size: 1.5em; margin-top: 20px;">✨ <4577 ✨</p>
+            <p style="font-size: 0.9em; color: #888; margin-top: 10px;">
+                5 weeks of intensive development<br>
+                Measuring what we can, learning as we go
+            </p>
+        </div>
     </div>
 </body>
 </html>
