@@ -184,6 +184,15 @@
             display: none;
         }
         
+        .analysis-disclaimer {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #888;
+        }
+        
         .metric {
             display: inline-block;
             margin: 10px;
@@ -203,41 +212,26 @@
             color: #888;
         }
         
-        .results-dashboard {
+        .study-status {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 12px;
             padding: 20px;
-            margin: 30px 0;
-        }
-        
-        .model-comparison {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .model-card {
-            background: rgba(0, 255, 204, 0.05);
-            border: 1px solid rgba(0, 255, 204, 0.3);
-            border-radius: 8px;
-            padding: 15px;
+            margin: 20px 0;
             text-align: center;
         }
         
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            overflow: hidden;
-            margin: 10px 0;
+        .results-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: #00ffcc;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
         }
         
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(45deg, #00ffcc, #0099ff);
-            transition: width 0.3s ease;
+        .results-link:hover {
+            text-decoration: underline;
+            transform: translateX(5px);
         }
     </style>
 </head>
@@ -258,28 +252,12 @@
             </p>
         </div>
         
-        <!-- ENHANCED: Live statistics from actual data -->
-        <div class="stats" id="liveStats">
-            <div class="stat-box">
-                <div class="stat-number" id="totalSessions">0</div>
-                <div class="stat-label">Sessions Collected</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-number" id="uniqueModels">0</div>
-                <div class="stat-label">Unique AI Models</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-number" id="avgAbstraction">0.0</div>
-                <div class="stat-label">Avg Abstraction Score</div>
-            </div>
-        </div>
-        
-        <!-- NEW: Results Dashboard -->
-        <div class="results-dashboard" id="resultsDashboard" style="display: none;">
-            <h3 style="text-align: center; margin-bottom: 20px;">📊 Study Progress & Insights</h3>
-            <div class="model-comparison" id="modelComparison">
-                <!-- Dynamically populated -->
-            </div>
+        <!-- ENHANCED: Study status without fake data -->
+        <div class="study-status">
+            <h3>📊 Study Status</h3>
+            <p style="margin-top: 15px; color: #00ffcc; font-size: 1.2em;">Data Collection in Progress</p>
+            <p style="margin-top: 10px; color: #888;">Every AI response helps us understand cognitive diversity better</p>
+            <a href="results.html" class="results-link">→ View Emerging Patterns</a>
         </div>
         
         <div class="visualization-preview">
@@ -346,6 +324,9 @@ Be specific and detailed in your description of the expected behaviors.</span>
             <div class="analysis-preview" id="analysis1">
                 <h4>📊 Real-time Analysis</h4>
                 <div id="metrics1"></div>
+                <div class="analysis-disclaimer">
+                    💡 <strong>Transparency note:</strong> These metrics show what we're measuring for research purposes. Your natural, unbiased responses are what matter most for scientific validity. Don't try to hit specific numbers - just paste the AI's authentic response!
+                </div>
             </div>
         </div>
         
@@ -369,6 +350,9 @@ Please reflect on any connections between these visualization patterns and your 
             <div class="analysis-preview" id="analysis2">
                 <h4>📊 Real-time Analysis</h4>
                 <div id="metrics2"></div>
+                <div class="analysis-disclaimer">
+                    💡 <strong>Transparency note:</strong> We're interested in how different AI models naturally reflect on their own processing. There's no "right" answer - diversity in responses is valuable!
+                </div>
             </div>
         </div>
         
@@ -562,54 +546,21 @@ Please reflect on any connections between these visualization patterns and your 
             }
         }
         
-        // Fetch and display study statistics (would connect to real data source)
-        function loadStudyStats() {
-            // In production, this would fetch from GitHub API or database
-            // For now, showing example structure
-            const mockStats = {
-                totalSessions: 12,
-                uniqueModels: 6,
-                avgAbstraction: 1.85,
-                modelData: [
-                    { name: 'Claude 4 Opus', sessions: 3, avgAbstract: 2.4 },
-                    { name: 'GPT-4', sessions: 2, avgAbstract: 1.8 },
-                    { name: 'Gemini 2.0', sessions: 2, avgAbstract: 1.5 },
-                    { name: 'Claude 3.5 Sonnet', sessions: 2, avgAbstract: 2.1 },
-                    { name: 'Llama 3.1', sessions: 2, avgAbstract: 1.3 },
-                    { name: 'Mistral Large', sessions: 1, avgAbstract: 1.7 }
-                ]
-            };
-            
-            // Update live stats
-            document.getElementById('totalSessions').textContent = mockStats.totalSessions;
-            document.getElementById('uniqueModels').textContent = mockStats.uniqueModels;
-            document.getElementById('avgAbstraction').textContent = mockStats.avgAbstraction.toFixed(2);
-            
-            // Show dashboard if we have data
-            if (mockStats.totalSessions > 0) {
-                document.getElementById('resultsDashboard').style.display = 'block';
-                
-                // Build model comparison cards
-                const comparisonHtml = mockStats.modelData.map(model => `
-                    <div class="model-card">
-                        <h4>${model.name}</h4>
-                        <div class="metric-value">${model.sessions}</div>
-                        <div class="metric-label">Sessions</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: ${(model.avgAbstract / 3) * 100}%"></div>
-                        </div>
-                        <div class="metric-label">Abstraction: ${model.avgAbstract.toFixed(1)}</div>
-                    </div>
-                `).join('');
-                
-                document.getElementById('modelComparison').innerHTML = comparisonHtml;
+        // Auto-select model when clicking AI links
+        function setModel(modelValue) {
+            localStorage.setItem('selectedModel', modelValue);
+            const modelDropdown = document.getElementById('aiModel');
+            if (modelDropdown && !document.getElementById('step3').classList.contains('hidden')) {
+                modelDropdown.value = modelValue;
+                modelDropdown.style.borderColor = '#00ff00';
+                setTimeout(() => {
+                    modelDropdown.style.borderColor = '';
+                }, 1000);
             }
         }
         
-        // Load stats on page load
+        // Load on page ready
         window.addEventListener('load', function() {
-            loadStudyStats();
-            
             // Check for pre-selected model
             const savedModel = localStorage.getItem('selectedModel');
             if (savedModel) {
@@ -625,19 +576,6 @@ Please reflect on any connections between these visualization patterns and your 
                 setTimeout(() => clearInterval(checkStep3), 30000);
             }
         });
-        
-        // Auto-select model when clicking AI links
-        function setModel(modelValue) {
-            localStorage.setItem('selectedModel', modelValue);
-            const modelDropdown = document.getElementById('aiModel');
-            if (modelDropdown && !document.getElementById('step3').classList.contains('hidden')) {
-                modelDropdown.value = modelValue;
-                modelDropdown.style.borderColor = '#00ff00';
-                setTimeout(() => {
-                    modelDropdown.style.borderColor = '';
-                }, 1000);
-            }
-        }
         
         // Show/hide other model field
         document.getElementById('aiModel').addEventListener('change', function() {
