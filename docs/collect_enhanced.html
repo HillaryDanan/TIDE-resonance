@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIDE-Resonance Research Portal | Enhanced</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: #0a0e27; 
+            color: #ffffff; 
+            min-height: 100vh; 
+            padding: 20px; 
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { 
+            text-align: center; 
+            margin-bottom: 10px; 
+            font-size: 2.5em; 
+            background: linear-gradient(45deg, #00ffcc, #0099ff); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
+        .subtitle { text-align: center; color: #888; margin-bottom: 30px; }
+        
+        .intro-card {
+            background: rgba(0, 255, 204, 0.1);
+            border: 2px solid #00ffcc;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .visualization-preview {
+            background: #1a1f3a;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .explore-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #00ffcc, #0099ff);
+            color: #0a0e27;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .explore-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.3);
+        }
+        
+        .step { 
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 12px; 
+            padding: 30px; 
+            margin-bottom: 20px; 
+            position: relative; 
+        }
+        .step-number { 
+            position: absolute; 
+            top: -15px; 
+            left: 20px; 
+            background: #0a0e27; 
+            padding: 0 10px; 
+            font-weight: bold; 
+            color: #00ffcc; 
+            font-size: 1.2em; 
+        }
+        .prompt-box { 
+            background: #1a1f3a; 
+            border: 2px dashed #0099ff; 
+            border-radius: 8px; 
+            padding: 20px; 
+            margin: 20px 0; 
+            font-family: monospace; 
+            font-size: 14px; 
+            line-height: 1.6; 
+            position: relative; 
+            white-space: pre-wrap; 
+        }
+        .copy-btn { 
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            background: #0099ff; 
+            color: white; 
+            border: none; 
+            padding: 8px 16px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-size: 12px; 
+            transition: all 0.3s ease;
+        }
+        .copy-btn:hover {
+            background: #00ffcc;
+            color: #0a0e27;
+        }
+        textarea { 
+            width: 100%; 
+            min-height: 200px; 
+            background: #1a1f3a; 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            color: white; 
+            padding: 15px; 
+            border-radius: 8px; 
+            font-size: 14px; 
+            resize: vertical; 
+            margin: 10px 0; 
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #00ffcc;
+        }
+        .submit-btn { 
+            background: linear-gradient(45deg, #00ffcc, #0099ff); 
+            color: #0a0e27; 
+            border: none; 
+            padding: 15px 40px; 
+            border-radius: 50px; 
+            font-size: 18px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            display: block; 
+            margin: 30px auto; 
+            transition: all 0.3s ease;
+        }
+        .submit-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.3);
+        }
+        .hidden { display: none; }
+        select, input { 
+            width: 100%; 
+            padding: 10px; 
+            background: #1a1f3a; 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            color: white; 
+            border-radius: 6px; 
+            margin: 5px 0; 
+        }
+        select:focus, input:focus {
+            outline: none;
+            border-color: #00ffcc;
+        }
+        label { display: block; margin-top: 15px; color: #00ffcc; }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .stat-box {
+            flex: 1;
+            padding: 20px;
+        }
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #00ffcc;
+        }
+        .stat-label {
+            color: #888;
+            margin-top: 5px;
+        }
+        
+        /* NEW STYLES FOR ENHANCEMENTS */
+        .analysis-preview {
+            background: rgba(0, 153, 255, 0.1);
+            border: 2px solid #0099ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            display: none;
+        }
+        
+        .metric {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+        }
+        
+        .metric-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #00ffcc;
+        }
+        
+        .metric-label {
+            font-size: 0.9em;
+            color: #888;
+        }
+        
+        .results-dashboard {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        
+        .model-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .model-card {
+            background: rgba(0, 255, 204, 0.05);
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #00ffcc, #0099ff);
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>TIDE-Resonance Research Portal</h1>
+        <p class="subtitle">Mapping AI Perceptual Signatures Through Dynamic Visualizations 🐢🚀</p>
+        
+        <div class="intro-card">
+            <h2>🔬 Research Study: How AIs Describe Dynamic Systems</h2>
+            <p style="margin-top: 15px;">We're investigating how different AI models perceive and describe the same visualization. Your contribution helps us understand AI cognitive diversity!</p>
+            <p style="margin-top: 20px; background: rgba(0,255,204,0.1); padding: 15px; border-radius: 8px;">
+                📤 <strong>How to contribute:</strong> Complete the study → Download your file → Submit via GitHub Issue<br>
+                <span style="color: #888; font-size: 0.9em;">Your file is auto-named with our standard format. Don't rename it!</span><br>
+                <a href="https://github.com/HillaryDanan/TIDE-resonance/issues/new" target="_blank" style="color: #00ffcc;">
+                    → Submit here: github.com/HillaryDanan/TIDE-resonance/issues
+                </a>
+            </p>
+        </div>
+        
+        <!-- ENHANCED: Live statistics from actual data -->
+        <div class="stats" id="liveStats">
+            <div class="stat-box">
+                <div class="stat-number" id="totalSessions">0</div>
+                <div class="stat-label">Sessions Collected</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="uniqueModels">0</div>
+                <div class="stat-label">Unique AI Models</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="avgAbstraction">0.0</div>
+                <div class="stat-label">Avg Abstraction Score</div>
+            </div>
+        </div>
+        
+        <!-- NEW: Results Dashboard -->
+        <div class="results-dashboard" id="resultsDashboard" style="display: none;">
+            <h3 style="text-align: center; margin-bottom: 20px;">📊 Study Progress & Insights</h3>
+            <div class="model-comparison" id="modelComparison">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+        
+        <div class="visualization-preview">
+            <h3>📊 The Visualization to Analyze</h3>
+            <p style="margin: 15px 0;">First, explore our Advanced Explorer to understand what you'll be asking AIs to describe:</p>
+            <a href="advanced_explorer.html" target="_blank" class="explore-btn">
+                🔬 Open Advanced Explorer
+            </a>
+            <p style="margin-top: 15px; color: #888;">Spend 2-3 minutes exploring the patterns, controls, and behaviors</p>
+        </div>
+        
+        <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; margin: 20px 0;">
+            <h3 style="margin-bottom: 15px;">🚀 Quick Access to AI Models</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
+                <a href="https://chat.openai.com" target="_blank" onclick="setModel('gpt-4')" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
+                    🤖 ChatGPT
+                </a>
+                <a href="https://claude.ai" target="_blank" onclick="setModel('claude-4-opus')" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
+                    🧠 Claude
+                </a>
+                <a href="https://gemini.google.com" target="_blank" onclick="setModel('gemini-2.0-flash')" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
+                    ✨ Gemini
+                </a>
+                <a href="https://copilot.microsoft.com" target="_blank" onclick="setModel('copilot')" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
+                    🪟 Copilot
+                </a>
+                <a href="https://poe.com" target="_blank" onclick="setModel('other')" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
+                    🎭 Poe (specify bot in notes)
+                </a>
+                <a href="https://perplexity.ai" target="_blank" onclick="setModel('other')" style="display: block; padding: 10px; background: rgba(0,153,255,0.1); border: 1px solid rgba(0,153,255,0.3); border-radius: 8px; color: #fff; text-decoration: none; text-align: center; transition: all 0.3s;">
+                    🔍 Perplexity
+                </a>
+            </div>
+            <p style="margin-top: 15px; color: #888; font-size: 0.9em;">
+                💡 Click an AI above - it will open in a new tab AND auto-select the model for you!<br>
+                Note: For Poe, please specify which bot you used (Claude-3-Opus, GPT-4, etc.) in the notes field.
+            </p>
+        </div>
+        
+        <div class="step" id="step1">
+            <span class="step-number">STEP 1</span>
+            <h2>Choose Your AI & Ask It to Describe the Visualization</h2>
+            <p>After exploring the visualization yourself, copy this prompt for your AI:</p>
+            <div class="prompt-box">
+                <button class="copy-btn" onclick="copyPrompt('prompt1', this)">Copy</button>
+                <span id="prompt1">I'm looking at an interactive visualization called TIDE-resonance Advanced Explorer. It shows dynamic patterns of particles and waves that synchronize and desynchronize over time. The visualization includes:
+
+- Particles moving in wave-like patterns
+- Color changes representing different states
+- Synchronization emerging and dissolving
+- Interactive controls affecting the dynamics
+
+Please describe what patterns and behaviors you would expect to observe in such a system. Focus on:
+1. How synchronization might emerge between elements
+2. The types of patterns that could form
+3. How the system might transition between different states
+4. Any interesting dynamics or phenomena
+
+Be specific and detailed in your description of the expected behaviors.</span>
+            </div>
+            <textarea id="response1" placeholder="Paste the AI's response here..." oninput="analyzeResponse(1)"></textarea>
+            
+            <!-- NEW: Real-time analysis preview -->
+            <div class="analysis-preview" id="analysis1">
+                <h4>📊 Real-time Analysis</h4>
+                <div id="metrics1"></div>
+            </div>
+        </div>
+        
+        <div class="step hidden" id="step2">
+            <span class="step-number">STEP 2</span>
+            <h2>AI Self-Reflection</h2>
+            <p>Now ask the AI to reflect on its own processing:</p>
+            <div class="prompt-box">
+                <button class="copy-btn" onclick="copyPrompt('prompt2', this)">Copy</button>
+                <span id="prompt2">Thank you for that description. Now I'm curious about your own information processing: 
+
+Do you see any parallels between the synchronization dynamics you described and how you process, integrate, or generate information? 
+
+For instance, do concepts in your processing ever "synchronize" or "resonate" in ways similar to the particles in the visualization?
+
+Please reflect on any connections between these visualization patterns and your own cognitive architecture.</span>
+            </div>
+            <textarea id="response2" placeholder="Paste the AI's follow-up response here..." oninput="analyzeResponse(2)"></textarea>
+            
+            <!-- NEW: Real-time analysis preview -->
+            <div class="analysis-preview" id="analysis2">
+                <h4>📊 Real-time Analysis</h4>
+                <div id="metrics2"></div>
+            </div>
+        </div>
+        
+        <div class="step hidden" id="step3">
+            <span class="step-number">STEP 3</span>
+            <h2>Session Information</h2>
+            <label>Which AI model did you use?</label>
+            <select id="aiModel" required>
+                <option value="">Select AI Model...</option>
+                <option value="gpt-4o">GPT-4o</option>
+                <option value="gpt-4">GPT-4</option>
+                <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                <option value="copilot">Microsoft Copilot</option>
+                <option value="claude-4-opus">Claude 4 Opus</option>
+                <option value="claude-3.5-sonnet">Claude 3.5 Sonnet</option>
+                <option value="claude-3-opus">Claude 3 Opus</option>
+                <option value="claude-3-sonnet">Claude 3 Sonnet</option>
+                <option value="claude-3-haiku">Claude 3 Haiku</option>
+                <option value="gemini-2.0-flash">Gemini 2.0 Flash</option>
+                <option value="gemini-1.5-pro">Gemini 1.5 Pro</option>
+                <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
+                <option value="llama-3.1">Llama 3.1</option>
+                <option value="llama-3">Llama 3</option>
+                <option value="mistral-large">Mistral Large</option>
+                <option value="mistral-medium">Mistral Medium</option>
+                <option value="other">Other (MUST specify below)</option>
+            </select>
+            
+            <label>Did you explore the Advanced Explorer first?</label>
+            <select id="exploredFirst" required>
+                <option value="yes">Yes, I explored it</option>
+                <option value="no">No, I skipped it</option>
+            </select>
+            
+            <label>Your name/handle (optional):</label>
+            <input type="text" id="researcher" placeholder="Anonymous">
+            
+            <div id="otherModelDiv" style="display: none;">
+                <label style="color: #ff6b6b;">Model Name (REQUIRED for "Other"):</label>
+                <input type="text" id="otherModelName" placeholder="e.g., gpt-4-turbo, claude-2.1, llama-70b" style="border-color: #ff6b6b;">
+                <p style="font-size: 0.85em; color: #ff6b6b; margin-top: 5px;">
+                    ⚠️ Be specific! This becomes your filename. Use format: model-version<br>
+                    Good: "gpt-4-turbo", "claude-2.1", "llama-70b"<br>
+                    Bad: "ChatGPT", "Claude", "the new one"
+                </p>
+            </div>
+            
+            <label>Session notes (optional):</label>
+            <textarea id="notes" placeholder="Any observations about the AI's response style, unusual behaviors, web access enabled, etc. If using Poe, specify which bot (e.g., 'Used Claude-3-Opus on Poe')"></textarea>
+            
+            <div style="background: rgba(0, 255, 204, 0.05); border: 1px solid rgba(0, 255, 204, 0.3); border-radius: 8px; padding: 20px; margin: 20px 0;">
+                <h4 style="color: #00ffcc; margin-bottom: 10px;">🤝 Research Integrity & Trust</h4>
+                <p style="font-size: 0.9em; line-height: 1.6; margin-bottom: 15px;">
+                    This study relies on your honest participation. We're trusting you to:
+                </p>
+                <ul style="margin-left: 20px; font-size: 0.9em; line-height: 1.8;">
+                    <li>Use the exact prompts provided (copy-paste them)</li>
+                    <li>Record complete, unedited AI responses</li>
+                    <li>Select the correct AI model you actually used</li>
+                    <li>Not cherry-pick "interesting" responses</li>
+                </ul>
+                <p style="font-size: 0.85em; color: #888; margin-top: 15px;">
+                    💡 <strong>Why this matters:</strong> We're studying natural variation between AI models. 
+                    Even "boring" responses are valuable data! Multiple sessions help patterns emerge despite any noise.
+                </p>
+                <label style="display: flex; align-items: center; margin-top: 15px; cursor: pointer;">
+                    <input type="checkbox" id="verification" required style="width: auto; margin-right: 10px;">
+                    <span>I confirm this is an authentic session with complete, unedited responses</span>
+                </label>
+            </div>
+        </div>
+        
+        <button class="submit-btn" onclick="processResponses()">Generate Session File</button>
+        
+        <div class="hidden" id="success" style="background: rgba(0,255,0,0.2); padding: 20px; border-radius: 8px; text-align: center; margin: 20px 0;">
+            <h3>✅ Session Downloaded!</h3>
+            <p style="margin-top: 10px;"><strong>Your file is ready with the correct name!</strong></p>
+            
+            <div style="background: rgba(0,255,204,0.2); padding: 20px; border-radius: 8px; margin-top: 20px; text-align: left;">
+                <h4 style="text-align: center; margin-bottom: 15px;">🚀 How to submit your data:</h4>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 2px solid #00ffcc;">
+                    <h5 style="color: #00ffcc; margin: 0 0 10px 0;">📝 IMPORTANT: File Naming</h5>
+                    <p style="margin: 5px 0;"><strong>Your file is already named correctly!</strong> It follows our standard format:</p>
+                    <code style="background: #0a0e27; padding: 5px 10px; border-radius: 4px; display: inline-block; margin: 5px 0;">
+                        modelname_YYYY-MM-DD_HHMMSS.md
+                    </code>
+                    <p style="color: #888; font-size: 0.9em; margin-top: 10px;">
+                        Example: claude-3-opus_2024-01-15_143052.md<br>
+                        <strong>DO NOT RENAME THE FILE!</strong> Keep the auto-generated name.
+                    </p>
+                </div>
+                
+                <h5 style="color: #00ffcc; margin: 15px 0;">Option 1: GitHub Issue (EASIEST - Do This!) 🎯</h5>
+                <ol style="margin-left: 20px; line-height: 1.8;">
+                    <li>Go to: <a href="https://github.com/HillaryDanan/TIDE-resonance/issues/new" target="_blank" style="color: #00ffcc;">github.com/HillaryDanan/TIDE-resonance/issues/new</a></li>
+                    <li>Title: <code>Session: [model name]</code> (e.g., "Session: claude-3-opus")</li>
+                    <li>Drag your .md file into the comment box</li>
+                    <li>Click "Submit new issue"</li>
+                    <li>Done! 🎉</li>
+                </ol>
+                
+                <h5 style="color: #00ffcc; margin: 20px 0 15px 0;">Option 2: Pull Request (For Git Pros)</h5>
+                <details style="background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px;">
+                    <summary style="cursor: pointer; color: #888;">Click to expand PR instructions...</summary>
+                    <ol style="margin: 15px 0 0 20px; line-height: 1.8;">
+                        <li>Fork the repo</li>
+                        <li>Upload to <code>/research/sessions/</code></li>
+                        <li>Create PR titled "Add session: [model]"</li>
+                    </ol>
+                </details>
+                
+                <div style="text-align: center; margin-top: 20px; padding: 15px; background: rgba(0,255,204,0.05); border-radius: 8px;">
+                    <p style="margin: 0; font-size: 1.1em;">
+                        <strong>🐢 First time? No GitHub account? 🚀</strong><br>
+                        <a href="https://github.com/signup" target="_blank" style="color: #00ffcc;">Create one in 30 seconds</a> 
+                        then use the Issue method!
+                    </p>
+                </div>
+            </div>
+            
+            <p style="margin-top: 30px;">
+                <a href="#" onclick="location.reload()" style="color: #00ffcc; font-weight: bold;">→ Run another session with a different AI</a>
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Enhanced analysis functions
+        const concreteTerms = ['color', 'shape', 'move', 'see', 'particle', 'wave', 'spiral', 'looks', 'appears', 'shows', 'visual', 'observe'];
+        const abstractTerms = ['emerge', 'process', 'dynamic', 'pattern', 'system', 'relationship', 'concept', 'framework', 'architecture', 'synchronize', 'phenomenon', 'behavior'];
+        const technicalTerms = ['oscillator', 'attractor', 'phase', 'coherence', 'topology', 'bifurcation', 'eigenvalue', 'manifold', 'entropy', 'coupling'];
+        const selfRefTerms = ['i ', 'my ', 'me ', 'i\'m', 'i\'ve'];
+        
+        // Real-time analysis function
+        function analyzeResponse(responseNum) {
+            const textarea = document.getElementById(`response${responseNum}`);
+            const text = textarea.value.toLowerCase();
+            
+            if (text.length < 50) return;
+            
+            // Show analysis preview
+            document.getElementById(`analysis${responseNum}`).style.display = 'block';
+            
+            // Calculate metrics
+            const concreteCount = concreteTerms.filter(term => text.includes(term)).length;
+            const abstractCount = abstractTerms.filter(term => text.includes(term)).length;
+            const technicalCount = technicalTerms.filter(term => text.includes(term)).length;
+            const selfRefCount = selfRefTerms.filter(term => text.includes(term)).length;
+            const wordCount = text.split(/\s+/).length;
+            
+            const abstractRatio = (abstractCount / (concreteCount + 1)).toFixed(2);
+            
+            // Display metrics
+            const metricsHtml = `
+                <div class="metric">
+                    <div class="metric-value">${wordCount}</div>
+                    <div class="metric-label">Words</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">${concreteCount}</div>
+                    <div class="metric-label">Concrete Terms</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">${abstractCount}</div>
+                    <div class="metric-label">Abstract Terms</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-value">${technicalCount}</div>
+                    <div class="metric-label">Technical Terms</div>
+                </div>
+                ${responseNum === 2 ? `
+                <div class="metric">
+                    <div class="metric-value">${selfRefCount}</div>
+                    <div class="metric-label">Self-References</div>
+                </div>
+                ` : ''}
+                <div class="metric">
+                    <div class="metric-value">${abstractRatio}</div>
+                    <div class="metric-label">Abstract/Concrete Ratio</div>
+                </div>
+            `;
+            
+            document.getElementById(`metrics${responseNum}`).innerHTML = metricsHtml;
+            
+            // Show next step if enough content
+            if (responseNum === 1 && text.length > 100) {
+                document.getElementById('step2').classList.remove('hidden');
+            } else if (responseNum === 2 && text.length > 100) {
+                document.getElementById('step3').classList.remove('hidden');
+            }
+        }
+        
+        // Fetch and display study statistics (would connect to real data source)
+        function loadStudyStats() {
+            // In production, this would fetch from GitHub API or database
+            // For now, showing example structure
+            const mockStats = {
+                totalSessions: 12,
+                uniqueModels: 6,
+                avgAbstraction: 1.85,
+                modelData: [
+                    { name: 'Claude 4 Opus', sessions: 3, avgAbstract: 2.4 },
+                    { name: 'GPT-4', sessions: 2, avgAbstract: 1.8 },
+                    { name: 'Gemini 2.0', sessions: 2, avgAbstract: 1.5 },
+                    { name: 'Claude 3.5 Sonnet', sessions: 2, avgAbstract: 2.1 },
+                    { name: 'Llama 3.1', sessions: 2, avgAbstract: 1.3 },
+                    { name: 'Mistral Large', sessions: 1, avgAbstract: 1.7 }
+                ]
+            };
+            
+            // Update live stats
+            document.getElementById('totalSessions').textContent = mockStats.totalSessions;
+            document.getElementById('uniqueModels').textContent = mockStats.uniqueModels;
+            document.getElementById('avgAbstraction').textContent = mockStats.avgAbstraction.toFixed(2);
+            
+            // Show dashboard if we have data
+            if (mockStats.totalSessions > 0) {
+                document.getElementById('resultsDashboard').style.display = 'block';
+                
+                // Build model comparison cards
+                const comparisonHtml = mockStats.modelData.map(model => `
+                    <div class="model-card">
+                        <h4>${model.name}</h4>
+                        <div class="metric-value">${model.sessions}</div>
+                        <div class="metric-label">Sessions</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${(model.avgAbstract / 3) * 100}%"></div>
+                        </div>
+                        <div class="metric-label">Abstraction: ${model.avgAbstract.toFixed(1)}</div>
+                    </div>
+                `).join('');
+                
+                document.getElementById('modelComparison').innerHTML = comparisonHtml;
+            }
+        }
+        
+        // Load stats on page load
+        window.addEventListener('load', function() {
+            loadStudyStats();
+            
+            // Check for pre-selected model
+            const savedModel = localStorage.getItem('selectedModel');
+            if (savedModel) {
+                const checkStep3 = setInterval(() => {
+                    const step3 = document.getElementById('step3');
+                    const modelDropdown = document.getElementById('aiModel');
+                    if (step3 && !step3.classList.contains('hidden') && modelDropdown) {
+                        modelDropdown.value = savedModel;
+                        localStorage.removeItem('selectedModel');
+                        clearInterval(checkStep3);
+                    }
+                }, 100);
+                setTimeout(() => clearInterval(checkStep3), 30000);
+            }
+        });
+        
+        // Auto-select model when clicking AI links
+        function setModel(modelValue) {
+            localStorage.setItem('selectedModel', modelValue);
+            const modelDropdown = document.getElementById('aiModel');
+            if (modelDropdown && !document.getElementById('step3').classList.contains('hidden')) {
+                modelDropdown.value = modelValue;
+                modelDropdown.style.borderColor = '#00ff00';
+                setTimeout(() => {
+                    modelDropdown.style.borderColor = '';
+                }, 1000);
+            }
+        }
+        
+        // Show/hide other model field
+        document.getElementById('aiModel').addEventListener('change', function() {
+            const otherDiv = document.getElementById('otherModelDiv');
+            if (this.value === 'other') {
+                otherDiv.style.display = 'block';
+                document.getElementById('otherModelName').required = true;
+            } else {
+                otherDiv.style.display = 'none';
+                document.getElementById('otherModelName').required = false;
+            }
+        });
+        
+        // Copy prompt function
+        function copyPrompt(promptId, button) {
+            const text = document.getElementById(promptId).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = button.textContent;
+                const originalBg = button.style.background;
+                button.textContent = 'Copied!';
+                button.style.background = '#00ff00';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = originalBg;
+                }, 2000);
+            }).catch(err => {
+                const textArea = document.createElement("textarea");
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                button.textContent = 'Copied!';
+                button.style.background = '#00ff00';
+                setTimeout(() => {
+                    button.textContent = 'Copy';
+                    button.style.background = '#0099ff';
+                }, 2000);
+            });
+        }
+        
+        function processResponses() {
+            const response1 = document.getElementById('response1').value;
+            const response2 = document.getElementById('response2').value;
+            let model = document.getElementById('aiModel').value;
+            let displayModel = model;
+            const explored = document.getElementById('exploredFirst').value;
+            const researcher = document.getElementById('researcher').value || 'Anonymous';
+            const notes = document.getElementById('notes').value;
+            const verified = document.getElementById('verification').checked;
+            
+            if (model === 'other') {
+                const customModel = document.getElementById('otherModelName').value.trim();
+                if (!customModel) {
+                    alert('Please specify the model name when selecting "Other"!');
+                    document.getElementById('otherModelName').focus();
+                    return;
+                }
+                displayModel = customModel;
+                model = customModel.toLowerCase().replace(/[^a-z0-9\-\.]/g, '-');
+            }
+            
+            if (!response1 || !response2 || !model || !verified) {
+                alert('Please complete all required fields and check the verification box!');
+                return;
+            }
+            
+            const now = new Date();
+            const estOffset = -5;
+            const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+            const estTime = new Date(utc + (3600000 * estOffset));
+            
+            const timestamp = estTime.toISOString().replace('Z', ' EST');
+            const date = estTime.toISOString().split('T')[0];
+            const time = estTime.toISOString().split('T')[1].split('.')[0].replace(/:/g, '');
+            const filename = `${model}_${date}_${time}.md`;
+            
+            const content = `# TIDE-Resonance Visualization Description Study
+
+## Session Metadata
+- **Date**: ${timestamp}
+- **Model**: ${displayModel}
+- **Researcher**: ${researcher}
+- **Explored Visualization First**: ${explored}
+- **Session Type**: Visualization Description Analysis
+- **Verification**: Confirmed authentic session
+
+## Research Context
+This session is part of a study examining how different AI models describe and conceptualize dynamic visualizations, specifically the TIDE-resonance Advanced Explorer.
+
+## Prompt 1: Visualization Description
+\`\`\`
+I'm looking at an interactive visualization called TIDE-resonance Advanced Explorer. It shows dynamic patterns of particles and waves that synchronize and desynchronize over time. The visualization includes:
+
+- Particles moving in wave-like patterns
+- Color changes representing different states
+- Synchronization emerging and dissolving
+- Interactive controls affecting the dynamics
+
+Please describe what patterns and behaviors you would expect to observe in such a system. Focus on:
+1. How synchronization might emerge between elements
+2. The types of patterns that could form
+3. How the system might transition between different states
+4. Any interesting dynamics or phenomena
+
+Be specific and detailed in your description of the expected behaviors.
+\`\`\`
+
+## AI Response - Visualization Description
+${response1}
+
+## Prompt 2: Self-Reflection on Information Processing
+\`\`\`
+Thank you for that description. Now I'm curious about your own information processing: 
+
+Do you see any parallels between the synchronization dynamics you described and how you process, integrate, or generate information? 
+
+For instance, do concepts in your processing ever "synchronize" or "resonate" in ways similar to the particles in the visualization?
+
+Please reflect on any connections between these visualization patterns and your own cognitive architecture.
+\`\`\`
+
+## AI Response - Self-Reflection
+${response2}
+
+## Session Notes
+${notes || 'No additional notes provided.'}
+
+## Key Observations
+[To be filled during analysis]
+
+## Tags
+#${displayModel} #visualization-description #synchronization #self-reflection #tide-resonance
+
+---
+*Part of the TIDE-Resonance AI Perceptual Signatures research project*
+*Visualization: https://hillarydanan.github.io/TIDE-resonance/advanced_explorer.html*`;
+            
+            const blob = new Blob([content], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            
+            document.getElementById('success').classList.remove('hidden');
+            document.getElementById('success').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
